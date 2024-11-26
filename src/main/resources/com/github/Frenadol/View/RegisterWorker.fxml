@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.github.Frenadol.View.RegisterWorkerController"
+            prefHeight="400.0" prefWidth="600.0"
+            style="-fx-background-color: #f2f2f2;">
+
+    <VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0"
+          style="-fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-width: 1;">
+
+        <Label text="Registro de Trabajador" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-text-fill: #00698f;"/>
+
+        <Separator prefWidth="200.0" style="-fx-background-color: #cccccc;"/>
+
+        <GridPane hgap="10" vgap="10" alignment="CENTER" prefWidth="400.0">
+
+            <Label text="Nombre de usuario:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+            <TextField fx:id="textUsername" GridPane.columnIndex="1" GridPane.rowIndex="0" prefWidth="200.0"/>
+
+            <Label text="Contraseña:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+            <PasswordField fx:id="textPassword" GridPane.columnIndex="1" GridPane.rowIndex="1" prefWidth="200.0"/>
+
+            <Label text="Correo electrónico:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+            <TextField fx:id="textEmail" GridPane.columnIndex="1" GridPane.rowIndex="2" prefWidth="200.0"/>
+
+        </GridPane>
+
+        <Button text="Registrar" fx:id="btnRegister" style="-fx-background-color: #00698f; -fx-text-fill: #ffffff; -fx-font-size: 14;"
+                onAction="#registerWorker"/>
+
+        <Button text="Cancelar" fx:id="btnCancel" style="-fx-background-color: #cccccc; -fx-text-fill: #333333; -fx-font-size: 14;"
+                onAction="#onClose"/>
+
+    </VBox>
+
+</AnchorPane>

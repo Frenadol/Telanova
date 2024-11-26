@@ -1,6 +1,7 @@
 package com.github.Frenadol.View;
 
-import com.github.Frenadol.Dao.UserDAO;
+import com.github.Frenadol.Dao.ClientDAO;
+import com.github.Frenadol.Model.Client;
 import com.github.Frenadol.Model.User;
 import com.github.Frenadol.Security.Security;
 import com.github.Frenadol.Utils.ErrorLog;
@@ -24,12 +25,12 @@ public class RegisterUserController {
     private PasswordField textPassword;
 
     @FXML
-    private TextField textEmail; // Campo para el correo electrónico.
+    private TextField textEmail;
 
     @FXML
     private AnchorPane anchorPane;
 
-    private UserDAO usersDAO = new UserDAO();
+    private ClientDAO clientDAO= new ClientDAO();
 
     /**
      * Este método se utiliza para registrar un nuevo usuario.
@@ -55,20 +56,19 @@ public class RegisterUserController {
             return;
         }
 
-        User existingUser = usersDAO.findByName(username);
-        if (existingUser != null) {
+        Client existingClient = clientDAO.findByName(username);
+        if (existingClient != null) {
             String message = "El nombre de usuario ya está en uso. Por favor, elija otro.";
             showAlert(message);
             ErrorLog.logMessage(message);
             return;
         }
 
-        User newUser = new User();
-        newUser.setUsername(username);
-        newUser.setAdmin(false);
-        newUser.setGmail(email);
+        Client newClient = new Client();
+        newClient.setUsername(username);
+        newClient.setGmail(email);
         try {
-            newUser.setPassword(Security.hashPassword(pass));
+            newClient.setPassword(Security.hashPassword(pass));
         } catch (NoSuchAlgorithmException e) {
             ErrorLog.fileRead(e);
             ErrorLog.logMessage("Error al hashear la contraseña: " + e.getMessage());
@@ -77,11 +77,11 @@ public class RegisterUserController {
         }
 
         try {
-            usersDAO.insertUser(newUser);
+            clientDAO.insertClient(newClient);
         } catch (Exception e) {
             ErrorLog.fileRead(e);
             ErrorLog.logMessage("Error al insertar el usuario hay un error aqui: " + e.getMessage());
-            showAlert("Error al insertar el usuario en la base de datos, porfavor revise.");
+            System.out.println(e.getMessage());
             return;
         }
 
