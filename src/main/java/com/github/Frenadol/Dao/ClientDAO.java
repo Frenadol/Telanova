@@ -8,7 +8,7 @@ import com.github.Frenadol.Model.Worker;
 import java.sql.*;
 
 public class ClientDAO {
-    private static final String INSERT = "INSERT INTO usuario (nombre_usuario,contraseña,gmail) VALUES (?,?,?)";
+    private static final String INSERT = "INSERT INTO usuario (nombre_usuario,contraseña,gmail,imagen_perfil) VALUES (?,?,?,?)";
     private static final String INSERT_CLIENTE = "INSERT INTO cliente (id_cliente, cartera) VALUES (?, ?)";
     private static final String UPDATE = "UPDATE usuario SET nombre_usuario=?, contraseña=?, gmail=?, esadministrador=?, WHERE id_usuario=?";
     private static final String FIND_BY_NAME = "SELECT u.id_usuario, u.nombre_usuario, u.contraseña FROM usuario u  JOIN cliente c ON c.id_cliente = u.id_usuario WHERE u.nombre_usuario=?";
@@ -25,6 +25,7 @@ public class ClientDAO {
             pst.setString(1, cliente.getUsername());
             pst.setString(2, cliente.getPassword());
             pst.setString(3, cliente.getGmail());
+            pst.setBytes(4, cliente.getProfilePicture());
             pst.executeUpdate();
 
             ResultSet rs = pst.getGeneratedKeys();

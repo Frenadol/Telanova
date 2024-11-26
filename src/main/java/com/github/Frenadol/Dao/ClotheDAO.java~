@@ -1,0 +1,6 @@
+package com.github.Frenadol.Dao;
+
+public class ClotheDAO {
+    private static final String INSERT = "INSERT INTO prendas (nombre_prenda,tallaprenda,colorprenda,descripcion,precio,id_almacen,id_trabajador) VALUES (?,?,?,?,?,?,?,?,?)";
+
+}

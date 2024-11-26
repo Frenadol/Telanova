@@ -12,14 +12,16 @@ public class Clothes {
     private Float price_clothes;
     private byte[] clothes_Visual;
 
-    public Clothes(int id_clothes, String name_clothes, String size_clothes, String color_clothes, String description_clothes, byte[] clothes_Visual, Float price_clothes) {
-        this.id_clothes = id_clothes;
-        this.name_clothes = name_clothes;
+
+    public Clothes() {
+    }
+
+    public String getSize_clothes() {
+        return size_clothes;
+    }
+
+    public void setSize_clothes(String size_clothes) {
         this.size_clothes = size_clothes;
-        this.color_clothes = color_clothes;
-        this.description_clothes = description_clothes;
-        this.clothes_Visual = clothes_Visual;
-        this.price_clothes = price_clothes;
     }
 
     public int getId_clothes() {
@@ -38,14 +40,6 @@ public class Clothes {
         this.name_clothes = name_clothes;
     }
 
-    public String getSize_clothes() {
-        return size_clothes;
-    }
-
-    public void setSize_clothes(String size_clothes) {
-        this.size_clothes = size_clothes;
-    }
-
     public String getColor_clothes() {
         return color_clothes;
     }
@@ -62,6 +56,14 @@ public class Clothes {
         this.description_clothes = description_clothes;
     }
 
+    public byte[] getClothes_Visual() {
+        return clothes_Visual;
+    }
+
+    public void setClothes_Visual(byte[] clothes_Visual) {
+        this.clothes_Visual = clothes_Visual;
+    }
+
     public Float getPrice_clothes() {
         return price_clothes;
     }
@@ -70,11 +72,13 @@ public class Clothes {
         this.price_clothes = price_clothes;
     }
 
-    public byte[] getClothes_Visual() {
-        return clothes_Visual;
-    }
-
-    public void setClothes_Visual(byte[] clothes_Visual) {
+    public Clothes(int id_clothes, String name_clothes, String size_clothes, String color_clothes, String description_clothes, Float price_clothes, byte[] clothes_Visual) {
+        this.id_clothes = id_clothes;
+        this.name_clothes = name_clothes;
+        this.size_clothes = size_clothes;
+        this.color_clothes = color_clothes;
+        this.description_clothes = description_clothes;
+        this.price_clothes = price_clothes;
         this.clothes_Visual = clothes_Visual;
     }
 

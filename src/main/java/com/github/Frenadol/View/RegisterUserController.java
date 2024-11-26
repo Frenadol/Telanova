@@ -10,9 +10,14 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.io.*;
+import java.nio.file.Files;
 import java.security.NoSuchAlgorithmException;
 import java.util.regex.Pattern;
 
@@ -26,9 +31,10 @@ public class RegisterUserController {
 
     @FXML
     private TextField textEmail;
-
     @FXML
-    private AnchorPane anchorPane;
+    private ImageView perfilImage;
+    private File imageFile;
+
 
     private ClientDAO clientDAO= new ClientDAO();
 
@@ -67,12 +73,25 @@ public class RegisterUserController {
         Client newClient = new Client();
         newClient.setUsername(username);
         newClient.setGmail(email);
+
+        if (imageFile != null) {
+            try {
+                byte[] imageBytes = Files.readAllBytes(imageFile.toPath());
+                newClient.setProfilePicture(imageBytes);
+            } catch (IOException e) {
+                ErrorLog.fileRead(e);
+                ErrorLog.logMessage("Error al leer la imagen: " + e.getMessage());
+                showAlert("Error al leer la imagen. Intente nuevamente.");
+                return;
+            }
+        }
+
         try {
             newClient.setPassword(Security.hashPassword(pass));
         } catch (NoSuchAlgorithmException e) {
             ErrorLog.fileRead(e);
             ErrorLog.logMessage("Error al hashear la contraseña: " + e.getMessage());
-            showAlert("Error al hashear la contraseña.");
+            showAlert("Error al hashear la contraseña. Intente nuevamente.");
             return;
         }
 
@@ -80,7 +99,7 @@ public class RegisterUserController {
             clientDAO.insertClient(newClient);
         } catch (Exception e) {
             ErrorLog.fileRead(e);
-            ErrorLog.logMessage("Error al insertar el usuario hay un error aqui: " + e.getMessage());
+            ErrorLog.logMessage("Error al insertar el usuario: " + e.getMessage());
             System.out.println(e.getMessage());
             return;
         }
@@ -99,7 +118,7 @@ public class RegisterUserController {
 
     @FXML
     public void goToInitialMenu() throws IOException {
-        App.setRoot("initialMenu");
+        App.setRoot("InitialMenu");
     }
 
 
@@ -108,9 +127,25 @@ public class RegisterUserController {
         alert.setContentText(message);
         alert.show();
     }
-
     @FXML
-    private void onClose() {
-        System.exit(0);
+    private void selectImage() {
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Select Image");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+        );
+        Stage stage = (Stage) perfilImage.getScene().getWindow();
+        imageFile = fileChooser.showOpenDialog(stage);
+        if (imageFile != null) {
+            try {
+                InputStream is = new FileInputStream(imageFile);
+                Image image = new Image(is);
+                perfilImage.setImage(image);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+        }
     }
+
+
 }

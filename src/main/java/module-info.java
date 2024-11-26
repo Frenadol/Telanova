@@ -8,6 +8,7 @@ module org.example {
 
     exports com.github.Frenadol;
     exports com.github.Frenadol.View;
+    opens com.github.Frenadol.Model to javafx.base;
 
     // Abre el paquete org.example.DataBase a jakarta.xml.bind
     opens com.github.Frenadol.DataBase to jakarta.xml.bind;

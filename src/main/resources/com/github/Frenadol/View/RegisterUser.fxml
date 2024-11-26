@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" prefHeight="350.0" prefWidth="540.0" spacing="10.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.RegisterUserController">
+<VBox alignment="CENTER" prefHeight="527.0" prefWidth="663.0" spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.RegisterUserController">
     <children>
         <Text text="NOMBRE DE USUARIO" />
         <TextField fx:id="textUsername" prefHeight="25.0" prefWidth="266.0" />
@@ -14,5 +16,8 @@
         <Text text="CORREO ELECTRÓNICO" />
         <TextField fx:id="textEmail" prefHeight="25.0" prefWidth="266.0" />
         <Button fx:id="usersRegister" mnemonicParsing="false" onMouseClicked="#registerUser" text="Registrar" />
+      <Button mnemonicParsing="false" onMouseClicked="#selectImage" text="Elegir imagen" />
+      <Button mnemonicParsing="false" onMouseClicked="#goToInitialMenu" text="Volver atras" />
+      <ImageView fx:id="perfilImage" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
     </children>
 </VBox>

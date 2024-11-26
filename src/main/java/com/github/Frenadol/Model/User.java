@@ -1,5 +1,6 @@
 package com.github.Frenadol.Model;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 public class User {
@@ -7,12 +8,14 @@ public class User {
     private String username;
     private String password;
     private String gmail;
+    private byte[] profilePicture;
 
-    public User(String username, int id_user, String password, String gmail) {
+    public User(String username, int id_user, String password, String gmail, byte[] profilePicture) {
         this.username = username;
         this.id_user = id_user;
         this.password = password;
         this.gmail = gmail;
+        this.profilePicture=profilePicture;
 
     }
 
@@ -48,6 +51,14 @@ public class User {
         this.gmail = gmail;
     }
 
+    public byte[] getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(byte[] profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -71,6 +82,7 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", gmail='" + gmail + '\'' +
+                ", profilePicture=" + Arrays.toString(profilePicture) +
                 '}';
     }
 }

@@ -9,7 +9,7 @@ import com.github.Frenadol.Utils.ErrorLog;
 import java.sql.*;
 
 public class WorkerDAO {
-    private static final String INSERT = "INSERT INTO usuario (nombre_usuario,contraseña,gmail) VALUES (?,?,?)";
+    private static final String INSERT = "INSERT INTO usuario (nombre_usuario,contraseña,gmail,imagen_perfil) VALUES (?,?,?,?)";
     private static final String INSERT_TRABAJADOR = "INSERT INTO trabajador (id_trabajador, estrabajador,fechacontrato) VALUES (?, ?, ?)";
     private static final String UPDATE = "UPDATE usuario SET nombre_usuario=?, contraseña=?, gmail=?, WHERE id_usuario=?";
     private static final String FIND_BY_ID = "SELECT * FROM trabajador WHERE id_trabajador=?";
@@ -25,6 +25,7 @@ public class WorkerDAO {
             pst.setString(1, worker.getUsername());
             pst.setString(2, worker.getPassword());
             pst.setString(3, worker.getGmail());
+            pst.setBytes(4,worker.getProfilePicture());
             pst.executeUpdate();
 
             ResultSet rs = pst.getGeneratedKeys();
