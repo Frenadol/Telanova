@@ -12,6 +12,18 @@ public class Clothes {
     private Float price_clothes;
     private byte[] clothes_Visual;
 
+
+    public Clothes() {
+    }
+
+    public String getSize_clothes() {
+        return size_clothes;
+    }
+
+    public void setSize_clothes(String size_clothes) {
+        this.size_clothes = size_clothes;
+    }
+
     public int getId_clothes() {
         return id_clothes;
     }
@@ -24,27 +36,8 @@ public class Clothes {
         return name_clothes;
     }
 
-    public Clothes() {
-    }
-
     public void setName_clothes(String name_clothes) {
         this.name_clothes = name_clothes;
-    }
-
-    public String getSize_clothes() {
-        return size_clothes;
-    }
-
-    public void setSize_clothes(String size_clothes) {
-        this.size_clothes = size_clothes;
-    }
-
-    public String getDescription_clothes() {
-        return description_clothes;
-    }
-
-    public void setDescription_clothes(String description_clothes) {
-        this.description_clothes = description_clothes;
     }
 
     public String getColor_clothes() {
@@ -55,12 +48,12 @@ public class Clothes {
         this.color_clothes = color_clothes;
     }
 
-    public Float getPrice_clothes() {
-        return price_clothes;
+    public String getDescription_clothes() {
+        return description_clothes;
     }
 
-    public void setPrice_clothes(Float price_clothes) {
-        this.price_clothes = price_clothes;
+    public void setDescription_clothes(String description_clothes) {
+        this.description_clothes = description_clothes;
     }
 
     public byte[] getClothes_Visual() {
@@ -69,6 +62,14 @@ public class Clothes {
 
     public void setClothes_Visual(byte[] clothes_Visual) {
         this.clothes_Visual = clothes_Visual;
+    }
+
+    public Float getPrice_clothes() {
+        return price_clothes;
+    }
+
+    public void setPrice_clothes(Float price_clothes) {
+        this.price_clothes = price_clothes;
     }
 
     public Clothes(int id_clothes, String name_clothes, String size_clothes, String color_clothes, String description_clothes, Float price_clothes, byte[] clothes_Visual) {

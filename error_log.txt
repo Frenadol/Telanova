@@ -230,3 +230,7 @@ java.io.IOException
 [2024-11-26 10:44:19] Trabajador registrado con éxito!
 [2024-11-26 10:52:56] Trabajador registrado con éxito!
 [2024-11-26 10:55:55] Trabajador registrado con éxito!
+[2024-11-26 20:51:44] Usuario registrado con éxito!
+[2024-11-26 21:09:10] Usuario registrado con éxito!
+[2024-11-26 21:10:53] El correo electrónico no tiene un formato válido.
+[2024-11-26 21:10:58] Usuario registrado con éxito!
