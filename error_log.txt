@@ -224,3 +224,9 @@ java.io.IOException
 [2024-11-26 09:56:47] Usuario registrado con éxito!
 [2024-11-26 09:57:45] El nombre de usuario ya está en uso. Por favor, elija otro.
 [2024-11-26 09:57:51] Usuario registrado con éxito!
+[2024-11-26 10:36:53] Trabajador registrado con éxito!
+[2024-11-26 10:41:43] Trabajador registrado con éxito!
+[2024-11-26 10:43:18] Trabajador registrado con éxito!
+[2024-11-26 10:44:19] Trabajador registrado con éxito!
+[2024-11-26 10:52:56] Trabajador registrado con éxito!
+[2024-11-26 10:55:55] Trabajador registrado con éxito!

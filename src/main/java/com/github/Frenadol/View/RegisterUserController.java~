@@ -27,6 +27,8 @@ public class RegisterUserController {
     @FXML
     private TextField textEmail;
 
+    @FXML
+    private AnchorPane anchorPane;
 
     private ClientDAO clientDAO= new ClientDAO();
 

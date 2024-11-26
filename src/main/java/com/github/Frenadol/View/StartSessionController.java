@@ -8,6 +8,7 @@ import com.github.Frenadol.Model.User;
 import com.github.Frenadol.Model.Worker;
 import com.github.Frenadol.Security.Security;
 import com.github.Frenadol.Utils.ErrorLog;
+import com.github.Frenadol.Utils.SessionManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
@@ -21,35 +22,34 @@ public class StartSessionController {
     private ClientDAO clienteDAO;
     private WorkerDAO workerDAO;
     private Security security;
-
-
     @FXML
     private TextField textUsername;
 
     @FXML
     private PasswordField textPassword;
 
-
-
     @FXML
     public void Login() {
         String username = textUsername.getText();
         String password = textPassword.getText();
         Worker worker = workerDAO.findByName(username);
-        Client cliente = clienteDAO.findByName(username);
+        Client client = clienteDAO.findByName(username);
+        SessionManager sessionManager = SessionManager.getInstance();
 
         if (worker != null) {
             if (security.checkPassword(password, worker.getPassword())) {
+                sessionManager.setCurrentUser(worker);
                 try {
-                    App.setRoot("MainMenu");
+                    App.setRoot("AdminPanel");
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             } else {
                 System.out.println("Contraseña incorrecta");
             }
-        } else if (cliente != null) {
-            if (security.checkPassword(password, cliente.getPassword())) {
+        } else if (client != null) {
+            sessionManager.setCurrentUser(client);
+            if (security.checkPassword(password, client.getPassword())) {
                try{
                    App.setRoot("ClientMenu");
                } catch (IOException e) {

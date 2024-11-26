@@ -24,9 +24,6 @@ public class Clothes {
         return name_clothes;
     }
 
-    public Clothes() {
-    }
-
     public void setName_clothes(String name_clothes) {
         this.name_clothes = name_clothes;
     }

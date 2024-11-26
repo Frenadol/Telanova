@@ -14,10 +14,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
-import java.io.*;
-import java.nio.file.Files;
+import java.io.File;
+import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.regex.Pattern;
 
@@ -84,17 +83,8 @@ public class RegisterWorkerController {
         newWorker.setGmail(email);
         newWorker.setHireDate(String.valueOf(UtilDate.getCurrentDate()));
         newWorker.setWorker(true);
-        if (imageFile != null) {
-            try {
-                byte[] imageBytes = Files.readAllBytes(imageFile.toPath());
-                newWorker.setProfilePicture(imageBytes);
-            } catch (IOException e) {
-                ErrorLog.fileRead(e);
-                ErrorLog.logMessage("Error al leer la imagen: " + e.getMessage());
-                showAlert(AlertType.ERROR, "Error al leer la imagen. Intente nuevamente.");
-                return;
-            }
-        }
+        newWorker.setProfilePicture(imageFile)
+
         try {
             newWorker.setPassword(Security.hashPassword(pass));
         } catch (NoSuchAlgorithmException e) {
@@ -137,20 +127,15 @@ public class RegisterWorkerController {
     @FXML
     private void selectImage() {
         FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Select Image");
+        fileChooser.setTitle("Seleccione una imagen de perfil");
         fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.jpeg")
+                new FileChooser.ExtensionFilter("Imagenes", "*.jpg", "*.jpeg", "*.png", "*.gif")
         );
-        Stage stage = (Stage) imageView.getScene().getWindow();
-        imageFile = fileChooser.showOpenDialog(stage);
+        imageFile = fileChooser.showOpenDialog(anchorPane.getScene().getWindow());
+
         if (imageFile != null) {
-            try {
-                InputStream is = new FileInputStream(imageFile);
-                Image image = new Image(is);
-                imageView.setImage(image);
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            }
+            imageView.setImage(new Image(imageFile.toURI().toString()));
+
         }
     }
 

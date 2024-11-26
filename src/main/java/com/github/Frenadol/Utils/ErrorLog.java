@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
 
 public class ErrorLog {
 
-    private static final String LOG_FILE = "error_log.txt"; // Nombre del archivo de registro
+    private static final String LOG_FILE = "error_log.txt";
 
     /**
      * Registra un mensaje de error en el archivo de registro.
