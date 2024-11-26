@@ -17,7 +17,7 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <Button fx:id="registrarButton" onAction="#switchToRegister" prefHeight="38.0" prefWidth="99.0" text="Crear Cuenta" />
-      <Button fx:id="iniciarButton" onAction="#switchToStartSession" prefHeight="38.0" prefWidth="99.0" text="Iniciar Sesion" />
+      <Button fx:id="registerButton" onAction="#switchToRegister" prefHeight="38.0" prefWidth="99.0" text="Crear Cuenta" />
+      <Button fx:id="sessionButton" onAction="#switchToStartSession" prefHeight="38.0" prefWidth="99.0" text="Iniciar Sesion" />
    </children>
 </VBox>

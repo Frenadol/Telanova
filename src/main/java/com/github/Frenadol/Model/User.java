@@ -7,24 +7,13 @@ public class User {
     private String username;
     private String password;
     private String gmail;
-    private boolean isAdmin;
-    private int wallet;
 
-    public User(String username, int id_user, String password, String gmail, boolean isAdmin, int wallet) {
+    public User(String username, int id_user, String password, String gmail) {
         this.username = username;
         this.id_user = id_user;
         this.password = password;
         this.gmail = gmail;
-        this.isAdmin = isAdmin;
-        this.wallet=wallet;
-    }
 
-    public double getWallet() {
-        return wallet;
-    }
-
-    public void setWallet(int wallet) {
-        this.wallet = wallet;
     }
 
     public int getId_user() {
@@ -57,14 +46,6 @@ public class User {
 
     public void setGmail(String gmail) {
         this.gmail = gmail;
-    }
-
-    public boolean isAdmin() {
-        return isAdmin;
-    }
-
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
     }
 
     @Override
