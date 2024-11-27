@@ -19,56 +19,66 @@ import java.awt.*;
 import java.io.IOException;
 
 public class StartSessionController {
-    private ClientDAO clienteDAO;
-    private WorkerDAO workerDAO;
-    private Security security;
+    private ClientDAO clienteDAO= new ClientDAO();
+    private WorkerDAO workerDAO= new WorkerDAO();
+    private Security security=new Security();
     @FXML
     private TextField textUsername;
 
     @FXML
     private PasswordField textPassword;
+    @FXML
+    private TextField gmailField;
 
     @FXML
     public void Login() {
         String username = textUsername.getText();
         String password = textPassword.getText();
-        Worker worker = workerDAO.findByName(username);
-        Client client = clienteDAO.findByName(username);
+        String gmail = gmailField.getText();
+        Worker worker = workerDAO.build().findByName(username);
+        Client client = clienteDAO.build().findByName(username);
         SessionManager sessionManager = SessionManager.getInstance();
 
         if (worker != null) {
-            if (security.checkPassword(password, worker.getPassword())) {
-                sessionManager.setCurrentUser(worker);
-                try {
-                    App.setRoot("AdminPanel");
-                } catch (IOException e) {
-                    e.printStackTrace();
+            Worker workerByGmail = workerDAO.build().findByGmail(gmail);
+            if (workerByGmail != null) {
+                if (security.checkPassword(password, workerByGmail.getPassword())) {
+                    sessionManager.setCurrentUser(workerByGmail);
+                    try {
+                        App.setRoot("AdminPanel");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    System.out.println("Contraseña incorrecta");
                 }
             } else {
-                System.out.println("Contraseña incorrecta");
+                System.out.println("Gmail incorrecto");
             }
         } else if (client != null) {
-            sessionManager.setCurrentUser(client);
-            if (security.checkPassword(password, client.getPassword())) {
-               try{
-                   App.setRoot("ClientMenu");
-               } catch (IOException e) {
-                   e.printStackTrace();
-               }
+            Client clientByGmail = clienteDAO.build().findByGmail(gmail);
+            if (clientByGmail != null) {
+                if (security.checkPassword(password, clientByGmail.getPassword())) {
+                    sessionManager.setCurrentUser(clientByGmail);
+                    try {
+                        App.setRoot("ClientMenu");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    System.out.println("Contraseña incorrecta");
+                }
+            } else {
+                System.out.println("Gmail incorrecto");
             }
         } else {
             System.out.println("Cliente no encontrado");
         }
     }
+
     private void showAlert(String message) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setContentText(message);
         alert.show();
     }
-    public StartSessionController() {
-        this.clienteDAO = new ClientDAO();
-        this.workerDAO = new WorkerDAO();
-        this.security = new Security();
-    }
-
 }

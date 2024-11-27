@@ -1,5 +1,8 @@
 package com.github.Frenadol.Model;
 
+import javafx.beans.property.FloatProperty;
+import javafx.beans.property.SimpleFloatProperty;
+
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -16,6 +19,7 @@ public class Clothes {
     public Worker getWorker() {
         return worker;
     }
+    private FloatProperty price_clothes = new SimpleFloatProperty();
 
     public void setWorker(Worker worker) {
         this.worker = worker;

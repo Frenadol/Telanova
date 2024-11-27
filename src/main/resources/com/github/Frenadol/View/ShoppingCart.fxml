@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.github.Frenadol.View.ShoppingCartController">
+    <TableView fx:id="shoppingCartTableView">
+        <columns>
+            <TableColumn fx:id="imageColumn" text="Imagen" prefWidth="100"/>
+            <TableColumn fx:id="nameColumn" text="Nombre" prefWidth="200"/>
+            <TableColumn fx:id="priceColumn" text="Precio" prefWidth="100"/>
+        </columns>
+    </TableView>
+</VBox>

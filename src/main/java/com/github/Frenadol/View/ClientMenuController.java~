@@ -29,7 +29,7 @@ public class ClientMenuController {
     private TableColumn<Clothes, Image> imagenColumn;
 
     @FXML
-    private TableColumn<Clothes, Float> precioColumn; // Mantén el tipo Float para mostrar el precio
+    private TableColumn<Clothes, Double> precioColumn;
 
     private ObservableList<Clothes> clothesList;
     private ObservableList<Clothes> shoppingCart;
@@ -74,10 +74,10 @@ public class ClientMenuController {
             }
         });
 
-        // Configuración de la columna de precio utilizando el getter getPrice_clothes()
-        precioColumn.setCellValueFactory(cellData -> {
-            return new SimpleObjectProperty<>(cellData.getValue().getPrice_clothes());
-        });
+        // Configuración de la columna de precio usando el getter `getPrice_clothes`
+        precioColumn.setCellValueFactory(cellData ->
+                new SimpleObjectProperty<>(cellData.getValue().getPrice_clothes())
+        );
 
         // Cargar prendas desde la base de datos
         ClothesDAO clothesDAO = new ClothesDAO();
