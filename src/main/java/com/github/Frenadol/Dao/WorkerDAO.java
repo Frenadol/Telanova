@@ -13,7 +13,8 @@ public class WorkerDAO {
     private static final String INSERT_TRABAJADOR = "INSERT INTO trabajador (id_trabajador, estrabajador,fechacontrato) VALUES (?, ?, ?)";
     private static final String UPDATE = "UPDATE usuario SET nombre_usuario=?, contraseña=?, gmail=?, WHERE id_usuario=?";
     private static final String FIND_BY_ID = "SELECT * FROM trabajador WHERE id_trabajador=?";
-    private static final String FIND_BY_NAME = "SELECT u.id_usuario, u.nombre_usuario, u.contraseña FROM usuario u  JOIN trabajador t ON t.id_trabajador = u.id_usuario WHERE u.nombre_usuario=?";
+    private static final String FIND_BY_NAME = "SELECT u.id_usuario, u.nombre_usuario, u.contraseña,u.gmail FROM usuario u  JOIN trabajador t ON t.id_trabajador = u.id_usuario WHERE u.nombre_usuario=?";
+    private static final String FIND_BY_GMAIL = "SELECT  u.id_usuario,u.nombre_usuario,u.contraseña,u.gmail FROM usuario u JOIN trabajador t ON t.id_trabajador=u.id_usuario WHERE u.gmail=?";
     private Connection conn;
 
     public WorkerDAO() {
@@ -52,6 +53,7 @@ public class WorkerDAO {
                 result.setId_user(res.getInt("id_usuario"));
                 result.setUsername(res.getString("nombre_usuario"));
                 result.setPassword(res.getString("contraseña"));
+                result.setGmail(res.getString("gmail"));
             }
             res.close();
         } catch (SQLException e) {
@@ -91,6 +93,27 @@ public class WorkerDAO {
             throw new RuntimeException(e);
         }
     }
+    public Worker findByGmail(String gmail) {
+        Worker result = null;
+        try (PreparedStatement pst = conn.prepareStatement(FIND_BY_GMAIL)) {
+            pst.setString(1, gmail);
+            ResultSet res = pst.executeQuery();
+            if (res.next()) {
+                result = new Worker();
+                result.setId_user(res.getInt("id_usuario"));
+                result.setUsername(res.getString("nombre_usuario"));
+                result.setPassword(res.getString("contraseña"));
+                result.setGmail(res.getString("gmail"));
 
-
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return result;
+    }
+    public static WorkerDAO build(){
+        return new WorkerDAO();
+    }
 }
+
+

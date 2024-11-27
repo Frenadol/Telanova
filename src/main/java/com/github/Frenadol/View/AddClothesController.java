@@ -3,6 +3,9 @@ package com.github.Frenadol.View;
 import com.github.Frenadol.Dao.ClientDAO;
 import com.github.Frenadol.Dao.ClothesDAO;
 import com.github.Frenadol.Model.Clothes;
+import com.github.Frenadol.Model.User;
+import com.github.Frenadol.Model.Worker;
+import com.github.Frenadol.Utils.SessionManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -32,6 +35,7 @@ public class AddClothesController {
     private ClothesDAO clothesDAO = new ClothesDAO();
 
 
+
     @FXML
     private void addImage() {
         FileChooser fileChooser = new FileChooser();
@@ -54,6 +58,10 @@ public class AddClothesController {
         garment.setColor_clothes(GarmentColorField.getText()); // Note: This might not be the best way to store the color
         garment.setDescription_clothes(GarmentDescriptionField.getText());
         garment.setPrice_clothes(Float.valueOf(GarmentPriceField.getText()));
+        Worker currentWorker=(Worker) SessionManager.getInstance().getCurrentUser();
+        Worker worker=new Worker();
+        worker.setId_user(currentWorker.getId_user());
+        garment.setWorker(worker);
 
         if (imageFile != null) {
             try (FileInputStream fis = new FileInputStream(imageFile)) {

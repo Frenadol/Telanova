@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClothesDAO {
-    private static final String INSERT_GARMENT = "INSERT INTO prendas (nombre_prenda,talla_prenda,color_prenda,descripcion,precio,imagen_prenda) VALUES (?,?,?,?,?,?)";
+    private static final String INSERT_GARMENT = "INSERT INTO prendas (nombre_prenda,talla_prenda,color_prenda,descripcion,precio,imagen_prenda,idtrabajador) VALUES (?,?,?,?,?,?,?)";
     private static final String FIND_CLOTHES_FOR_CLIENTS = "Select imagen_prenda,precio from prendas ";
     private Connection conn;
 
@@ -25,6 +25,8 @@ public class ClothesDAO {
             pst.setString(4, garment.getDescription_clothes());
             pst.setDouble(5, garment.getPrice_clothes());
             pst.setBytes(6, garment.getClothes_Visual());
+            pst.setInt(7, garment.getWorker().getId_user());
+
 
             pst.executeUpdate();
         } catch (SQLException e) {
@@ -54,4 +56,6 @@ public class ClothesDAO {
 
         return new ClothesDAO();
     }
+
+
 }

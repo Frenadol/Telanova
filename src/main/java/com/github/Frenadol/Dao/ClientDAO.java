@@ -11,7 +11,7 @@ public class ClientDAO {
     private static final String INSERT = "INSERT INTO usuario (nombre_usuario,contraseña,gmail,imagen_perfil) VALUES (?,?,?,?)";
     private static final String INSERT_CLIENTE = "INSERT INTO cliente (id_cliente, cartera) VALUES (?, ?)";
     private static final String UPDATE = "UPDATE usuario SET nombre_usuario=?, contraseña=?, gmail=?, esadministrador=?, WHERE id_usuario=?";
-    private static final String FIND_BY_NAME = "SELECT u.id_usuario, u.nombre_usuario, u.contraseña FROM usuario u  JOIN cliente c ON c.id_cliente = u.id_usuario WHERE u.nombre_usuario=?";
+    private static final String FIND_BY_NAME = "SELECT u.id_usuario, u.nombre_usuario, u.contraseña,u.gmail FROM usuario u  JOIN cliente c ON c.id_cliente = u.id_usuario WHERE u.nombre_usuario=?";
     private static final String FIND_BY_GMAIL = "SELECT * FROM usuario WHERE gmail=?";
 
     private Connection conn;
@@ -72,13 +72,13 @@ public class ClientDAO {
         return result;
     }
 
-    public User findByGmail(String gmail) {
-        User result = null;
+    public Client findByGmail(String gmail) {
+        Client result = null;
         try (PreparedStatement pst = conn.prepareStatement(FIND_BY_GMAIL)) {
             pst.setString(1, gmail);
             ResultSet res = pst.executeQuery();
             if (res.next()) {
-                result = new User();
+                result = new Client();
                 result.setId_user(res.getInt("id_usuario"));
                 result.setUsername(res.getString("nombre_usuario"));
                 result.setPassword(res.getString("contraseña"));
@@ -89,5 +89,8 @@ public class ClientDAO {
             throw new RuntimeException(e);
         }
         return result;
+    }
+    public static ClientDAO build(){
+        return new ClientDAO();
     }
 }

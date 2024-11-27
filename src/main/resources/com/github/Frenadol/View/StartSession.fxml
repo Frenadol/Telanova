@@ -14,7 +14,7 @@
       <Text layoutX="112.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gmail" wrappingWidth="51.28631591796875" />
       <Button layoutX="125.0" layoutY="325.0" mnemonicParsing="false" onMouseClicked="#Login" text="Iniciar Sesion" />
       <TextField fx:id="textUsername" layoutX="72.0" layoutY="139.0" />
-      <TextField fx:id="textEmail" layoutX="51.0" layoutY="263.0" />
+      <TextField fx:id="gmailField" layoutX="51.0" layoutY="263.0" />
       <PasswordField fx:id="textPassword" layoutX="63.0" layoutY="200.0" />
 
    </children>
