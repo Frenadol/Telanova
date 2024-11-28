@@ -1,0 +1,128 @@
+/* Estilo general */
+* {
+    -fx-font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    -fx-font-size: 14px;
+    -fx-base: #f5f5f5;
+    -fx-background-color: #ffffff;
+}
+
+/* Fondo del AnchorPane */
+.root {
+    -fx-background-color: #f3e9d2; /* Beige suave */
+}
+
+/* Título */
+.label {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+    -fx-margin-bottom: 20px;
+}
+
+/* Campos de texto */
+.text-field {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #bdc3c7;
+    -fx-border-width: 1px;
+    -fx-padding: 8px;
+    -fx-font-size: 14px;
+    -fx-pref-width: 300px;
+    -fx-margin-bottom: 15px;
+    -fx-border-radius: 5px;
+    -fx-focus-color: #3498db;
+}
+
+/* ComboBox */
+.combo-box {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #bdc3c7;
+    -fx-border-width: 1px;
+    -fx-padding: 8px;
+    -fx-font-size: 14px;
+    -fx-pref-width: 300px;
+    -fx-margin-bottom: 15px;
+    -fx-border-radius: 5px;
+    -fx-focus-color: #3498db;
+}
+
+/* Botones */
+.button {
+    -fx-background-color: #3498db; /* Azul brillante para los botones */
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-border-radius: 5px;
+    -fx-padding: 10px 20px;
+    -fx-cursor: hand;
+    -fx-margin-right: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0.4, 0, 2);
+}
+
+.button:hover {
+    -fx-background-color: #2980b9; /* Azul más oscuro al pasar el mouse */
+}
+
+/* Botón 'Ir a otra pantalla' */
+#goToOtherScreenButton {
+    -fx-background-color: #e67e22; /* Naranja cálido para resaltar este botón */
+    -fx-text-fill: #ffffff;
+}
+
+#goToOtherScreenButton:hover {
+    -fx-background-color: #d35400;
+}
+
+/* Imagen */
+.image-view {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0.4, 0, 2);
+    -fx-background-color: #e0e0e0;
+    -fx-border-radius: 10px;
+    -fx-padding: 5px;
+}
+
+/* Espaciado entre botones */
+.button-container {
+    -fx-spacing: 10px;
+    -fx-alignment: center;
+}
+
+/* Colocación del form */
+#form-container {
+    -fx-alignment: center;
+    -fx-spacing: 15px;
+    -fx-padding: 30px;
+}
+
+/* Fondo cálido de la ventana */
+.root {
+    -fx-background-color: #f3e9d2; /* Beige suave cálido */
+}
+
+/* Agregar sombra sutil a los campos */
+.text-field, .combo-box {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.1), 8, 0.3, 0, 2);
+}
+
+/* Títulos con color destacado */
+.label {
+    -fx-text-fill: #2c3e50; /* Color oscuro para texto */
+}
+
+/* Fondo suave de la ventana */
+.root {
+    -fx-background-color: #f3e9d2; /* Fondo beige claro */
+}
+
+/* Asegura que los botones sean visualmente atractivos */
+.button {
+    -fx-background-color: #3498db; /* Azul */
+    -fx-text-fill: #ffffff;
+    -fx-font-weight: bold;
+    -fx-padding: 10px 20px;
+    -fx-border-radius: 5px;
+}
+
+.button:hover {
+    -fx-background-color: #2980b9; /* Azul más oscuro para el hover */
+}
+

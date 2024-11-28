@@ -1,7 +1,6 @@
 package com.github.Frenadol.Dao;
 
 import com.github.Frenadol.DataBase.ConnectionDB;
-import com.github.Frenadol.Model.Client;
 import com.github.Frenadol.Model.Clothes;
 import com.github.Frenadol.Utils.ErrorLog;
 
@@ -10,15 +9,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClothesDAO {
-    private static final String INSERT_GARMENT = "INSERT INTO prendas (nombre_prenda,talla_prenda,color_prenda,descripcion,precio,imagen_prenda) VALUES (?,?,?,?,?,?)";
-    private static final String FIND_CLOTHES_FOR_CLIENTS = "Select imagen_prenda,precio from prendas ";
-    private static final String FIND_BY_ID = "SELECT * FROM prendas WHERE id_prenda=?";
+    private static final String INSERT_GARMENT = "INSERT INTO prendas (nombre_prenda, talla_prenda, color_prenda, descripcion, precio, imagen_prenda) VALUES (?, ?, ?, ?, ?, ?)";
+    private static final String FIND_CLOTHES_FOR_CLIENTS = "SELECT imagen_prenda, precio FROM prendas";
     private static final String INSERT_CREATED_CLOTHES = "INSERT INTO trabajadores_prenda (id_prenda, id_trabajador) VALUES (?, ?)";
+    private static final String FIND_CLOTHES_LAZY = "SELECT id_prenda, nombre_prenda, precio, imagen_prenda,descripcion FROM prendas";
 
     private Connection conn;
 
     public ClothesDAO() {
-        conn = ConnectionDB.getConnection();
+        this.conn = ConnectionDB.getConnection();
     }
 
     public void insertGarment(Clothes garment) {
@@ -29,58 +28,68 @@ public class ClothesDAO {
             pst.setString(4, garment.getDescription_clothes());
             pst.setDouble(5, garment.getPrice_clothes());
             pst.setBytes(6, garment.getClothes_Visual());
-
-
-
             pst.executeUpdate();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            ErrorLog.fileRead(e);
         }
     }
 
-
-    public List<Clothes> findAll() {
-        List<Clothes> result = new ArrayList<>();
-        try (PreparedStatement pst = ConnectionDB.getConnection().prepareStatement(FIND_CLOTHES_FOR_CLIENTS)) {
-            ResultSet res = pst.executeQuery();
-            while (res.next()) {
-                Clothes clothes = new Clothes();
-                clothes.setClothes_Visual(res.getBytes("imagen_prenda"));
-                clothes.setPrice_clothes(res.getFloat("precio"));
-                result.add(clothes);
-            }
-            res.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return result;
-    }
-    public void insertCreatedClothes(int  idclothes, int idworker) {
-        if (idworker != 0 && idclothes != 0) {
+    public void insertCreatedClothes(int idClothes, int idWorker) {
+        if (idWorker > 0 && idClothes > 0) {
             try (PreparedStatement pst = conn.prepareStatement(INSERT_CREATED_CLOTHES)) {
-                pst.setInt(1, idclothes);
-                pst.setInt(2, idworker);
+                pst.setInt(1, idClothes);
+                pst.setInt(2, idWorker);
                 pst.executeUpdate();
             } catch (SQLException e) {
                 ErrorLog.fileRead(e);
             }
         }
     }
+
     public int getLastInsertedId() {
-        try (Statement stmt = conn.createStatement()) {
-            ResultSet rs = stmt.executeQuery("SELECT LAST_INSERT_ID()");
+        try (Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT LAST_INSERT_ID()")) {
             if (rs.next()) {
                 return rs.getInt(1);
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            ErrorLog.fileRead(e);
         }
         return 0;
     }
-    public ClothesDAO build() {
 
-        return new ClothesDAO();
+    public List<ClothesLazyAll> findAllClothesLazy() {
+        List<ClothesLazyAll> result = new ArrayList<>();
+        try (PreparedStatement pst = conn.prepareStatement(FIND_CLOTHES_LAZY);
+             ResultSet res = pst.executeQuery()) {
+            while (res.next()) {
+                ClothesLazyAll clothes = new ClothesLazyAll(
+                        res.getInt("id_prenda"),
+                        res.getString("nombre_prenda"),
+                        res.getFloat("precio"),
+                        res.getBytes("imagen_prenda"),
+                        res.getString("descripcion")
+
+                );
+                result.add(clothes);
+            }
+        } catch (SQLException e) {
+            ErrorLog.fileRead(e);
+        }
+        return result;
     }
 
+    public ClothesDAO build() {
+        return this;
+    }
 
+    public class ClothesLazyAll extends Clothes {
+        public ClothesLazyAll(int idClothes, String nameClothes, float priceClothes, byte[] clothesVisual,String garmentDescription) {
+            super(idClothes, nameClothes, null, null, garmentDescription, priceClothes, clothesVisual);
+        }
+
+        public ClothesLazyAll() {
+            super();
+        }
+    }
 }

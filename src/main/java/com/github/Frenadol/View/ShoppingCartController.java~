@@ -34,7 +34,7 @@ public class ShoppingCartController {
         this.shoppingCart = shoppingCart;
 
         // Configuración de las columnas de la tabla
-        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
+        nameColumn.setCellValueFactory(new PropertyValueFactory<>("name_clothes"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price_clothes"));
 
         // Configuración de la columna de imagen

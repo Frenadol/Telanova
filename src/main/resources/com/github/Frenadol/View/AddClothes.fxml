@@ -1,23 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.AddClothesController">
-    <children>
-        <Label text="Administración de Ropa" />
-        <TextField fx:id="Garment_name" promptText="Nombre de la prenda" />
-        <TextField fx:id="GarmentSizeField" promptText="Tamaño de la prenda" />
-        <TextField fx:id="GarmentColorField" promptText="Color de la prenda" />
-        <TextField fx:id="GarmentDescriptionField" promptText="Descripción de la prenda" />
-        <TextField fx:id="GarmentPriceField" promptText="Precio de la prenda" />
-        <Button onMouseClicked="#saveGarment" text="Guardar" />
-        <Button fx:id="cancelClothesButton" text="Cancelar" />
-        <Button fx:id="addImageButton" onMouseClicked="#addImage" text="Añadir imagen" />
-        <ImageView fx:id="GarmentImageField" fitHeight="150.0" fitWidth="200.0" />
-        <Button fx:id="goToOtherScreenButton" text="Ir a otra pantalla" />
-    </children>
-</VBox>
+<AnchorPane prefHeight="524.0" prefWidth="716.0" stylesheets="@AddClothes.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.AddClothesController">
+        <children>
+
+            <!-- Campo de texto para nombre de la prenda -->
+            <TextField fx:id="Garment_name" layoutX="208.0" layoutY="50.0" prefWidth="300" promptText="Nombre de la prenda" />
+
+            <!-- ComboBox para seleccionar la talla -->
+            <ComboBox fx:id="GarmentSizeComboBox" layoutX="208.0" layoutY="86.0" prefWidth="300" promptText="Selecciona la talla">
+                <items>
+                    <FXCollections fx:factory="observableArrayList">
+                        <String fx:value="S" />
+                        <String fx:value="M" />
+                        <String fx:value="L" />
+                        <String fx:value="XL" />
+                        <String fx:value="XXL" />
+                    </FXCollections>
+                </items>
+            </ComboBox>
+
+            <!-- Campo de texto para color de la prenda -->
+            <TextField fx:id="GarmentColorField" layoutX="208.0" layoutY="132.0" prefWidth="300" promptText="Color de la prenda" />
+
+            <!-- Campo de texto para descripción de la prenda -->
+            <TextField fx:id="GarmentDescriptionField" layoutX="208.0" layoutY="168.0" prefWidth="300" promptText="Descripción de la prenda" />
+
+            <!-- Campo de texto para precio de la prenda -->
+            <TextField fx:id="GarmentPriceField" layoutX="208.0" layoutY="204.0" prefWidth="300" promptText="Precio de la prenda" />
+
+            <!-- Imagen de la prenda -->
+            <ImageView fx:id="GarmentImageField" fitHeight="264.0" fitWidth="286.0" layoutX="215.0" layoutY="254.0" />
+
+            <!-- Botones -->
+            <Button layoutX="517.0" layoutY="408.0" onMouseClicked="#saveGarment" prefHeight="39.0" prefWidth="166.0" text="Guardar" />
+            <Button fx:id="cancelClothesButton" layoutX="550.0" layoutY="288.0" prefWidth="100" text="Cancelar" />
+            <Button fx:id="addImageButton" layoutX="521.0" layoutY="238.0" onMouseClicked="#addImage" prefHeight="39.0" prefWidth="158.0" text="Añadir imagen" />
+            <Button fx:id="goToOtherScreenButton" layoutX="516.0" layoutY="347.0" prefHeight="39.0" prefWidth="166.0" text="Ir a otra pantalla" />
+      <Text layoutX="266.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu de creación de prendas" />
+        </children>
+    </AnchorPane>
