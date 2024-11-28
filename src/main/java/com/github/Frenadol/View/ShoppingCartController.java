@@ -27,17 +27,17 @@ public class ShoppingCartController {
     @FXML
     private TableColumn<Clothes, Double> priceColumn;
 
-    private ObservableList<Clothes> shoppingCart;  // Lista de prendas en el carrito
+    private ObservableList<Clothes> shoppingCart;
 
-    // Método para recibir las prendas del carrito
+
     public void setShoppingCart(ObservableList<Clothes> shoppingCart) {
         this.shoppingCart = shoppingCart;
 
-        // Configuración de las columnas de la tabla
+
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name_clothes"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price_clothes"));
 
-        // Configuración de la columna de imagen
+
         imageColumn.setCellValueFactory(clothes -> {
             byte[] visualData = clothes.getValue().getClothes_Visual();
             if (visualData != null) {
@@ -63,7 +63,7 @@ public class ShoppingCartController {
             }
         });
 
-        // Agregar las prendas al TableView del carrito
+
         shoppingCartTableView.setItems(shoppingCart);
     }
 }

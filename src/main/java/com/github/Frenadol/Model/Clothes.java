@@ -76,8 +76,15 @@ public class Clothes {
         return price_clothes;
     }
 
+
     public void setPrice_clothes(Float price_clothes) {
         this.price_clothes = price_clothes;
+    }
+
+    public Clothes(String name_clothes, Float price_clothes, byte[] clothes_Visual) {
+        this.name_clothes = name_clothes;
+        this.price_clothes = price_clothes;
+        this.clothes_Visual = clothes_Visual;
     }
 
     public Clothes(int id_clothes, String name_clothes, String size_clothes, String color_clothes, String description_clothes, Float price_clothes, byte[] clothes_Visual) {

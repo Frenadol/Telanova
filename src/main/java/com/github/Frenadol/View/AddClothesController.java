@@ -1,13 +1,11 @@
 package com.github.Frenadol.View;
 
-import com.github.Frenadol.Dao.ClientDAO;
 import com.github.Frenadol.Dao.ClothesDAO;
-import com.github.Frenadol.Dao.WorkerDAO;
 import com.github.Frenadol.Model.Clothes;
-import com.github.Frenadol.Model.User;
 import com.github.Frenadol.Model.Worker;
 import com.github.Frenadol.Utils.SessionManager;
 import javafx.fxml.FXML;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -18,10 +16,11 @@ import java.io.FileInputStream;
 import java.io.IOException;
 
 public class AddClothesController {
+
     @FXML
     private TextField Garment_name;
     @FXML
-    private TextField GarmentSizeField;
+    private ComboBox<String> GarmentSizeComboBox; // Usamos ComboBox para seleccionar la talla
     @FXML
     private TextField GarmentColorField;
     @FXML
@@ -34,10 +33,7 @@ public class AddClothesController {
     private File imageFile;
 
     private ClothesDAO clothesDAO = new ClothesDAO();
-    private WorkerDAO workerDAO = new WorkerDAO();
-
-    SessionManager sessionManager = SessionManager.getInstance();
-
+    private SessionManager sessionManager = SessionManager.getInstance();
 
     @FXML
     private void addImage() {
@@ -53,19 +49,29 @@ public class AddClothesController {
             GarmentImageField.setImage(image);
         }
     }
+
     @FXML
     private void saveGarment() {
         Clothes garment = new Clothes();
         garment.setName_clothes(Garment_name.getText());
-        garment.setSize_clothes(GarmentSizeField.getText());
-        garment.setColor_clothes(GarmentColorField.getText()); // Note: This might not be the best way to store the color
+
+        // Obtener la talla seleccionada del ComboBox
+        String selectedSize = GarmentSizeComboBox.getValue();
+        if (selectedSize != null && !selectedSize.isEmpty()) {
+            garment.setSize_clothes(selectedSize);
+        } else {
+            System.out.println("Debe seleccionar una talla");
+        }
+
+        garment.setColor_clothes(GarmentColorField.getText());
         garment.setDescription_clothes(GarmentDescriptionField.getText());
         garment.setPrice_clothes(Float.valueOf(GarmentPriceField.getText()));
-        Worker currentWorker = SessionManager.getInstance().getCurrentWorker();
 
+        Worker currentWorker = sessionManager.getCurrentWorker();
         currentWorker.setId_user(currentWorker.getId_user());
         garment.setWorker(currentWorker);
 
+        // Guardar la imagen si fue seleccionada
         if (imageFile != null) {
             try (FileInputStream fis = new FileInputStream(imageFile)) {
                 garment.setClothes_Visual(fis.readAllBytes());
@@ -74,9 +80,9 @@ public class AddClothesController {
             }
         }
 
+        // Guardar la prenda en la base de datos
         clothesDAO.insertGarment(garment);
         int idClothes = clothesDAO.getLastInsertedId();
         clothesDAO.insertCreatedClothes(idClothes, currentWorker.getId_user());
     }
 }
-

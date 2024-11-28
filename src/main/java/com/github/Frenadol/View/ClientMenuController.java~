@@ -68,6 +68,7 @@ public class ClientMenuController {
 
         for (Clothes clothes : clothesList) {
             try {
+                // Cargar la miniatura del producto desde el archivo FXML
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("Thumb.fxml"));
                 VBox box = loader.load();  // Cargar el contenedor de la miniatura
                 ThumbController thumbController = loader.getController();
