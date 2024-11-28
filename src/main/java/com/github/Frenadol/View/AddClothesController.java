@@ -2,6 +2,7 @@ package com.github.Frenadol.View;
 
 import com.github.Frenadol.Dao.ClientDAO;
 import com.github.Frenadol.Dao.ClothesDAO;
+import com.github.Frenadol.Dao.WorkerDAO;
 import com.github.Frenadol.Model.Clothes;
 import com.github.Frenadol.Model.User;
 import com.github.Frenadol.Model.Worker;
@@ -33,7 +34,9 @@ public class AddClothesController {
     private File imageFile;
 
     private ClothesDAO clothesDAO = new ClothesDAO();
+    private WorkerDAO workerDAO = new WorkerDAO();
 
+    SessionManager sessionManager = SessionManager.getInstance();
 
 
     @FXML
@@ -58,10 +61,10 @@ public class AddClothesController {
         garment.setColor_clothes(GarmentColorField.getText()); // Note: This might not be the best way to store the color
         garment.setDescription_clothes(GarmentDescriptionField.getText());
         garment.setPrice_clothes(Float.valueOf(GarmentPriceField.getText()));
-        Worker currentWorker=(Worker) SessionManager.getInstance().getCurrentUser();
-        Worker worker=new Worker();
-        worker.setId_user(currentWorker.getId_user());
-        garment.setWorker(worker);
+        Worker currentWorker = SessionManager.getInstance().getCurrentWorker();
+
+        currentWorker.setId_user(currentWorker.getId_user());
+        garment.setWorker(currentWorker);
 
         if (imageFile != null) {
             try (FileInputStream fis = new FileInputStream(imageFile)) {
@@ -72,6 +75,8 @@ public class AddClothesController {
         }
 
         clothesDAO.insertGarment(garment);
+        int idClothes = clothesDAO.getLastInsertedId();
+        clothesDAO.insertCreatedClothes(idClothes, currentWorker.getId_user());
     }
 }
 

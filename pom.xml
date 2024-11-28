@@ -82,7 +82,7 @@
                     <execution>
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>com.github.Frenadol.View.App</mainClass> <!-- Cambia esto a tu clase principal -->
+                            <mainClass>com.github.Frenadol.App</mainClass> <!-- Cambia esto a tu clase principal -->
                         </configuration>
                     </execution>
                 </executions>
