@@ -1,8 +1,8 @@
 package com.github.Frenadol.View;
 
+import com.github.Frenadol.App;
 import com.github.Frenadol.Dao.ClientDAO;
 import com.github.Frenadol.Model.Client;
-import com.github.Frenadol.Model.User;
 import com.github.Frenadol.Security.Security;
 import com.github.Frenadol.Utils.ErrorLog;
 import javafx.fxml.FXML;
@@ -12,7 +12,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -118,7 +117,7 @@ public class RegisterUserController {
 
     @FXML
     public void goToInitialMenu() throws IOException {
-        App.setRoot("InitialMenu");
+        App.setRoot("View/InitialMenu");
     }
 
 

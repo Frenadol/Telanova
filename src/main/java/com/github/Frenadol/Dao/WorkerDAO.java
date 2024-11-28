@@ -2,11 +2,13 @@ package com.github.Frenadol.Dao;
 
 import com.github.Frenadol.DataBase.ConnectionDB;
 import com.github.Frenadol.Model.Client;
+import com.github.Frenadol.Model.Clothes;
 import com.github.Frenadol.Model.User;
 import com.github.Frenadol.Model.Worker;
 import com.github.Frenadol.Utils.ErrorLog;
 
 import java.sql.*;
+import java.util.List;
 
 public class WorkerDAO {
     private static final String INSERT = "INSERT INTO usuario (nombre_usuario,contraseña,gmail,imagen_perfil) VALUES (?,?,?,?)";
@@ -16,7 +18,7 @@ public class WorkerDAO {
     private static final String FIND_BY_NAME = "SELECT u.id_usuario, u.nombre_usuario, u.contraseña,u.gmail FROM usuario u  JOIN trabajador t ON t.id_trabajador = u.id_usuario WHERE u.nombre_usuario=?";
     private static final String FIND_BY_GMAIL = "SELECT  u.id_usuario,u.nombre_usuario,u.contraseña,u.gmail FROM usuario u JOIN trabajador t ON t.id_trabajador=u.id_usuario WHERE u.gmail=?";
     private Connection conn;
-
+    Worker worker;
     public WorkerDAO() {
         conn = ConnectionDB.getConnection();
     }
@@ -111,6 +113,7 @@ public class WorkerDAO {
         }
         return result;
     }
+
     public static WorkerDAO build(){
         return new WorkerDAO();
     }

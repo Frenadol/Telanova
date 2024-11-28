@@ -114,7 +114,7 @@ public class ClientMenuController {
     private void openShoppingCart() {
         try {
             // Cargar la vista de ShoppingCart
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/github/Frenadol/View/ShoppingCart.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ShoppingCart.fxml"));
             Stage stage = (Stage) tableView.getScene().getWindow();  // Obtener la ventana actual
 
             // Cargar la escena

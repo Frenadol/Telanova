@@ -1,4 +1,4 @@
-package com.github.Frenadol.View;
+package com.github.Frenadol;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +13,7 @@ public class    App extends Application {
     private static Scene scene;
     @Override
     public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("ClientMenu"), 640, 480);
+        scene = new Scene(loadFXML("View/InitialMenu"), 640, 480);
         stage.setScene(scene);
         stage.show();
     }

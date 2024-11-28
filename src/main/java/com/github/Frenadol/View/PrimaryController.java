@@ -1,5 +1,6 @@
 package com.github.Frenadol.View;
 
+import com.github.Frenadol.App;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 
@@ -13,11 +14,11 @@ public class PrimaryController {
 
     @FXML
     private void switchToRegister() throws IOException {
-        App.setRoot("RegisterUser");
+        App.setRoot("View/RegisterUser");
     }
 
     @FXML
     private void switchToStartSession() throws IOException {
-        App.setRoot("StartSession");
+        App.setRoot("View/StartSession");
     }
 }
