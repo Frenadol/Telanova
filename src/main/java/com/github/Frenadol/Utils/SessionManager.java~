@@ -1,0 +1,237 @@
+package com.github.Frenadol.Utils;
+
+import com.github.Frenadol.Model.*;
+import javafx.beans.InvalidationListener;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+
+import java.time.LocalDate;
+import java.util.*;
+
+public class SessionManager {
+    private static SessionManager instance;
+    private User currentUser;
+    private Worker currentWorker;
+    private Client currentClient;
+    private ObservableList<Client_Clothes> details = new ObservableList<Client_Clothes>() {
+        @Override
+        public void addListener(ListChangeListener<? super Client_Clothes> listChangeListener) {
+
+        }
+
+        @Override
+        public void removeListener(ListChangeListener<? super Client_Clothes> listChangeListener) {
+
+        }
+
+        @Override
+        public boolean addAll(Client_Clothes... clientClothes) {
+            return false;
+        }
+
+        @Override
+        public boolean setAll(Client_Clothes... clientClothes) {
+            return false;
+        }
+
+        @Override
+        public boolean setAll(Collection<? extends Client_Clothes> collection) {
+            return false;
+        }
+
+        @Override
+        public boolean removeAll(Client_Clothes... clientClothes) {
+            return false;
+        }
+
+        @Override
+        public boolean retainAll(Client_Clothes... clientClothes) {
+            return false;
+        }
+
+        @Override
+        public void remove(int i, int i1) {
+
+        }
+
+        @Override
+        public int size() {
+            return 0;
+        }
+
+        @Override
+        public boolean isEmpty() {
+            return false;
+        }
+
+        @Override
+        public boolean contains(Object o) {
+            return false;
+        }
+
+        @Override
+        public Iterator<Client_Clothes> iterator() {
+            return null;
+        }
+
+        @Override
+        public Object[] toArray() {
+            return new Object[0];
+        }
+
+        @Override
+        public <T> T[] toArray(T[] a) {
+            return null;
+        }
+
+        @Override
+        public boolean add(Client_Clothes clientClothes) {
+            return false;
+        }
+
+        @Override
+        public boolean remove(Object o) {
+            return false;
+        }
+
+        @Override
+        public boolean containsAll(Collection<?> c) {
+            return false;
+        }
+
+        @Override
+        public boolean addAll(Collection<? extends Client_Clothes> c) {
+            return false;
+        }
+
+        @Override
+        public boolean addAll(int index, Collection<? extends Client_Clothes> c) {
+            return false;
+        }
+
+        @Override
+        public boolean removeAll(Collection<?> c) {
+            return false;
+        }
+
+        @Override
+        public boolean retainAll(Collection<?> c) {
+            return false;
+        }
+
+        @Override
+        public void clear() {
+
+        }
+
+        @Override
+        public Client_Clothes get(int index) {
+            return null;
+        }
+
+        @Override
+        public Client_Clothes set(int index, Client_Clothes element) {
+            return null;
+        }
+
+        @Override
+        public void add(int index, Client_Clothes element) {
+
+        }
+
+        @Override
+        public Client_Clothes remove(int index) {
+            return null;
+        }
+
+        @Override
+        public int indexOf(Object o) {
+            return 0;
+        }
+
+        @Override
+        public int lastIndexOf(Object o) {
+            return 0;
+        }
+
+        @Override
+        public ListIterator<Client_Clothes> listIterator() {
+            return null;
+        }
+
+        @Override
+        public ListIterator<Client_Clothes> listIterator(int index) {
+            return null;
+        }
+
+        @Override
+        public List<Client_Clothes> subList(int fromIndex, int toIndex) {
+            return List.of();
+        }
+
+        @Override
+        public void addListener(InvalidationListener invalidationListener) {
+
+        }
+
+        @Override
+        public void removeListener(InvalidationListener invalidationListener) {
+
+        }
+    };
+
+    private SessionManager() {
+    }
+
+    private User selectedUser;
+
+    public User getSelectedUser() {
+        return selectedUser;
+    }
+
+    public void setSelectedUser(User user) {
+        this.selectedUser = user;
+    }
+
+    public void addDetail(Clothes garment, int cantidad) {
+        LocalDate date = LocalDate.now();
+        String dateString = date.getDayOfMonth()+"/"+date.getMonthValue()+"/"+date.getYear();
+        details.add(new Client_Clothes(currentClient, garment, cantidad,dateString));
+    }
+
+    public ObservableList<Client_Clothes> getDetails() {
+        return details;
+    }
+
+    public static SessionManager getInstance() {
+        if (instance == null) {
+            instance = new SessionManager();
+        }
+        return instance;
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public Worker getCurrentWorker() {
+        return currentWorker;
+    }
+
+    public Client getCurrentClient() {
+        return currentClient;
+    }
+
+    public void setCurrentWorker(Worker worker) {
+        this.currentWorker = worker;
+    }
+
+    public void setCurrentClient(Client client) {
+        this.currentClient = client;
+    }
+
+
+    public void setCurrentUser(User user) {
+        this.currentUser = user;
+    }
+}

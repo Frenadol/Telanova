@@ -3,6 +3,7 @@ package com.github.Frenadol.View;
 import com.github.Frenadol.Dao.ClothesDAO;
 import com.github.Frenadol.Model.Client_Clothes;
 import com.github.Frenadol.Model.Clothes;
+import com.github.Frenadol.Model.Session;
 import com.github.Frenadol.Utils.SessionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClientMenuController {
@@ -49,14 +51,14 @@ public class ClientMenuController {
 
         initializeSpinner();
 
-        // Set the action for the Add to Cart button
+
         addToCartButton.setOnAction(event -> addToCart());
     }
 
     private void initializeSpinner() {
-        // Create a new IntegerSpinnerValueFactory and set it to the Spinner
+
         SpinnerValueFactory<Integer> valueFactory =
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1); // Min, Max, and Default value
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1);
         cantidadSpinner.setValueFactory(valueFactory);
     }
 
@@ -68,13 +70,11 @@ public class ClientMenuController {
 
         for (Clothes clothes : clothesList) {
             try {
-                // Cargar la miniatura del producto desde el archivo FXML
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("Thumb.fxml"));
                 VBox box = loader.load();  // Cargar el contenedor de la miniatura
                 ThumbController thumbController = loader.getController();
                 thumbController.setGarment(clothes);  // Pasar el producto al controlador de la miniatura
 
-                // Cuando se haga clic en la miniatura, mostrar los detalles del producto
                 box.setOnMouseClicked(event -> {
                     selectedClothes = clothes;  // Asignar la prenda seleccionada
                     System.out.println("Producto seleccionado: " + clothes.getName_clothes());  // Mensaje para verificar
@@ -83,7 +83,7 @@ public class ClientMenuController {
 
                 ClothesPane.add(box, columns++, rows);
 
-                // Si alcanzamos el número máximo de columnas, pasamos a la siguiente fila
+
                 if (columns == MAX_COLUMNS) {
                     columns = 0;
                     rows++;
@@ -97,26 +97,23 @@ public class ClientMenuController {
 
     @FXML
     private void addToCart() {
+
         if (selectedClothes != null) {
-            // Get the value from the Spinner with a null check
+
             Integer cantidad = cantidadSpinner.getValue();
 
-            // Ensure that the Spinner has a valid value
             if (cantidad == null || cantidad <= 0) {
                 System.out.println("Por favor, selecciona una cantidad válida.");
-                return;  // Exit if no valid quantity
+                return;
             }
 
-            // Create a confirmation dialog
             Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
             confirmationAlert.setTitle("Confirmar adición al carrito");
             confirmationAlert.setHeaderText("¿Estás seguro de añadir al carrito?");
             confirmationAlert.setContentText("¿Deseas añadir " + cantidad + " de " + selectedClothes.getName_clothes() + " al carrito?");
 
-            // Wait for the user to click OK or Cancel
             confirmationAlert.showAndWait().ifPresent(response -> {
                 if (response == ButtonType.OK) {
-                    // Verificar si la prenda ya está en el carrito
                     if (!shoppingCart.contains(selectedClothes)) {
                         shoppingCart.add(selectedClothes);
                         System.out.println("Prenda añadida al carrito: " + selectedClothes.getName_clothes());
@@ -124,17 +121,14 @@ public class ClientMenuController {
                         System.out.println("La prenda ya está en el carrito.");
                     }
 
-                    // Add the selected clothes and quantity to the session manager
                     SessionManager sessionManager = SessionManager.getInstance();
-                    sessionManager.addDetail(selectedClothes, cantidad); // Pass the correct quantity
+                    sessionManager.addDetail(selectedClothes, cantidad);
 
-                    // Optionally, you can also create a new Client_Clothes object to store in the database
                     Client_Clothes clientClothes = new Client_Clothes();
                     clientClothes.setClothes(selectedClothes);
                     clientClothes.setCantidad(cantidad);
-                    clientClothes.setDate("");  // Ignore the date for now
+                    clientClothes.setDate("");
 
-                    // Store clientClothes in the database or the shopping cart
 
                 }
             });
@@ -148,25 +142,38 @@ public class ClientMenuController {
     @FXML
     private void openShoppingCart() {
         try {
-            // Cargar la vista de ShoppingCart
+            System.out.println("Abriendo el carrito de compras...");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ShoppingCart.fxml"));
             Stage stage = (Stage) ClothesPane.getScene().getWindow();  // Obtener la ventana actual
+            System.out.println("Ventana actual obtenida.");
 
-            // Cargar la escena
+            // Cargar la nueva escena
             Scene scene = new Scene(loader.load());
-            stage.setScene(scene);
+            stage.setScene(scene);  // Establecer la nueva escena en la ventana
             stage.show();
+            System.out.println("Escena cambiada correctamente.");
 
-            // Obtener el controlador de la vista ShoppingCart
+            // Obtener el controlador de la nueva vista
             ShoppingCartController shoppingCartController = loader.getController();
 
+            ArrayList<Client_Clothes> detalles = SessionManager.getInstance().getDetails();
+            ObservableList<Client_Clothes> details = FXCollections.observableArrayList(detalles);
+
+            // Verificar si la lista de detalles es no nula y contiene objetos de tipo Client_Clothes
+            if (details != null && !details.isEmpty()) {
+
+            } else {
+               
+            }
+
             // Pasar el carrito de compras al ShoppingCartController
-            shoppingCartController.setShoppingCart(shoppingCart); // Pasamos las prendas del carrito
+            shoppingCartController.setShoppingCart(details);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 
     @FXML
     private void showProductDetails(Clothes clothes) {

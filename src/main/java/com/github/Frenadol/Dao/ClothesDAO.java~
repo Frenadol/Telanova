@@ -84,7 +84,7 @@ public class ClothesDAO {
     }
 
     public class ClothesLazyAll extends Clothes {
-        public ClothesLazyAll(int idClothes, String nameClothes, double priceClothes, byte[] clothesVisual,String garmentDescription) {
+        public ClothesLazyAll(int idClothes, String nameClothes, float priceClothes, byte[] clothesVisual,String garmentDescription) {
             super(idClothes, nameClothes, null, null, garmentDescription, priceClothes, clothesVisual);
         }
 

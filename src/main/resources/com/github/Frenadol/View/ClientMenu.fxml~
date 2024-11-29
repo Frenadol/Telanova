@@ -34,8 +34,10 @@
    <right>
       <VBox alignment="CENTER" spacing="10">
          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Cantidad" />
+         <!-- No SpinnerValueFactory in FXML, set it in the controller -->
          <Spinner fx:id="cantidadSpinner" />
          <Button fx:id="addToCartButton" mnemonicParsing="false" onAction="#addToCart" text="Añadir" />
+         <!-- Imagen del carrito -->
          <ImageView fx:id="carritoImage" fitHeight="90.0" fitWidth="90.0" onMouseClicked="#openShoppingCart">
             <image>
                <Image url="@Images/Carrito.png" />

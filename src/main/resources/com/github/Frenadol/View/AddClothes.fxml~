@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="524.0" prefWidth="716.0" stylesheets="@CSS/AddClothes.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.AddClothesController">
+<AnchorPane prefHeight="524.0" prefWidth="716.0" stylesheets="@AddClothes.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.AddClothesController">
         <children>
 
             <!-- Campo de texto para nombre de la prenda -->

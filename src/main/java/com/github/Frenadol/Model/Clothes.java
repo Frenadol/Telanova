@@ -9,7 +9,7 @@ public class Clothes {
     private String size_clothes;
     private String color_clothes;
     private String description_clothes;
-    private Float price_clothes;
+    private Double price_clothes;
     private byte[] clothes_Visual;
     private Worker worker;
 
@@ -72,22 +72,22 @@ public class Clothes {
         this.clothes_Visual = clothes_Visual;
     }
 
-    public Float getPrice_clothes() {
+    public Double getPrice_clothes() {
         return price_clothes;
     }
 
 
-    public void setPrice_clothes(Float price_clothes) {
+    public void setPrice_clothes(Double price_clothes) {
         this.price_clothes = price_clothes;
     }
 
-    public Clothes(String name_clothes, Float price_clothes, byte[] clothes_Visual) {
+    public Clothes(String name_clothes, Double price_clothes, byte[] clothes_Visual) {
         this.name_clothes = name_clothes;
         this.price_clothes = price_clothes;
         this.clothes_Visual = clothes_Visual;
     }
 
-    public Clothes(int id_clothes, String name_clothes, String size_clothes, String color_clothes, String description_clothes, Float price_clothes, byte[] clothes_Visual) {
+    public Clothes(int id_clothes, String name_clothes, String size_clothes, String color_clothes, String description_clothes, Double price_clothes, byte[] clothes_Visual) {
         this.id_clothes = id_clothes;
         this.name_clothes = name_clothes;
         this.size_clothes = size_clothes;

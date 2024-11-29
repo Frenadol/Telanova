@@ -5,7 +5,6 @@ import com.github.Frenadol.Utils.ErrorLog;
 import javafx.fxml.FXML;
 
 import java.io.IOException;
-import java.security.PublicKey;
 
 public class AdminPanelController {
 
@@ -18,15 +17,7 @@ public class AdminPanelController {
             showAlert("Error" + e.getMessage());
         }
     }
-@FXML
-    public void gotoAddWorker() {
-        try {
-            App.setRoot("View/RegisterWorker");
-        } catch (IOException e) {
-            ErrorLog.fileRead(e);
-            showAlert("Error" + e.getMessage());
-        }
-    }
+
     private void showAlert(String s) {
     }
 }
