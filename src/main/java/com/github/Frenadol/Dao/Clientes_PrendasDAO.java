@@ -44,7 +44,7 @@ public class Clientes_PrendasDAO {
                     clothes.setId_clothes(rs.getInt("id_prenda"));
                     clothes.setName_clothes(rs.getString("nombre"));
                     clothes.setDescription_clothes(rs.getString("descripcion"));
-                    clothes.setPrice_clothes((float) rs.getDouble("precio"));
+                    clothes.setPrice_clothes(rs.getDouble("precio"));
                     clientClothes.setCantidad(rs.getInt("cantidad"));
                     clothesList.add(clothes);
                 }
@@ -103,7 +103,7 @@ public class Clientes_PrendasDAO {
                         clothes.setId_clothes(rs.getInt("id_prenda"));
                         clothes.setName_clothes(rs.getString("nombre"));
                         clothes.setDescription_clothes(rs.getString("descripcion"));
-                        clothes.setPrice_clothes((float) rs.getDouble("precio"));
+                        clothes.setPrice_clothes( rs.getDouble("precio"));
                         clientClothes.setCantidad(rs.getInt("cantidad"));
                         break;
                     }

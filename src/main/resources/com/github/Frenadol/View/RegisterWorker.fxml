@@ -7,56 +7,62 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
-<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #f2f2f2;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.RegisterWorkerController">
+<AnchorPane fx:id="anchorPane" prefHeight="600.0" prefWidth="800.0" stylesheets="@CSS/RegisterWorker.css" styleClass="background-pane" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.RegisterWorkerController">
 
-    <VBox alignment="CENTER" layoutY="10.0" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #ffffff; -fx-border-color: #cccccc; -fx-border-width: 1;">
+    <!-- Contenedor principal centrado -->
+    <VBox alignment="CENTER" layoutY="10.0" prefHeight="600.0" prefWidth="800.0" styleClass="main-vbox" spacing="20">
 
-        <Label style="-fx-font-size: 36; -fx-font-weight: bold; -fx-text-fill: #00698f;" text="Registro de Trabajador" />
+        <!-- Título -->
+        <Label styleClass="title-label" text="Registro de Trabajador" />
 
-        <Separator prefWidth="200.0" style="-fx-background-color: #cccccc;" />
+        <!-- Separador -->
+        <Separator styleClass="section-separator"/>
 
-        <GridPane alignment="CENTER" hgap="20" prefHeight="487.0" prefWidth="874.0" vgap="20">
+        <!-- Formulario de entrada -->
+        <VBox alignment="CENTER" spacing="15" styleClass="form-vbox">
 
-            <Label style="-fx-font-size: 18;" text="Nombre de usuario:" GridPane.columnIndex="1" />
-            <TextField fx:id="textUsername" prefWidth="200.0" style="-fx-font-size: 18;" GridPane.columnIndex="2" />
+            <!-- Campo Nombre de Usuario -->
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="form-hbox">
+                <Label styleClass="form-label" text="Nombre de usuario:"/>
+                <TextField fx:id="textUsername" styleClass="text-field" />
+            </HBox>
 
-            <Label style="-fx-font-size: 18;" text="Contraseña:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <PasswordField fx:id="textPassword" prefWidth="200.0" style="-fx-font-size: 18;" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <!-- Campo Contraseña -->
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="form-hbox">
+                <Label styleClass="form-label" text="Contraseña:"/>
+                <PasswordField fx:id="textPassword" styleClass="text-field" />
+            </HBox>
 
-            <Label style="-fx-font-size: 18;" text="Correo electrónico:" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="textEmail" prefWidth="200.0" style="-fx-font-size: 18;" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <!-- Campo Correo electrónico -->
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="form-hbox">
+                <Label styleClass="form-label" text="Correo electrónico:"/>
+                <TextField fx:id="textEmail" styleClass="text-field" />
+            </HBox>
 
-            <Label style="-fx-font-size: 18;" text="Imagen de perfil:" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <Button fx:id="btnImage" onMouseClicked="#selectImage" style="-fx-font-size: 18;" text="Seleccionar imagen" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+            <!-- Selección de imagen -->
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="form-hbox">
+                <Label styleClass="form-label" text="Imagen de perfil:"/>
+                <Button fx:id="btnImage" onMouseClicked="#selectImage" styleClass="button-primary" text="Seleccionar imagen"/>
+            </HBox>
 
-            <Label fx:id="lblImage" style="-fx-font-size: 18;" text="Imagen seleccionada: " GridPane.columnIndex="2" GridPane.rowIndex="4" />
-         <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" GridPane.rowIndex="3" />
-         <columnConstraints>
-            <ColumnConstraints />
-            <ColumnConstraints />
-            <ColumnConstraints />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-         </rowConstraints>
+            <!-- Vista previa de la imagen seleccionada -->
+            <HBox alignment="CENTER_LEFT" spacing="10" styleClass="form-hbox">
+                <Label fx:id="lblImage" styleClass="form-label" text="Imagen seleccionada:"/>
+                <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true"/>
+            </HBox>
 
-        </GridPane>
+        </VBox>
 
-        <Separator prefWidth="200.0" style="-fx-background-color: #cccccc;" />
+        <!-- Separador -->
+        <Separator styleClass="section-separator"/>
 
-        <HBox alignment="CENTER" spacing="40">
-            <Button fx:id="btnRegister" onAction="#registerWorker" style="-fx-background-color: #00698f; -fx-text-fill: #ffffff; -fx-font-size: 18;" text="Registrar" />
-            <Button fx:id="btnCancel" onAction="#onClose" style="-fx-background-color: #cccccc; -fx-text-fill: #333333; -fx-font-size: 18;" text="Cancelar" />
+        <!-- Botones de acción -->
+        <HBox alignment="CENTER" spacing="40" styleClass="button-hbox">
+            <Button fx:id="btnRegister" onAction="#registerWorker" styleClass="button-primary" text="Registrar" />
+            <Button fx:id="btnCancel" onAction="#onClose" styleClass="button-secondary" text="Cancelar" />
         </HBox>
 
     </VBox>

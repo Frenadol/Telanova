@@ -65,7 +65,7 @@ public class AddClothesController {
 
         garment.setColor_clothes(GarmentColorField.getText());
         garment.setDescription_clothes(GarmentDescriptionField.getText());
-        garment.setPrice_clothes(Double.parseDouble(GarmentPriceField.getText()));
+        garment.setPrice_clothes(Float.valueOf(GarmentPriceField.getText()));
 
         Worker currentWorker = sessionManager.getCurrentWorker();
         currentWorker.setId_user(currentWorker.getId_user());
