@@ -1,14 +1,17 @@
 package com.github.Frenadol.Model;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Storage {
     private int id_storage;
     private String storageName;
+    private ArrayList<Clothes> clothes = new ArrayList<Clothes>();
 
-    public Storage(int id_storage, String storageName) {
+    public Storage(int id_storage, String storageName, ArrayList<Clothes> clothes) {
         this.id_storage = id_storage;
         this.storageName = storageName;
+        this.clothes = null;
     }
 
     public int getId_storage() {

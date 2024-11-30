@@ -3,15 +3,36 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="productDetailPane" prefHeight="476.0" prefWidth="634.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.DetailsProductsController">
-    <!-- Imagen del producto -->
-    <ImageView fx:id="productImage" fitHeight="358.0" fitWidth="317.0" layoutX="50.0" layoutY="59.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="59.0" />
+<AnchorPane fx:id="productDetailPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.DetailsProductsController">
+    <!-- Contenedor principal -->
+    <VBox layoutX="20.0" layoutY="20.0" spacing="20.0" style="-fx-padding: 20;">
+        <!-- Imagen del producto -->
+        <ImageView fx:id="productImage" fitHeight="300.0" fitWidth="300.0" />
 
-    <!-- Nombre del producto -->
-    <Label fx:id="productName" layoutX="426.0" layoutY="72.0" prefHeight="65.0" prefWidth="190.0" style="-fx-font-size: 18px; -fx-font-weight: bold;" AnchorPane.leftAnchor="426.0" AnchorPane.topAnchor="72.0" />
+        <!-- Detalles del producto -->
+        <VBox spacing="10.0">
+            <!-- Nombre del producto -->
+            <Label fx:id="productName" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
 
-    <!-- Precio del producto -->
-    <Label fx:id="productPrice" layoutX="147.0" layoutY="400.8" prefHeight="45.0" prefWidth="122.0" style="-fx-font-size: 16px; -fx-text-fill: green;" AnchorPane.leftAnchor="147.0" AnchorPane.topAnchor="401.0" />
-   <Label fx:id="productDescription" layoutX="348.0" layoutY="183.0" prefHeight="227.0" prefWidth="255.0" />
+            <!-- Precio del producto -->
+            <Label fx:id="productPrice" style="-fx-font-size: 20px; -fx-text-fill: green;" />
+
+            <!-- Descripción del producto -->
+            <Label fx:id="productDescription" wrapText="true" style="-fx-font-size: 16px;" />
+
+            <!-- Talla del producto -->
+            <Label fx:id="productSize" style="-fx-font-size: 16px;" />
+
+            <!-- Color del producto -->
+            <Label fx:id="productColor" style="-fx-font-size: 16px;" />
+
+            <!-- Categoría del producto -->
+            <Label fx:id="productCategory" style="-fx-font-size: 16px;" />
+
+            <!-- Cantidad disponible del producto -->
+            <Label fx:id="productQuantity" style="-fx-font-size: 16px;" />
+        </VBox>
+    </VBox>
 </AnchorPane>

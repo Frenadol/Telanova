@@ -7,6 +7,7 @@ import com.github.Frenadol.Model.Client;
 import com.github.Frenadol.Model.Worker;
 import com.github.Frenadol.Security.Security;
 import com.github.Frenadol.Utils.SessionManager;
+import java.util.prefs.Preferences;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
@@ -15,14 +16,16 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 
 public class StartSessionController {
-    private ClientDAO clienteDAO= new ClientDAO();
-    private WorkerDAO workerDAO= new WorkerDAO();
-    private Security security=new Security();
+    private ClientDAO clienteDAO = new ClientDAO();
+    private WorkerDAO workerDAO = new WorkerDAO();
+    private Security security = new Security();
+
     @FXML
     private TextField textUsername;
 
     @FXML
     private PasswordField textPassword;
+
     @FXML
     private TextField gmailField;
 
@@ -38,10 +41,9 @@ public class StartSessionController {
             Worker workerByGmail = workerDAO.build().findByGmail(gmail);
             if (workerByGmail != null) {
                 if (security.checkPassword(password, workerByGmail.getPassword())) {
-                    sessionManager.setCurrentUser(workerByGmail);
+                    sessionManager.setCurrentWorker(workerByGmail); // Set current worker here
                     try {
                         App.setRoot("View/AdminPanel");
-                        sessionManager.setCurrentWorker(workerByGmail);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
@@ -70,6 +72,24 @@ public class StartSessionController {
         } else {
             System.out.println("Cliente no encontrado");
         }
+        saveFields();
+    }
+
+    private void loadFields() {
+        textUsername.setText(Preferences.userRoot().node("username").get("username", ""));
+        textPassword.setText(Preferences.userRoot().node("password").get("password", ""));
+        gmailField.setText(Preferences.userRoot().node("gmail").get("gmail", ""));
+    }
+
+    private void saveFields() {
+        Preferences.userRoot().node("username").put("username", textUsername.getText());
+        Preferences.userRoot().node("password").put("password", textPassword.getText());
+        Preferences.userRoot().node("gmail").put("gmail", gmailField.getText());
+    }
+
+    @FXML
+    public void initialize() {
+        loadFields();
     }
 
     private void showAlert(String message) {

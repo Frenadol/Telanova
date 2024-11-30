@@ -2,37 +2,17 @@ package com.github.Frenadol.Utils;
 
 import com.github.Frenadol.Model.*;
 
-import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class SessionManager {
     private static SessionManager instance;
+    private List<Client_Clothes> details;
     private User currentUser;
     private Worker currentWorker;
     private Client currentClient;
-    private ArrayList<Client_Clothes> details = new ArrayList<>();
-
     private SessionManager() {
-    }
-
-    private User selectedUser;
-
-    public User getSelectedUser() {
-        return selectedUser;
-    }
-
-    public void setSelectedUser(User user) {
-        this.selectedUser = user;
-    }
-
-    public void addDetail(Clothes garment, int cantidad) {
-        LocalDate date = LocalDate.now();
-        String dateString = date.getDayOfMonth()+"/"+date.getMonthValue()+"/"+date.getYear();
-        details.add(new Client_Clothes(currentClient, garment, cantidad,dateString));
-    }
-
-    public ArrayList<Client_Clothes> getDetails() {
-        return details;
+        details = new ArrayList<>();
     }
 
     public static SessionManager getInstance() {
@@ -42,18 +22,30 @@ public class SessionManager {
         return instance;
     }
 
-    public User getCurrentUser() {
-        return currentUser;
+    public  void addDetail(Client_Clothes newDetail, int quantity) {
+        for (Client_Clothes detail : details) {
+            if (detail.getClothes().equals(newDetail.getClothes())) {
+                updateDetailQuantity(detail.getClothes(), quantity);
+                return;
+            }
+        }
+        newDetail.setCantidad(quantity);
+        details.add(newDetail);
     }
 
-    public Worker getCurrentWorker() {
-        return currentWorker;
+    public void updateDetailQuantity(Clothes clothes, int quantity) {
+        for (Client_Clothes detail : details) {
+            if (detail.getClothes().equals(clothes)) {
+                int currentQuantity = detail.getCantidad();
+                detail.setCantidad(currentQuantity + quantity);
+                break;
+            }
+        }
     }
 
-    public Client getCurrentClient() {
-        return currentClient;
+    public List<Client_Clothes> getDetails() {
+        return new ArrayList<>(details);
     }
-
     public void setCurrentWorker(Worker worker) {
         this.currentWorker = worker;
     }
@@ -66,4 +58,16 @@ public class SessionManager {
     public void setCurrentUser(User user) {
         this.currentUser = user;
     }
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public Worker getCurrentWorker() {
+        return currentWorker;
+    }
+
+    public Client getCurrentClient() {
+        return currentClient;
+    }
+
 }

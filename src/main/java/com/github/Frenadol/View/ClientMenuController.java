@@ -3,7 +3,6 @@ package com.github.Frenadol.View;
 import com.github.Frenadol.Dao.ClothesDAO;
 import com.github.Frenadol.Model.Client_Clothes;
 import com.github.Frenadol.Model.Clothes;
-import com.github.Frenadol.Model.Session;
 import com.github.Frenadol.Utils.SessionManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,8 +17,9 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ClientMenuController {
     @FXML
@@ -28,15 +28,20 @@ public class ClientMenuController {
     private Spinner<Integer> cantidadSpinner;
     @FXML
     private TableColumn<Clothes, Float> precioColumn;
-    private ObservableList<Clothes> clothesList;
+    private ObservableList<ClothesDAO.ClothesLazyAll> clothesList;
     private ObservableList<Clothes> shoppingCart;
-    private Clothes selectedClothes;
+    private ClothesDAO.ClothesLazyAll selectedClothes;
 
     @FXML
     private Button addToCartButton;
-
+    @FXML
+    private TextField searchTextField;
     @FXML
     private ImageView imageView;
+    @FXML
+    private Button cleanButton;
+    @FXML
+    private Button searchButton;
 
     @FXML
     public void initialize() {
@@ -48,41 +53,63 @@ public class ClientMenuController {
         clothesList.addAll(clothes);
         mostrarProductos(clothesList);
 
-
         initializeSpinner();
-
 
         addToCartButton.setOnAction(event -> addToCart());
     }
 
-    private void initializeSpinner() {
+    @FXML
+    private void cleanSearch() {
+        searchTextField.clear();
+        clothesList = FXCollections.observableArrayList();
+        ClothesDAO clothesDAO = new ClothesDAO();
+        List<ClothesDAO.ClothesLazyAll> clothes = clothesDAO.findAllClothesLazy();
+        clothesList.addAll(clothes);
+        mostrarProductos(clothesList);
+    }
 
+    @FXML
+    private void searchClothes() {
+        String searchQuery = searchTextField.getText();
+        if (searchQuery.isEmpty()) {
+            System.out.println("Por favor, ingresa un texto de búsqueda.");
+            return;
+        }
+        ClothesDAO clothesDAO = new ClothesDAO();
+        List<Clothes> searchedResults = clothesDAO.findClothesByName(searchQuery);
+        if (searchedResults.isEmpty()) {
+            System.out.println("No se encontraron resultados");
+            return;
+        }
+        mostrarProductos(searchedResults);
+    }
+
+    private void initializeSpinner() {
         SpinnerValueFactory<Integer> valueFactory =
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1);
         cantidadSpinner.setValueFactory(valueFactory);
     }
 
-    public void mostrarProductos(List<Clothes> clothesList) {
-        ClothesPane.getChildren().clear();  // Limpiar el GridPane antes de agregar nuevos elementos
-        final int MAX_COLUMNS = 3;  // Número máximo de columnas
+    public void mostrarProductos(List<? extends Clothes> clothesList) {
+        ClothesPane.getChildren().clear();
+        final int MAX_COLUMNS = 3;
         int columns = 0;
         int rows = 0;
 
         for (Clothes clothes : clothesList) {
             try {
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("Thumb.fxml"));
-                VBox box = loader.load();  // Cargar el contenedor de la miniatura
+                VBox box = loader.load();
                 ThumbController thumbController = loader.getController();
-                thumbController.setGarment(clothes);  // Pasar el producto al controlador de la miniatura
+                thumbController.setGarment(clothes);
 
                 box.setOnMouseClicked(event -> {
-                    selectedClothes = clothes;  // Asignar la prenda seleccionada
-                    System.out.println("Producto seleccionado: " + clothes.getName_clothes());  // Mensaje para verificar
-                    showProductDetails(clothes);  // Llamar al método para mostrar los detalles
+                    selectedClothes = (ClothesDAO.ClothesLazyAll) clothes;
+                    System.out.println("Producto seleccionado: " + clothes.getName_clothes());
+                    showProductDetails((ClothesDAO.ClothesLazyAll) clothes);
                 });
 
                 ClothesPane.add(box, columns++, rows);
-
 
                 if (columns == MAX_COLUMNS) {
                     columns = 0;
@@ -97,96 +124,87 @@ public class ClientMenuController {
 
     @FXML
     private void addToCart() {
+        if (selectedClothes == null) {
+            System.out.println("Por favor, selecciona una prenda.");
+            return;
+        }
 
-        if (selectedClothes != null) {
+        Integer cantidad = cantidadSpinner.getValue();
+        if (cantidad == null || cantidad <= 0) {
+            System.out.println("Por favor, selecciona una cantidad válida.");
+            return;
+        }
 
-            Integer cantidad = cantidadSpinner.getValue();
+        ClothesDAO clothesDAO = new ClothesDAO();
+        int availableQuantity = clothesDAO.getAvailableQuantity(selectedClothes.getId_clothes());
+        if (cantidad > availableQuantity) {
+            System.out.println("No puede añadir más cantidad de esta prenda porque no hay más en stock");
+            return;
+        }
 
-            if (cantidad == null || cantidad <= 0) {
-                System.out.println("Por favor, selecciona una cantidad válida.");
-                return;
+        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
+        confirmationAlert.setTitle("Confirmar adición al carrito");
+        confirmationAlert.setHeaderText("¿Estás seguro de añadir al carrito?");
+        confirmationAlert.setContentText("¿Deseas añadir " + cantidad + " de " + selectedClothes.getName_clothes() + " al carrito?");
+
+        Optional<ButtonType> response = confirmationAlert.showAndWait();
+        if (response.isPresent() && response.get() == ButtonType.OK) {
+            if (!shoppingCart.contains(selectedClothes)) {
+                shoppingCart.add(selectedClothes);
+                System.out.println("Prenda añadida al carrito: " + selectedClothes.getName_clothes());
+            } else {
+                System.out.println("La prenda ya está en el carrito.");
             }
 
-            Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
-            confirmationAlert.setTitle("Confirmar adición al carrito");
-            confirmationAlert.setHeaderText("¿Estás seguro de añadir al carrito?");
-            confirmationAlert.setContentText("¿Deseas añadir " + cantidad + " de " + selectedClothes.getName_clothes() + " al carrito?");
+            Client_Clothes clientClothes = new Client_Clothes();
+            clientClothes.setClothes(selectedClothes);
+            clientClothes.setCantidad(cantidad);
+            clientClothes.setDate("");
 
-            confirmationAlert.showAndWait().ifPresent(response -> {
-                if (response == ButtonType.OK) {
-                    if (!shoppingCart.contains(selectedClothes)) {
-                        shoppingCart.add(selectedClothes);
-                        System.out.println("Prenda añadida al carrito: " + selectedClothes.getName_clothes());
-                    } else {
-                        System.out.println("La prenda ya está en el carrito.");
-                    }
-
-                    SessionManager sessionManager = SessionManager.getInstance();
-                    sessionManager.addDetail(selectedClothes, cantidad);
-
-                    Client_Clothes clientClothes = new Client_Clothes();
-                    clientClothes.setClothes(selectedClothes);
-                    clientClothes.setCantidad(cantidad);
-                    clientClothes.setDate("");
-
-
-                }
-            });
-        } else {
-            // Si no se ha seleccionado ninguna prenda
-            System.out.println("Por favor, selecciona una prenda.");
+            SessionManager.getInstance().addDetail(clientClothes, cantidadSpinner.getValue());
         }
     }
 
-    // Método para abrir el carrito de compras
     @FXML
     private void openShoppingCart() {
         try {
             System.out.println("Abriendo el carrito de compras...");
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ShoppingCart.fxml"));
-            Stage stage = (Stage) ClothesPane.getScene().getWindow();  // Obtener la ventana actual
+            Stage stage = (Stage) ClothesPane.getScene().getWindow();
             System.out.println("Ventana actual obtenida.");
 
-            // Cargar la nueva escena
             Scene scene = new Scene(loader.load());
-            stage.setScene(scene);  // Establecer la nueva escena en la ventana
+            stage.setScene(scene);
             stage.show();
             System.out.println("Escena cambiada correctamente.");
 
-            // Obtener el controlador de la nueva vista
             ShoppingCartController shoppingCartController = loader.getController();
 
-            ArrayList<Client_Clothes> detalles = SessionManager.getInstance().getDetails();
+            List<Client_Clothes> detalles = SessionManager.getInstance().getDetails();
             ObservableList<Client_Clothes> details = FXCollections.observableArrayList(detalles);
 
-            // Verificar si la lista de detalles es no nula y contiene objetos de tipo Client_Clothes
             if (details != null && !details.isEmpty()) {
-
+                shoppingCartController.setShoppingCart(details);
             } else {
                 System.out.println("Lista de detalles nula o vacía");
             }
-
-            // Pasar el carrito de compras al ShoppingCartController
-            shoppingCartController.setShoppingCart(details);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-
     @FXML
-    private void showProductDetails(Clothes clothes) {
+    private void showProductDetails(ClothesDAO.ClothesLazyAll clothesLazy) {
         try {
-            // Cargar la vista de detalles
             FXMLLoader loader = new FXMLLoader(getClass().getResource("DetailsProducts.fxml"));
             AnchorPane productDetailPane = loader.load();
 
-            // Obtener el controlador de la vista de detalles
             DetailsProductsController detailsProductsController = loader.getController();
-            detailsProductsController.setProductDetails(selectedClothes); // Pasar el objeto completo de la prenda con su descripción
+            ClothesDAO clothesDAO = new ClothesDAO();
+            Clothes clothes = clothesDAO.findClothesById(clothesLazy.getId_clothes());
+            detailsProductsController.setProductDetails(clothes);
 
-            // Crear una nueva ventana emergente (Stage) para mostrar los detalles
             Stage detailStage = new Stage();
             Scene scene = new Scene(productDetailPane);
             detailStage.setScene(scene);
@@ -197,5 +215,4 @@ public class ClientMenuController {
             e.printStackTrace();
         }
     }
-
 }

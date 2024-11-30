@@ -1,11 +1,11 @@
 package com.github.Frenadol.View;
 
+import com.github.Frenadol.Dao.ClothesDAO;
 import com.github.Frenadol.Model.Clothes;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.text.Text;
 
 import java.io.ByteArrayInputStream;
 
@@ -13,26 +13,45 @@ public class DetailsProductsController {
 
     @FXML
     private ImageView productImage;
-
     @FXML
     private Label productName;
-
-    @FXML
-    private Label productDescription;
-
     @FXML
     private Label productPrice;
+    @FXML
+    private Label productDescription;
+    @FXML
+    private Label productSize;
+    @FXML
+    private Label productColor;
+    @FXML
+    private Label productCategory;
+    @FXML
+    private Label productQuantity;
+
+    private ClothesDAO clothesDAO;
+
+    public DetailsProductsController() {
+        this.clothesDAO = new ClothesDAO();
+    }
+
+    public void displayProductDetails(int id) {
+        Clothes clothes = clothesDAO.findClothesById(id);
+        if (clothes != null) {
+            setProductDetails(clothes);
+        }
+    }
 
     public void setProductDetails(Clothes clothes) {
-        // Configura los detalles de la prenda
         productName.setText(clothes.getName_clothes());
-        productDescription.setText(clothes.getDescription_clothes()); // Asumiendo que Clothes tiene una descripción
-        productPrice.setText("$" + clothes.getPrice_clothes());
+        productPrice.setText(String.format("$%.2f", clothes.getPrice_clothes()));
+        productDescription.setText(clothes.getDescription_clothes());
+        productSize.setText("Talla: " + clothes.getSize_clothes());
+        productColor.setText("Color: " + clothes.getColor_clothes());
+        productCategory.setText("Categoría: " + clothes.getCategory());
+        productQuantity.setText("Cantidad disponible: " + clothes.getCantidad());
 
-        // Mostrar la imagen de la prenda
-        byte[] imageBytes = clothes.getClothes_Visual();
-        if (imageBytes != null) {
-            Image image = new Image(new ByteArrayInputStream(imageBytes));
+        if (clothes.getClothes_Visual() != null) {
+            Image image = new Image(new ByteArrayInputStream(clothes.getClothes_Visual()));
             productImage.setImage(image);
         }
     }

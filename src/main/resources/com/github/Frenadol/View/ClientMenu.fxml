@@ -16,8 +16,9 @@
 <BorderPane fx:id="root" prefHeight="626.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.ClientMenuController">
    <top>
       <HBox alignment="CENTER" spacing="10">
-         <TextField fx:id="busquedaTextField" promptText="Buscar productos" />
-         <Button fx:id="buscarButton" text="Buscar" />
+         <Button fx:id="cleanButton" mnemonicParsing="false" onMouseClicked="#cleanSearch" prefHeight="26.0" prefWidth="121.0" text="Limpiar busqueda" />
+         <TextField fx:id="searchTextField" promptText="Buscar productos" />
+         <Button fx:id="searchButton" onMouseClicked="#searchClothes" text="Buscar" />
       </HBox>
    </top>
    <center>
