@@ -53,9 +53,8 @@ public class ClientMenuController {
         clothesList.addAll(clothes);
         mostrarProductos(clothesList);
 
-        initializeSpinner();
 
-        addToCartButton.setOnAction(event -> addToCart());
+
     }
 
     @FXML
@@ -84,11 +83,7 @@ public class ClientMenuController {
         mostrarProductos(searchedResults);
     }
 
-    private void initializeSpinner() {
-        SpinnerValueFactory<Integer> valueFactory =
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1);
-        cantidadSpinner.setValueFactory(valueFactory);
-    }
+
 
     public void mostrarProductos(List<? extends Clothes> clothesList) {
         ClothesPane.getChildren().clear();
@@ -122,48 +117,6 @@ public class ClientMenuController {
         }
     }
 
-    @FXML
-    private void addToCart() {
-        if (selectedClothes == null) {
-            System.out.println("Por favor, selecciona una prenda.");
-            return;
-        }
-
-        Integer cantidad = cantidadSpinner.getValue();
-        if (cantidad == null || cantidad <= 0) {
-            System.out.println("Por favor, selecciona una cantidad válida.");
-            return;
-        }
-
-        ClothesDAO clothesDAO = new ClothesDAO();
-        int availableQuantity = clothesDAO.getAvailableQuantity(selectedClothes.getId_clothes());
-        if (cantidad > availableQuantity) {
-            System.out.println("No puede añadir más cantidad de esta prenda porque no hay más en stock");
-            return;
-        }
-
-        Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
-        confirmationAlert.setTitle("Confirmar adición al carrito");
-        confirmationAlert.setHeaderText("¿Estás seguro de añadir al carrito?");
-        confirmationAlert.setContentText("¿Deseas añadir " + cantidad + " de " + selectedClothes.getName_clothes() + " al carrito?");
-
-        Optional<ButtonType> response = confirmationAlert.showAndWait();
-        if (response.isPresent() && response.get() == ButtonType.OK) {
-            if (!shoppingCart.contains(selectedClothes)) {
-                shoppingCart.add(selectedClothes);
-                System.out.println("Prenda añadida al carrito: " + selectedClothes.getName_clothes());
-            } else {
-                System.out.println("La prenda ya está en el carrito.");
-            }
-
-            Client_Clothes clientClothes = new Client_Clothes();
-            clientClothes.setClothes(selectedClothes);
-            clientClothes.setCantidad(cantidad);
-            clientClothes.setDate("");
-
-            SessionManager.getInstance().addDetail(clientClothes, cantidadSpinner.getValue());
-        }
-    }
 
     @FXML
     private void openShoppingCart() {
