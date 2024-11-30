@@ -34,16 +34,7 @@ public class Clientes_PrendasDAO {
     public Clientes_PrendasDAO() {
         conn = ConnectionDB.getConnection();
     }
-    public  void UpdateClothesDate(int clientId, int prendaId, Date purchaseDate) {
-        try (PreparedStatement pst = conn.prepareStatement(UPDATE_DATE)) {
-            pst.setDate(1, purchaseDate);
-            pst.setInt(2, clientId);
-            pst.setInt(3, prendaId);
-            pst.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
+    public UpdateClothes
 
     // Método para ver el carrito de compras de un cliente
     public List<Clothes> viewShoppingCart(int clientId) {

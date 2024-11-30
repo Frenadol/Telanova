@@ -163,15 +163,7 @@ public class ClothesDAO {
         }
         return result;
     }
-    public void updateQuantity(int idClothes, int quantity) {
-        try (PreparedStatement pst = conn.prepareStatement(UPDATE_QUANTITY)) {
-            pst.setInt(1, quantity);
-            pst.setInt(2, idClothes);
-            pst.executeUpdate();
-        } catch (SQLException e) {
-            ErrorLog.fileRead(e);
-        }
-    }
+    public
 
     public ClothesDAO build() {
         return this;

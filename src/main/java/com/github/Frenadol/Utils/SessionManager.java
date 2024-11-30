@@ -8,11 +8,15 @@ import java.util.List;
 public class SessionManager {
     private static SessionManager instance;
     private List<Client_Clothes> details;
+    private List<Clothes> shoppingCart;
     private User currentUser;
     private Worker currentWorker;
     private Client currentClient;
+
+
     private SessionManager() {
         details = new ArrayList<>();
+        shoppingCart = new ArrayList<>();
     }
 
     public static SessionManager getInstance() {
@@ -22,7 +26,7 @@ public class SessionManager {
         return instance;
     }
 
-    public  void addDetail(Client_Clothes newDetail, int quantity) {
+    public void addDetail(Client_Clothes newDetail, int quantity) {
         for (Client_Clothes detail : details) {
             if (detail.getClothes().equals(newDetail.getClothes())) {
                 updateDetailQuantity(detail.getClothes(), quantity);
@@ -46,6 +50,17 @@ public class SessionManager {
     public List<Client_Clothes> getDetails() {
         return new ArrayList<>(details);
     }
+
+    public void addToCart(Clothes clothes) {
+        if (!shoppingCart.contains(clothes)) {
+            shoppingCart.add(clothes);
+        }
+    }
+
+    public List<Clothes> getShoppingCart() {
+        return new ArrayList<>(shoppingCart);
+    }
+
     public void setCurrentWorker(Worker worker) {
         this.currentWorker = worker;
     }
@@ -54,10 +69,10 @@ public class SessionManager {
         this.currentClient = client;
     }
 
-
     public void setCurrentUser(User user) {
         this.currentUser = user;
     }
+
     public User getCurrentUser() {
         return currentUser;
     }
@@ -69,5 +84,4 @@ public class SessionManager {
     public Client getCurrentClient() {
         return currentClient;
     }
-
 }
