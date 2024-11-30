@@ -15,8 +15,8 @@ public class WorkerDAO {
     private static final String INSERT_TRABAJADOR = "INSERT INTO trabajador (id_trabajador, estrabajador,fechacontrato) VALUES (?, ?, ?)";
     private static final String UPDATE = "UPDATE usuario SET nombre_usuario=?, contraseña=?, gmail=?, WHERE id_usuario=?";
     private static final String FIND_BY_ID = "SELECT * FROM trabajador WHERE id_trabajador=?";
-    private static final String FIND_BY_NAME = "SELECT u.id_usuario, u.nombre_usuario, u.contraseña,u.gmail FROM usuario u  JOIN trabajador t ON t.id_trabajador = u.id_usuario WHERE u.nombre_usuario=?";
-    private static final String FIND_BY_GMAIL = "SELECT  u.id_usuario,u.nombre_usuario,u.contraseña,u.gmail FROM usuario u JOIN trabajador t ON t.id_trabajador=u.id_usuario WHERE u.gmail=?";
+    private static final String FIND_BY_NAME = "SELECT u.id_usuario, u.nombre_usuario, u.contraseña,u.gmail, u.imagen_perfil FROM usuario u  JOIN trabajador t ON t.id_trabajador = u.id_usuario WHERE u.nombre_usuario=?";
+    private static final String FIND_BY_GMAIL = "SELECT  u.id_usuario,u.nombre_usuario,u.contraseña,u.gmail, u.imagen_perfil FROM usuario u JOIN trabajador t ON t.id_trabajador=u.id_usuario WHERE u.gmail=?";
     private Connection conn;
     Worker worker;
     public WorkerDAO() {
@@ -56,6 +56,7 @@ public class WorkerDAO {
                 result.setUsername(res.getString("nombre_usuario"));
                 result.setPassword(res.getString("contraseña"));
                 result.setGmail(res.getString("gmail"));
+                result.setProfilePicture(res.getBytes("imagen_perfil"));
             }
             res.close();
         } catch (SQLException e) {
@@ -106,6 +107,7 @@ public class WorkerDAO {
                 result.setUsername(res.getString("nombre_usuario"));
                 result.setPassword(res.getString("contraseña"));
                 result.setGmail(res.getString("gmail"));
+                result.setProfilePicture(res.getBytes("imagen_perfil"));
 
             }
         } catch (SQLException e) {

@@ -9,13 +9,13 @@
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.StartSessionController">
    <children>
       <Text layoutX="146.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduzca sus credenciales para iniciar sesion" wrappingWidth="307.7366943359375" />
-      <Text layoutX="85.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de usuario/ria" wrappingWidth="169.30975341796875" />
-      <Text layoutX="107.0" layoutY="186.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña" wrappingWidth="123.85943603515625" />
-      <Text layoutX="112.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gmail" wrappingWidth="51.28631591796875" />
+      <Text layoutX="225.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de usuario/ria" wrappingWidth="169.30975341796875" />
+      <Text layoutX="238.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña" wrappingWidth="123.85943603515625" />
+      <Text layoutX="238.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gmail" wrappingWidth="51.28631591796875" />
       <Button layoutX="125.0" layoutY="325.0" mnemonicParsing="false" onMouseClicked="#Login" text="Iniciar Sesion" />
-      <TextField fx:id="textUsername" layoutX="72.0" layoutY="139.0" />
-      <TextField fx:id="gmailField" layoutX="51.0" layoutY="263.0" />
-      <PasswordField fx:id="textPassword" layoutX="63.0" layoutY="200.0" />
+      <TextField fx:id="textUsername" layoutX="225.0" layoutY="139.0" />
+      <TextField fx:id="gmailField" layoutX="225.0" layoutY="262.0" />
+      <PasswordField fx:id="textPassword" layoutX="225.0" layoutY="200.0" />
 
    </children>
 </AnchorPane>

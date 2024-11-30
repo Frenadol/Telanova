@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.github.Frenadol.View.ClothesController"
+            prefHeight="600.0" prefWidth="800.0">
+
+    <TableView fx:id="clothesTable" layoutX="14.0" layoutY="14.0" prefHeight="574.0" prefWidth="772.0">
+        <columns>
+            <TableColumn fx:id="idPrendaColumn" prefWidth="75.0" text="ID Prenda"/>
+            <TableColumn fx:id="nombrePrendaColumn" prefWidth="150.0" text="Nombre Prenda"/>
+            <TableColumn fx:id="tallaPrendaColumn" prefWidth="75.0" text="Talla Prenda"/>
+            <TableColumn fx:id="colorPrendaColumn" prefWidth="75.0" text="Color Prenda"/>
+            <TableColumn fx:id="descripcionColumn" prefWidth="200.0" text="Descripción"/>
+            <TableColumn fx:id="precioColumn" prefWidth="75.0" text="Precio"/>
+            <TableColumn fx:id="imagenPrendaColumn" prefWidth="100.0" text="Imagen Prenda"/>
+            <TableColumn fx:id="tipoPrendaColumn" prefWidth="100.0" text="Tipo Prenda"/>
+            <TableColumn fx:id="marcaPrendaColumn" prefWidth="100.0" text="Marca Prenda"/>
+            <TableColumn fx:id="modeloPrendaColumn" prefWidth="100.0" text="Modelo Prenda"/>
+            <TableColumn fx:id="fechaLlegadaColumn" prefWidth="100.0" text="Fecha Llegada"/>
+            <TableColumn fx:id="fechaSalidaColumn" prefWidth="100.0" text="Fecha Salida"/>
+            <TableColumn fx:id="stockPrendaColumn" prefWidth="75.0" text="Stock Prenda"/>
+        </columns>
+    </TableView>
+
+    <Button fx:id="bringClothesButton" layoutX="14.0" layoutY="594.0" mnemonicParsing="false" text="Traer ropa al almacén"/>
+
+</AnchorPane>

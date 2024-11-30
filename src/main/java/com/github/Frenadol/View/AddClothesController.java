@@ -22,18 +22,35 @@ public class AddClothesController {
     @FXML
     private ComboBox<String> GarmentSizeComboBox; // Usamos ComboBox para seleccionar la talla
     @FXML
-    private TextField GarmentColorField;
+    private ComboBox<String> GarmentColorComboBox; // Usamos ComboBox para seleccionar el color
     @FXML
     private TextField GarmentDescriptionField;
     @FXML
     private TextField GarmentPriceField;
     @FXML
     private ImageView GarmentImageField;
+    @FXML
+    private ComboBox<String> GarmentCategoryComboBox; // ComboBox para seleccionar la categoría
+    @FXML
+    private TextField GarmentQuantityField; // TextField para cantidad
 
     private File imageFile;
 
     private ClothesDAO clothesDAO = new ClothesDAO();
     private SessionManager sessionManager = SessionManager.getInstance();
+
+    @FXML
+    private void initialize() {
+        if (GarmentSizeComboBox.getItems().isEmpty()) {
+            GarmentSizeComboBox.getItems().addAll("S", "M", "L", "XL", "XXL");
+        }
+        if (GarmentColorComboBox.getItems().isEmpty()) {
+            GarmentColorComboBox.getItems().addAll("Rojo", "Azul", "Verde", "Negro", "Blanco", "Amarillo", "Naranja", "Rosa", "Morado", "Marrón", "Gris", "Beige");
+        }
+        if (GarmentCategoryComboBox.getItems().isEmpty()) {
+            GarmentCategoryComboBox.getItems().addAll("Deportiva", "Formal", "Informal", "Casual", "Exterior", "Interior");
+        }
+    }
 
     @FXML
     private void addImage() {
@@ -63,9 +80,28 @@ public class AddClothesController {
             System.out.println("Debe seleccionar una talla");
         }
 
-        garment.setColor_clothes(GarmentColorField.getText());
+        // Obtener el color seleccionado del ComboBox
+        String selectedColor = GarmentColorComboBox.getValue();
+        if (selectedColor != null && !selectedColor.isEmpty()) {
+            garment.setColor_clothes(selectedColor);
+        } else {
+            System.out.println("Debe seleccionar un color");
+        }
+
         garment.setDescription_clothes(GarmentDescriptionField.getText());
         garment.setPrice_clothes(Double.parseDouble(GarmentPriceField.getText()));
+
+        // Obtener la categoría seleccionada del ComboBox
+        String selectedCategory = GarmentCategoryComboBox.getValue();
+        if (selectedCategory != null && !selectedCategory.isEmpty()) {
+            garment.setCategory(selectedCategory);
+        } else {
+            System.out.println("Debe seleccionar una categoría");
+        }
+
+        // Obtener la cantidad de la prenda
+        int cantidad = Integer.parseInt(GarmentQuantityField.getText());
+        garment.setCantidad(cantidad);
 
         Worker currentWorker = sessionManager.getCurrentWorker();
         currentWorker.setId_user(currentWorker.getId_user());

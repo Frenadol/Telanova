@@ -28,17 +28,7 @@
             </Text>
          </children>
       </Pane>
-      <Text layoutX="279.0" layoutY="296.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ALMACEN" wrappingWidth="110.99999999999994">
-         <font>
-            <Font size="19.0" />
-         </font>
-      </Text>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="247.0" layoutY="308.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Images/Storage.png" />
-         </image>
-      </ImageView>
-      <Text layoutX="26.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AÑADIR PRENDAS" wrappingWidth="177.40002441406244">
+      <Text layoutX="39.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AÑADIR PRENDAS" wrappingWidth="157.40002441406244">
          <font>
             <Font size="19.0" />
          </font>
@@ -48,7 +38,7 @@
             <Font size="19.0" />
          </font>
       </Text>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutY="144.0" onMouseClicked="#goToAddClothes" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="26.0" layoutY="144.0" onMouseClicked="#goToAddClothes" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/AddGarment.png" />
          </image>
@@ -58,5 +48,6 @@
             <Image url="@Images/AddWorker.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="workerImageView" fitHeight="162.0" fitWidth="175.0" layoutX="254.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true" />
    </children>
 </AnchorPane>

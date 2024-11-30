@@ -15,7 +15,6 @@ public class Clothes {
     private String category; // Nuevo atributo
     private int cantidad;
 
-
     public Clothes(int id_clothes, String name_clothes, String size_clothes, String color_clothes, String description_clothes, Double price_clothes, int cantidad, String category, byte[] clothes_Visual, Worker worker) {
         this.id_clothes = id_clothes;
         this.name_clothes = name_clothes;
