@@ -81,7 +81,7 @@ public class ThumbController {
 
         Optional<ButtonType> response = confirmationAlert.showAndWait();
         if (response.isPresent() && response.get() == ButtonType.OK) {
-            SessionManager.getInstance().addToCart(clothesItem);
+            SessionManager.getInstance().addToCart(clothesItem, cantidad);
             System.out.println("Prenda añadida al carrito: " + clothesItem.getName_clothes());
 
             Client_Clothes clientClothes = new Client_Clothes();

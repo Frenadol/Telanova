@@ -7,14 +7,15 @@ public class Client_Clothes {
     Clothes clothes;
     int cantidad;
     String date;
+
     public Client_Clothes(Client client, Clothes clothes, int cantidad, String date) {
         this.client = client;
         this.clothes = clothes;
         this.cantidad = cantidad;
         this.date = date;
     }
-    public Client_Clothes(){
- 
+
+    public Client_Clothes() {
     }
 
     public Client getClient() {
@@ -49,6 +50,22 @@ public class Client_Clothes {
         this.date = date;
     }
 
+    // Getters for Clothes properties
+    public int getId_clothes() {
+        return clothes.getId_clothes();
+    }
+
+    public String getName_clothes() {
+        return clothes.getName_clothes();
+    }
+
+    public double getPrice_clothes() {
+        return clothes.getPrice_clothes();
+    }
+
+    public byte[] getClothes_Visual() {
+        return clothes.getClothes_Visual();
+    }
 
     @Override
     public boolean equals(Object o) {

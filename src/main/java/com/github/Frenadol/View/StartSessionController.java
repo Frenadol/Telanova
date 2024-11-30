@@ -57,7 +57,7 @@ public class StartSessionController {
             Client clientByGmail = clienteDAO.build().findByGmail(gmail);
             if (clientByGmail != null) {
                 if (security.checkPassword(password, clientByGmail.getPassword())) {
-                    sessionManager.setCurrentUser(clientByGmail);
+                    sessionManager.setCurrentClient(clientByGmail);
                     try {
                         App.setRoot("View/ClientMenu");
                     } catch (IOException e) {

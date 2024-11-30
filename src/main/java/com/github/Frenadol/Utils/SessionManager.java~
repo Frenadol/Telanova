@@ -7,7 +7,7 @@ import java.util.List;
 
 public class SessionManager {
     private static SessionManager instance;
-    private List<Client_Clothes> details;
+    private List<Clothes> details;
     private List<Clothes> shoppingCart;
     private User currentUser;
     private Worker currentWorker;
@@ -25,9 +25,9 @@ public class SessionManager {
         return instance;
     }
 
-    public void addDetail(Client_Clothes newDetail, int quantity) {
-        for (Client_Clothes detail : details) {
-            if (detail.getClothes().getName_clothes().equals(newDetail.getClothes().getName_clothes())) {
+    public void addDetail(Clothes newDetail, int quantity) {
+        for (Clothes detail : details) {
+            if (detail.getName_clothes().equals(newDetail.getName_clothes())) {
                 updateDetailQuantity(detail, quantity);
                 return;
             }
@@ -36,9 +36,9 @@ public class SessionManager {
         details.add(newDetail);
     }
 
-    public void updateDetailQuantity(Client_Clothes clientClothes, int quantity) {
-        for (Client_Clothes detail : details) {
-            if (detail.equals(clientClothes)) {
+    public void updateDetailQuantity(Clothes clothes, int quantity) {
+        for (Clothes detail : details) {
+            if (detail.equals(clothes)) {
                 int currentQuantity = detail.getCantidad();
                 detail.setCantidad(currentQuantity + quantity);
                 break;
@@ -46,13 +46,14 @@ public class SessionManager {
         }
     }
 
-    public List<Client_Clothes> getDetails() {
+    public List<Clothes> getDetails() {
         return new ArrayList<>(details);
     }
 
     public void addToCart(Clothes clothes, int cantidad) {
         if (!shoppingCart.contains(clothes)) {
             shoppingCart.add(clothes);
+
         }
     }
 
