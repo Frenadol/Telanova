@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.cell.PropertyValueFactory?>
-<VBox xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.ShoppingCartController">
+<VBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.ShoppingCartController">
     <TableView fx:id="shoppingCartTableView">
         <columns>
             <TableColumn fx:id="imageColumn" text="Image">
@@ -32,6 +32,9 @@
             </TableColumn>
         </columns>
     </TableView>
-    <Button text="Go Back" onAction="#goBack" />
-    <Button text="Reload Cart" onAction="#reloadCart"/>
+    <Label fx:id="totalPriceLabel" text="Total: €" />
+    <Button onAction="#goBack" text="Go Back" />
+   <Button mnemonicParsing="false" onMouseClicked="#handleOrderReceived" text="Terminar pedido" />
+   <Button mnemonicParsing="false" onMouseClicked="#handleFinishOrder" text="terminar pedido" />
+    <Button onAction="#reloadCart" text="Reload Cart" />
 </VBox>

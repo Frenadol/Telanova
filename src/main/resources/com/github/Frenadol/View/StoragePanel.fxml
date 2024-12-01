@@ -8,4 +8,14 @@
       fx:controller="com.github.Frenadol.View.StoragePanelController"
       spacing="10" alignment="CENTER" prefWidth="300" prefHeight="200">
     <VBox fx:id="itemsContainer" spacing="10" alignment="CENTER"/>
+    <Button text="Recuento por Categoría" onAction="#handleCountByCategory"/>
+    <Button text="Recuento por Talla" onAction="#handleCountBySize"/>
+    <Button text="Recuento por Color" onAction="#handleCountByColor"/>
+    <TableView fx:id="resultsTable">
+        <columns>
+            <TableColumn fx:id="attributeColumn" text="Atributo"/>
+            <TableColumn fx:id="countColumn" text="Cantidad"/>
+            <TableColumn fx:id="nameColumn" text="Nombre"/>
+        </columns>
+    </TableView>
 </VBox>
