@@ -1,5 +1,6 @@
 package com.github.Frenadol.View;
 
+import com.github.Frenadol.Dao.Clientes_PrendasDAO;
 import com.github.Frenadol.Dao.ClothesDAO;
 import com.github.Frenadol.Model.Client_Clothes;
 import com.github.Frenadol.Model.Clothes;
@@ -15,23 +16,27 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 
 import java.io.ByteArrayInputStream;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Optional;
 
 public class ThumbController {
 
     @FXML
     private Label itemName;
-    @FXML
-    private Button addToCartButton;
 
     @FXML
     private ImageView productImageView;
+    @FXML
+    private Label productPriceLabel;
 
     private Clothes clothesItem;
 
     public void setGarment(Clothes clothes) {
         this.clothesItem = clothes;
         itemName.setText(clothes.getName_clothes());
+        productPriceLabel.setText(String.format("$%.2f", clothes.getPrice_clothes()));
         if (clothes.getClothes_Visual() != null && clothes.getClothes_Visual().length > 0) {
             ByteArrayInputStream bis = new ByteArrayInputStream(clothes.getClothes_Visual());
             Image image = new Image(bis);
@@ -93,8 +98,24 @@ public class ThumbController {
 
             clothesDAO.updateQuantity(clothesItem.getId_clothes(), availableQuantity - cantidad);
 
-            // Save the cart after adding the item
+            // Llamar al método addClothesToCart del DAO
+            Clientes_PrendasDAO dao = new Clientes_PrendasDAO();
+            int clientId = getClientId(); // Obtener el ID del cliente actual
+            String purchaseDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date(System.currentTimeMillis()));
+            // Verificar si la entrada ya existe y actualizar la cantidad si es necesario
+            if (dao.entryExists(clientId, clothesItem.getId_clothes())) {
+                dao.updateClothesQuantity(clientId, clothesItem.getId_clothes(), cantidad);
+            } else {
+                dao.addClothesToCart(clientId, clothesItem.getId_clothes(), purchaseDate, cantidad);
+            }
+
+            System.out.println("Prenda añadida a la base de datos.");
         }
+    }
+
+    private int getClientId() {
+        // Obtener el ID del cliente actual desde el SessionManager
+        return SessionManager.getInstance().getCurrentClient().getId_user();
     }
 
     private void showAlert(String title, String message) {

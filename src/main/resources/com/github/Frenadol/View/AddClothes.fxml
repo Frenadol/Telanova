@@ -71,8 +71,11 @@
         <!-- Campo de texto para cantidad de la prenda -->
         <TextField fx:id="GarmentQuantityField" layoutX="208.0" layoutY="276.0" prefWidth="300" promptText="Cantidad de la prenda" />
 
+        <!-- ComboBox para seleccionar el almacén -->
+        <ComboBox fx:id="StorageComboBox" layoutX="208.0" layoutY="312.0" prefWidth="300" promptText="Selecciona el almacén" />
+
         <!-- Imagen de la prenda -->
-        <ImageView fx:id="GarmentImageField" fitHeight="264.0" fitWidth="286.0" layoutX="215.0" layoutY="320.0" />
+        <ImageView fx:id="GarmentImageField" fitHeight="264.0" fitWidth="286.0" layoutX="215.0" layoutY="350.0" />
 
         <!-- Botones -->
         <Button layoutX="517.0" layoutY="408.0" onMouseClicked="#saveGarment" prefHeight="39.0" prefWidth="166.0" text="Guardar" />

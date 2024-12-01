@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
+<?import javafx.scene.control.Label?>
 <BorderPane fx:id="root" prefHeight="626.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.ClientMenuController">
    <top>
       <HBox alignment="CENTER" spacing="10">
@@ -37,6 +38,8 @@
                <Image url="@Images/Carrito.png" />
             </image>
          </ImageView>
+         <Label fx:id="walletBalanceLabel" text="Saldo: $0.00" />
+         <Button fx:id="addMoneyButton" text="Añadir dinero" onMouseClicked="#showAddMoneyDialog" />
       </VBox>
    </right>
 </BorderPane>

@@ -16,16 +16,12 @@
                   <Image url="@Images/TelaNovaLogo.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="102.0" fitWidth="108.0" layoutX="552.0" layoutY="3.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Images/TelaNovaLogo.png" />
-               </image>
-            </ImageView>
-            <Text layoutX="153.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido/a al panel de administración" wrappingWidth="382.71514892578125">
+            <Text layoutX="79.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido/a al panel de administración" wrappingWidth="382.71514892578125">
                <font>
                   <Font size="19.0" />
                </font>
             </Text>
+            <ImageView fx:id="workerImageView" fitHeight="108.0" fitWidth="175.0" layoutX="479.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
       <Text layoutX="39.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AÑADIR PRENDAS" wrappingWidth="157.40002441406244">
@@ -48,6 +44,25 @@
             <Image url="@Images/AddWorker.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="workerImageView" fitHeight="162.0" fitWidth="175.0" layoutX="254.0" layoutY="78.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="7.0" layoutY="316.0" onMouseClicked="#gotoStorage" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/Storage.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="166.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ENTRAR EN ALMACENES" wrappingWidth="175.0">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="180.0" fitWidth="200.0" layoutX="469.0" layoutY="300.0" onMouseClicked="#openInsertStorageWindow" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/MapStorage.png" />
+         </image>
+      </ImageView>
+      <Text layoutX="312.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CREAR ALMACENES" wrappingWidth="175.0">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

@@ -1,0 +1,33 @@
+package com.github.Frenadol.View;
+
+import com.github.Frenadol.Dao.StorageDAO;
+import com.github.Frenadol.Model.Storage;
+import javafx.fxml.FXML;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+
+public class InsertStorageController {
+
+    @FXML
+    private TextField storageNameField;
+
+    private StorageDAO storageDAO = new StorageDAO();
+
+    @FXML
+    public void saveStorage() {
+        String storageName = storageNameField.getText();
+        if (storageName != null && !storageName.isEmpty()) {
+            Storage storage = new Storage();
+            storage.setStorageName(storageName);
+            storageDAO.insertStorage(storage);
+            closeWindow();
+        } else {
+            // Show error message
+        }
+    }
+
+    private void closeWindow() {
+        Stage stage = (Stage) storageNameField.getScene().getWindow();
+        stage.close();
+    }
+}

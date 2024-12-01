@@ -1,10 +1,13 @@
 package com.github.Frenadol.View;
 
 import com.github.Frenadol.Dao.ClothesDAO;
+import com.github.Frenadol.Dao.StorageDAO;
 import com.github.Frenadol.Model.Clothes;
+import com.github.Frenadol.Model.Storage;
 import com.github.Frenadol.Model.Worker;
 import com.github.Frenadol.Utils.SessionManager;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -14,15 +17,16 @@ import javafx.stage.FileChooser;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.List;
 
 public class AddClothesController {
 
     @FXML
     private TextField Garment_name;
     @FXML
-    private ComboBox<String> GarmentSizeComboBox; // Usamos ComboBox para seleccionar la talla
+    private ComboBox<String> GarmentSizeComboBox;
     @FXML
-    private ComboBox<String> GarmentColorComboBox; // Usamos ComboBox para seleccionar el color
+    private ComboBox<String> GarmentColorComboBox;
     @FXML
     private TextField GarmentDescriptionField;
     @FXML
@@ -30,26 +34,33 @@ public class AddClothesController {
     @FXML
     private ImageView GarmentImageField;
     @FXML
-    private ComboBox<String> GarmentCategoryComboBox; // ComboBox para seleccionar la categoría
+    private ComboBox<String> GarmentCategoryComboBox;
     @FXML
-    private TextField GarmentQuantityField; // TextField para cantidad
+    private TextField GarmentQuantityField;
+    @FXML
+    private ComboBox<Storage> StorageComboBox; // ComboBox for selecting storage
 
     private File imageFile;
 
     private ClothesDAO clothesDAO = new ClothesDAO();
+    private StorageDAO storageDAO = new StorageDAO();
     private SessionManager sessionManager = SessionManager.getInstance();
 
     @FXML
     private void initialize() {
-        if (GarmentSizeComboBox.getItems().isEmpty()) {
-            GarmentSizeComboBox.getItems().addAll("S", "M", "L", "XL", "XXL");
-        }
-        if (GarmentColorComboBox.getItems().isEmpty()) {
-            GarmentColorComboBox.getItems().addAll("Rojo", "Azul", "Verde", "Negro", "Blanco", "Amarillo", "Naranja", "Rosa", "Morado", "Marrón", "Gris", "Beige");
-        }
-        if (GarmentCategoryComboBox.getItems().isEmpty()) {
-            GarmentCategoryComboBox.getItems().addAll("Deportiva", "Formal", "Informal", "Casual", "Exterior", "Interior");
-        }
+        populateComboBoxes();
+        populateStorageComboBox();
+    }
+
+    private void populateComboBoxes() {
+        GarmentSizeComboBox.getItems().addAll("S", "M", "L", "XL", "XXL");
+        GarmentColorComboBox.getItems().addAll("Rojo", "Azul", "Verde", "Negro", "Blanco", "Amarillo", "Naranja", "Rosa", "Morado", "Marrón", "Gris", "Beige");
+        GarmentCategoryComboBox.getItems().addAll("Deportiva", "Formal", "Informal", "Casual", "Exterior", "Interior");
+    }
+
+    private void populateStorageComboBox() {
+        List<Storage> storages = storageDAO.findAllStorages();
+        StorageComboBox.getItems().addAll(storages);
     }
 
     @FXML
@@ -72,53 +83,74 @@ public class AddClothesController {
         Clothes garment = new Clothes();
         garment.setName_clothes(Garment_name.getText());
 
-        // Obtener la talla seleccionada del ComboBox
         String selectedSize = GarmentSizeComboBox.getValue();
         if (selectedSize != null && !selectedSize.isEmpty()) {
             garment.setSize_clothes(selectedSize);
         } else {
-            System.out.println("Debe seleccionar una talla");
+            showAlert("Error", "Debe seleccionar una talla", Alert.AlertType.ERROR);
+            return;
         }
 
-        // Obtener el color seleccionado del ComboBox
         String selectedColor = GarmentColorComboBox.getValue();
         if (selectedColor != null && !selectedColor.isEmpty()) {
             garment.setColor_clothes(selectedColor);
         } else {
-            System.out.println("Debe seleccionar un color");
+            showAlert("Error", "Debe seleccionar un color", Alert.AlertType.ERROR);
+            return;
         }
 
         garment.setDescription_clothes(GarmentDescriptionField.getText());
-        garment.setPrice_clothes(Double.parseDouble(GarmentPriceField.getText()));
+        try {
+            garment.setPrice_clothes(Double.parseDouble(GarmentPriceField.getText()));
+        } catch (NumberFormatException e) {
+            showAlert("Error", "Debe ingresar un precio válido", Alert.AlertType.ERROR);
+            return;
+        }
 
-        // Obtener la categoría seleccionada del ComboBox
         String selectedCategory = GarmentCategoryComboBox.getValue();
         if (selectedCategory != null && !selectedCategory.isEmpty()) {
             garment.setCategory(selectedCategory);
         } else {
-            System.out.println("Debe seleccionar una categoría");
+            showAlert("Error", "Debe seleccionar una categoría", Alert.AlertType.ERROR);
+            return;
         }
 
-        // Obtener la cantidad de la prenda
-        int cantidad = Integer.parseInt(GarmentQuantityField.getText());
-        garment.setCantidad(cantidad);
+        try {
+            int cantidad = Integer.parseInt(GarmentQuantityField.getText());
+            garment.setCantidad(cantidad);
+        } catch (NumberFormatException e) {
+            showAlert("Error", "Debe ingresar una cantidad válida", Alert.AlertType.ERROR);
+            return;
+        }
 
         Worker currentWorker = sessionManager.getCurrentWorker();
-        currentWorker.setId_user(currentWorker.getId_user());
         garment.setWorker(currentWorker);
 
-        // Guardar la imagen si fue seleccionada
         if (imageFile != null) {
             try (FileInputStream fis = new FileInputStream(imageFile)) {
                 garment.setClothes_Visual(fis.readAllBytes());
             } catch (IOException e) {
-                System.out.println(e.getMessage());
+                showAlert("Error", "Error al leer la imagen: " + e.getMessage(), Alert.AlertType.ERROR);
+                return;
             }
         }
 
-        // Guardar la prenda en la base de datos
-        clothesDAO.insertGarment(garment);
-        int idClothes = clothesDAO.getLastInsertedId();
-        clothesDAO.insertCreatedClothes(idClothes, currentWorker.getId_user());
+        Storage selectedStorage = StorageComboBox.getValue();
+        if (selectedStorage != null) {
+            clothesDAO.insertGarment(garment, selectedStorage.getId_storage());
+            int idClothes = clothesDAO.getLastInsertedId();
+            clothesDAO.insertCreatedClothes(idClothes, currentWorker.getId_user());
+            showAlert("Éxito", "Prenda insertada correctamente", Alert.AlertType.INFORMATION);
+        } else {
+            showAlert("Error", "Debe seleccionar un almacén", Alert.AlertType.ERROR);
+        }
+    }
+
+    private void showAlert(String title, String message, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 }

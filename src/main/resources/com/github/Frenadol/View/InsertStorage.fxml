@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.github.Frenadol.View.InsertStorageController"
+      spacing="10" alignment="CENTER" prefWidth="300" prefHeight="200">
+    <Label text="Nombre del Almacén"/>
+    <Label fx:id="errorMessage" textFill="red"/>
+    <TextField fx:id="storageNameField"/>
+    <Button text="Guardar" onAction="#saveStorage"/>
+</VBox>

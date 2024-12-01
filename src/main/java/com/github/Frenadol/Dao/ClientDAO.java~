@@ -93,7 +93,6 @@ public class ClientDAO {
                 result.setId_user(res.getInt("id_usuario"));
                 result.setUsername(res.getString("nombre_usuario"));
                 result.setPassword(res.getString("contraseña"));
-                result.setWallet(res.getDouble("cartera"));
                 result.setGmail(res.getString("gmail"));
             }
         } catch (SQLException e) {

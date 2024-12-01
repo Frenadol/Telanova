@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="768.0" prefWidth="761.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.ChanguePropertiesController">
+    <VBox alignment="CENTER" layoutX="100" layoutY="50" prefHeight="400" prefWidth="600" spacing="10">
+        <Label style="-fx-font-size: 20px;" text="Cambiar Propiedades" />
+        <Label text="Nombre" />
+        <TextField fx:id="nameField" />
+        <Label text="Talla" />
+        <ComboBox fx:id="sizeComboBox" promptText="Selecciona la talla">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="S" />
+                    <String fx:value="M" />
+                    <String fx:value="L" />
+                    <String fx:value="XL" />
+                    <String fx:value="XXL" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <Label text="Color" />
+        <ComboBox fx:id="colorComboBox" promptText="Selecciona el color">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Rojo" />
+                    <String fx:value="Azul" />
+                    <String fx:value="Verde" />
+                    <String fx:value="Negro" />
+                    <String fx:value="Blanco" />
+                    <String fx:value="Amarillo" />
+                    <String fx:value="Naranja" />
+                    <String fx:value="Rosa" />
+                    <String fx:value="Morado" />
+                    <String fx:value="Marrón" />
+                    <String fx:value="Gris" />
+                    <String fx:value="Beige" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <Label text="Descripción" />
+        <TextArea fx:id="descriptionField" />
+        <Label text="Precio" />
+        <TextField fx:id="priceField" />
+        <Label text="Categoría" />
+        <ComboBox fx:id="categoryComboBox" promptText="Selecciona la categoría">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Deportiva" />
+                    <String fx:value="Formal" />
+                    <String fx:value="Informal" />
+                    <String fx:value="Casual" />
+                    <String fx:value="Exterior" />
+                    <String fx:value="Interior" />
+                </FXCollections>
+            </items>
+        </ComboBox>
+        <Label text="Cantidad" />
+        <TextField fx:id="quantityField" />
+        <Label text="Imagen" />
+        <HBox alignment="CENTER" spacing="10">
+            <TextField fx:id="imageField" editable="false" />
+            <Button onAction="#handleSelectImage" text="Seleccionar Imagen" />
+            <Button onAction="#handleSave" text="Guardar Cambios" />
+        </HBox>
+         <Button onAction="#handleBack" prefHeight="26.0" prefWidth="92.0" text="Volver" />
+        <ImageView fx:id="imageView" fitHeight="200" fitWidth="200" />
+        <HBox alignment="CENTER" spacing="10" />
+    </VBox>
+</AnchorPane>

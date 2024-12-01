@@ -29,6 +29,10 @@ public class Client extends User {
     public Client() {
     }
 
+    public void addMoneyToWallet(double amount) {
+        this.wallet += amount;
+    }
+
     public double getWallet() {
         return wallet;
     }

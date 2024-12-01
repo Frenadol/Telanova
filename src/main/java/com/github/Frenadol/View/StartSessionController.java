@@ -9,9 +9,12 @@ import com.github.Frenadol.Security.Security;
 import com.github.Frenadol.Utils.SessionManager;
 import java.util.prefs.Preferences;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Alert;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 
@@ -33,44 +36,43 @@ public class StartSessionController {
     public void Login() {
         String username = textUsername.getText();
         String password = textPassword.getText();
-        String gmail = gmailField.getText();
         Worker worker = workerDAO.build().findByName(username);
         Client client = clienteDAO.build().findByName(username);
         SessionManager sessionManager = SessionManager.getInstance();
         if (worker != null) {
-            Worker workerByGmail = workerDAO.build().findByGmail(gmail);
-            if (workerByGmail != null) {
-                if (security.checkPassword(password, workerByGmail.getPassword())) {
-                    sessionManager.setCurrentWorker(workerByGmail); // Set current worker here
-                    try {
-                        App.setRoot("View/AdminPanel");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    System.out.println("Contraseña incorrecta");
+            if (security.checkPassword(password, worker.getPassword())) {
+                sessionManager.setCurrentWorker(worker); // Set current worker here
+                showAlert("Bienvenido a Telanova", "Bienvenido a Telanova, " + worker.getUsername(), Alert.AlertType.INFORMATION);
+                try {
+                    App.setRoot("View/AdminPanel");
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             } else {
-                System.out.println("Gmail incorrecto");
+                showAlert("Error", "Contraseña incorrecta", Alert.AlertType.ERROR);
             }
         } else if (client != null) {
-            Client clientByGmail = clienteDAO.build().findByGmail(gmail);
-            if (clientByGmail != null) {
-                if (security.checkPassword(password, clientByGmail.getPassword())) {
-                    sessionManager.setCurrentClient(clientByGmail);
-                    try {
-                        App.setRoot("View/ClientMenu");
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    System.out.println("Contraseña incorrecta");
+            if (security.checkPassword(password, client.getPassword())) {
+                sessionManager.setCurrentClient(client);
+                showAlert("Bienvenido a Telanova", "Bienvenido a Telanova, " + client.getUsername(), Alert.AlertType.INFORMATION);
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("ClientMenu.fxml"));
+                    Stage stage = (Stage) textUsername.getScene().getWindow();
+                    Scene scene = new Scene(loader.load());
+                    stage.setScene(scene);
+                    stage.show();
+
+                    ClientMenuController clientMenuController = loader.getController();
+                    sessionManager.getCurrentClient().setWallet(client.getWallet());
+                    clientMenuController.updateWalletBalance();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             } else {
-                System.out.println("Gmail incorrecto");
+                showAlert("Error", "Contraseña incorrecta", Alert.AlertType.ERROR);
             }
         } else {
-            System.out.println("Cliente no encontrado");
+            showAlert("Error", "Cliente no encontrado", Alert.AlertType.ERROR);
         }
         saveFields();
     }
@@ -92,9 +94,20 @@ public class StartSessionController {
         loadFields();
     }
 
-    private void showAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+    private void showAlert(String title, String message, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
         alert.setContentText(message);
-        alert.show();
+        alert.showAndWait();
+    }
+
+    public int getClientId() {
+        Client currentClient = SessionManager.getInstance().getCurrentClient();
+        if (currentClient != null) {
+            return currentClient.getId_user();
+        } else {
+            throw new IllegalStateException("No client is currently logged in.");
+        }
     }
 }
