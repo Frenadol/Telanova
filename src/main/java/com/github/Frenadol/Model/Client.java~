@@ -2,14 +2,14 @@ package com.github.Frenadol.Model;
 
 import java.util.ArrayList;
 
-public class Client extends User{
+public class Client extends User {
     private double wallet;
-    private ArrayList<Clothes> clothes = new ArrayList<Clothes>();
+    private ArrayList<Clothes> clothes = new ArrayList<>();
 
     public Client(String username, int id_user, String password, String gmail, byte[] profilePicture, double wallet, ArrayList<Clothes> clothes) {
         super(username, id_user, password, gmail, profilePicture);
         this.wallet = wallet;
-        this.clothes = null;
+        this.clothes = clothes;
     }
 
     public Client(double wallet, ArrayList<Clothes> clothes) {
@@ -29,7 +29,6 @@ public class Client extends User{
     public Client() {
     }
 
-
     public double getWallet() {
         return wallet;
     }
@@ -38,9 +37,16 @@ public class Client extends User{
         this.wallet = wallet;
     }
 
+    public ArrayList<Clothes> getClothes() {
+        return clothes;
+    }
+
+    public void setClothes(ArrayList<Clothes> clothes) {
+        this.clothes = clothes;
+    }
 
     @Override
     public String toString() {
-        return super.toString()+wallet;
+        return super.toString() + wallet;
     }
 }

@@ -1,52 +1,43 @@
 package com.github.Frenadol.View;
 
-import com.github.Frenadol.App;
-import com.github.Frenadol.Model.Worker;
+import com.github.Frenadol.Dao.ClothesDAO;
+import com.github.Frenadol.Model.Clothes;
+import com.github.Frenadol.Model.Storage;
 import com.github.Frenadol.Utils.SessionManager;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.shape.Circle;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.VBox;
 
-import java.io.ByteArrayInputStream;
 import java.io.IOException;
+import java.util.List;
 
 public class StoragePanelController {
-    private Worker currentWorker;
 
     @FXML
-    private ImageView workerImage;
-    @FXML
-    private Button ViewClothesButton;
+    private VBox itemsContainer;
 
     @FXML
-    public void initialize() {
-        currentWorker = SessionManager.getInstance().getCurrentWorker();
-
-        if (currentWorker != null) {
-            System.out.println("Worker logueado: " + currentWorker.getUsername());
-            byte[] visualData = currentWorker.getProfilePicture();
-
-            if (visualData != null && visualData.length > 0) {
-                System.out.println("Tamaño del array de bytes: " + visualData.length);
-                ByteArrayInputStream bis = new ByteArrayInputStream(visualData);
-                Image image = new Image(bis);
-                workerImage.setImage(image);
-            } else {
-                System.out.println("La variable currentWorker es null");
-            }
-        }
-
-
+    private void initialize() {
+        loadClothes();
     }
 
-    @FXML
-    public void ViewClothes() {
-        try {
-            App.setRoot("View/Clothes");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+    private void loadClothes() {
+        Storage currentStorage = SessionManager.getInstance().getCurrentStorage();
+        if (currentStorage != null) {
+            ClothesDAO clothesDAO = new ClothesDAO();
+            List<Clothes> clothesList = clothesDAO.findByStorageId(currentStorage.getId_storage());
+
+            for (Clothes clothes : clothesList) {
+                try {
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminThumb.fxml"));
+                    VBox thumb = loader.load();
+                    ThumbControllerAdmin controller = loader.getController();
+                    controller.setGarment(clothes);
+                    itemsContainer.getChildren().add(thumb);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }

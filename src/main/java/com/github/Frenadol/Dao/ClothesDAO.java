@@ -9,22 +9,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClothesDAO {
-    private static final String INSERT_GARMENT = "INSERT INTO prendas (nombre_prenda, talla_prenda, color_prenda, descripcion, precio, imagen_prenda, categoria, cantidad) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
-    private static final String FIND_CLOTHES_FOR_CLIENTS = "SELECT imagen_prenda, precio FROM prendas";
+    private static final String FIND_BY_STORAGE_ID = "SELECT * FROM prendas WHERE id_almacen=?";
+    private static final String INSERT_GARMENT = "INSERT INTO prendas (nombre_prenda, talla_prenda, color_prenda, descripcion, precio, imagen_prenda, categoria, cantidad, id_almacen) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
     private static final String INSERT_CREATED_CLOTHES = "INSERT INTO trabajadores_prenda (id_prenda, id_trabajador) VALUES (?, ?)";
     private static final String FIND_CLOTHES_LAZY = "SELECT id_prenda, nombre_prenda, precio, imagen_prenda, descripcion, categoria, cantidad FROM prendas";
     private static final String FIND_BY_NAME = "SELECT id_prenda, nombre_prenda, precio, imagen_prenda, descripcion, categoria, cantidad FROM prendas WHERE nombre_prenda LIKE ?";
     private static final String FIND_ALL = "SELECT * from prendas";
-    private static final String  GET_QUANTITY  = "SELECT cantidad FROM prendas WHERE id_prenda = ?";
+    private static final String GET_QUANTITY = "SELECT cantidad FROM prendas WHERE id_prenda = ?";
     private static final String GET_BY_ID = "SELECT * FROM prendas WHERE id_prenda = ?";
-    private static final String UPDATE_QUANTITY="UPDATE prendas SET cantidad=? WHERE id_prenda=?";
-
+    private static final String UPDATE_QUANTITY = "UPDATE prendas SET cantidad=? WHERE id_prenda=?";
+    private static final String UPDATE = "UPDATE prendas SET nombre_prenda=?, talla_prenda=?, color_prenda=?, descripcion=?, precio=?, imagen_prenda=?, categoria=?, cantidad=? WHERE id_prenda=?";
 
     private Connection conn;
 
     public ClothesDAO() {
         this.conn = ConnectionDB.getConnection();
     }
+
     public Clothes findClothesById(int id) {
         Clothes clothes = null;
         try (PreparedStatement pst = conn.prepareStatement(GET_BY_ID)) {
@@ -48,7 +49,8 @@ public class ClothesDAO {
         }
         return clothes;
     }
-    public void insertGarment(Clothes garment) {
+
+    public void insertGarment(Clothes garment, int idAlmacen) {
         try (PreparedStatement pst = conn.prepareStatement(INSERT_GARMENT, Statement.RETURN_GENERATED_KEYS)) {
             pst.setString(1, garment.getName_clothes());
             pst.setString(2, garment.getSize_clothes());
@@ -57,12 +59,51 @@ public class ClothesDAO {
             pst.setDouble(5, garment.getPrice_clothes());
             pst.setBytes(6, garment.getClothes_Visual());
             pst.setString(7, garment.getCategory());
-            pst.setInt(8, garment.getCantidad()); // Set cantidad
+            pst.setInt(8, garment.getCantidad());
+            pst.setInt(9, idAlmacen); // Set id_almacen
             pst.executeUpdate();
         } catch (SQLException e) {
             ErrorLog.fileRead(e);
         }
     }
+
+    public List<Clothes> findByStorageId(int storageId) {
+        List<Clothes> clothesList = new ArrayList<>();
+        try (PreparedStatement pst = conn.prepareStatement(FIND_BY_STORAGE_ID)) {
+            pst.setInt(1, storageId);
+            try (ResultSet rs = pst.executeQuery()) {
+                while (rs.next()) {
+                    Clothes clothes = new Clothes();
+                    clothes.setId_clothes(rs.getInt("id_prenda"));
+                    clothes.setName_clothes(rs.getString("nombre_prenda"));
+                    clothes.setPrice_clothes(rs.getDouble("precio"));
+                    clothes.setClothes_Visual(rs.getBytes("imagen_prenda"));
+                    clothesList.add(clothes);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return clothesList;
+    }
+
+    public void updateClothes(Clothes clothes) {
+        try (PreparedStatement pst = conn.prepareStatement(UPDATE)) {
+            pst.setString(1, clothes.getName_clothes());
+            pst.setString(2, clothes.getSize_clothes());
+            pst.setString(3, clothes.getColor_clothes());
+            pst.setString(4, clothes.getDescription_clothes());
+            pst.setDouble(5, clothes.getPrice_clothes());
+            pst.setBytes(6, clothes.getClothes_Visual());
+            pst.setString(7, clothes.getCategory());
+            pst.setInt(8, clothes.getCantidad());
+            pst.setInt(9, clothes.getId_clothes());
+            pst.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public int getAvailableQuantity(int idClothes) {
         try (PreparedStatement pst = conn.prepareStatement(GET_QUANTITY)) {
             pst.setInt(1, idClothes);
@@ -143,6 +184,7 @@ public class ClothesDAO {
         }
         return result;
     }
+
     public List<Clothes> findClothesByName(String name) {
         List<Clothes> result = new ArrayList<>();
         try (PreparedStatement pst = conn.prepareStatement(FIND_BY_NAME)) {
@@ -163,6 +205,7 @@ public class ClothesDAO {
         }
         return result;
     }
+
     public void updateQuantity(int idClothes, int quantity) {
         try (PreparedStatement pst = conn.prepareStatement(UPDATE_QUANTITY)) {
             pst.setInt(1, quantity);

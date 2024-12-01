@@ -1,5 +1,6 @@
 package com.github.Frenadol.Utils;
 
+import com.github.Frenadol.Dao.ClientDAO;
 import com.github.Frenadol.Model.*;
 
 import java.util.ArrayList;
@@ -7,11 +8,12 @@ import java.util.List;
 
 public class SessionManager {
     private static SessionManager instance;
-    private List<Clothes> details;
+    private List<Client_Clothes> details;
     private List<Clothes> shoppingCart;
     private User currentUser;
     private Worker currentWorker;
     private Client currentClient;
+    private Storage currentStorage;
 
     private SessionManager() {
         details = new ArrayList<>();
@@ -24,10 +26,13 @@ public class SessionManager {
         }
         return instance;
     }
-
-    public void addDetail(Clothes newDetail, int quantity) {
-        for (Clothes detail : details) {
-            if (detail.getName_clothes().equals(newDetail.getName_clothes())) {
+    public void initializeSession(String clientName) {
+        ClientDAO clientDAO = new ClientDAO();
+        currentClient = clientDAO.findByName(clientName);
+    }
+    public void addDetail(Client_Clothes newDetail, int quantity) {
+        for (Client_Clothes detail : details) {
+            if (detail.getClothes().getName_clothes().equals(newDetail.getClothes().getName_clothes())) {
                 updateDetailQuantity(detail, quantity);
                 return;
             }
@@ -36,9 +41,9 @@ public class SessionManager {
         details.add(newDetail);
     }
 
-    public void updateDetailQuantity(Clothes clothes, int quantity) {
-        for (Clothes detail : details) {
-            if (detail.equals(clothes)) {
+    public void updateDetailQuantity(Client_Clothes clientClothes, int quantity) {
+        for (Client_Clothes detail : details) {
+            if (detail.equals(clientClothes)) {
                 int currentQuantity = detail.getCantidad();
                 detail.setCantidad(currentQuantity + quantity);
                 break;
@@ -46,14 +51,13 @@ public class SessionManager {
         }
     }
 
-    public List<Clothes> getDetails() {
+    public List<Client_Clothes> getDetails() {
         return new ArrayList<>(details);
     }
 
     public void addToCart(Clothes clothes, int cantidad) {
         if (!shoppingCart.contains(clothes)) {
             shoppingCart.add(clothes);
-
         }
     }
 
@@ -83,5 +87,13 @@ public class SessionManager {
 
     public Client getCurrentClient() {
         return currentClient;
+    }
+
+    public void setCurrentStorage(Storage storage) {
+        this.currentStorage = storage;
+    }
+
+    public Storage getCurrentStorage() {
+        return currentStorage;
     }
 }

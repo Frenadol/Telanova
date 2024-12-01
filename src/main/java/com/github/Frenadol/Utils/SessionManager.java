@@ -12,6 +12,7 @@ public class SessionManager {
     private User currentUser;
     private Worker currentWorker;
     private Client currentClient;
+    private Storage currentStorage;
 
     private SessionManager() {
         details = new ArrayList<>();
@@ -82,5 +83,13 @@ public class SessionManager {
 
     public Client getCurrentClient() {
         return currentClient;
+    }
+
+    public void setCurrentStorage(Storage storage) {
+        this.currentStorage = storage;
+    }
+
+    public Storage getCurrentStorage() {
+        return currentStorage;
     }
 }

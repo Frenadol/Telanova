@@ -35,12 +35,12 @@ public class Storage {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Storage storage = (Storage) o;
-        return Objects.equals(storageName, storage.storageName);
+        return id_storage == storage.id_storage;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hashCode(storageName);
+        return Objects.hashCode(id_storage);
     }
 
     @Override

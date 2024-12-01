@@ -32,5 +32,6 @@
             </TableColumn>
         </columns>
     </TableView>
-    <Button text="Go Back" onAction="#goBack"/>
+    <Button text="Go Back" onAction="#goBack" />
+    <Button text="Reload Cart" onAction="#reloadCart"/>
 </VBox>

@@ -2,13 +2,16 @@ package com.github.Frenadol.View;
 
 import com.github.Frenadol.App;
 import com.github.Frenadol.Model.Worker;
-import com.github.Frenadol.Utils.SessionManager;
 import com.github.Frenadol.Utils.ErrorLog;
+import com.github.Frenadol.Utils.SessionManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -40,21 +43,27 @@ public class AdminPanelController implements Initializable {
         }
     }
 
+
+    @FXML
+    public void openInsertStorageWindow() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("InsertStorage.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+            stage.setTitle("Insertar Almacén");
+            stage.show();
+        } catch (IOException e) {
+            ErrorLog.fileRead(e);
+            showAlert("Error" + e.getMessage());
+        }
+    }
+
     private void showAlert(String s) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Error");
         alert.setContentText(s);
         alert.showAndWait();
-    }
-
-    @FXML
-    public void gotoStorage() {
-        try {
-            App.setRoot("View/OptionsPanel");
-        } catch (IOException e) {
-            ErrorLog.fileRead(e);
-            showAlert("Error" + e.getMessage());
-        }
     }
 
     @Override
@@ -71,6 +80,20 @@ public class AdminPanelController implements Initializable {
             }
         } else {
             System.out.println("Current worker is null");
+        }
+    }
+    @FXML
+    public void gotoStorage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("StorageLogin.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+            stage.setTitle("Ingresar al Almacén");
+            stage.show();
+        } catch (IOException e) {
+            ErrorLog.fileRead(e);
+            showAlert("Error" + e.getMessage());
         }
     }
 }
