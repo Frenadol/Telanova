@@ -4,12 +4,21 @@ import com.github.Frenadol.Dao.ClothesDAO;
 import com.github.Frenadol.Model.Clothes;
 import com.github.Frenadol.Model.Storage;
 import com.github.Frenadol.Utils.SessionManager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 public class StoragePanelController {
 
@@ -17,14 +26,28 @@ public class StoragePanelController {
     private VBox itemsContainer;
 
     @FXML
+    private TableView<Result> resultsTable;
+
+    @FXML
+    private TableColumn<Result, String> attributeColumn;
+
+    @FXML
+    private TableColumn<Result, Integer> countColumn;
+
+    private ClothesDAO clothesDAO;
+
+    @FXML
     private void initialize() {
+        clothesDAO = new ClothesDAO();
         loadClothes();
+
+        attributeColumn.setCellValueFactory(new PropertyValueFactory<>("attribute"));
+        countColumn.setCellValueFactory(new PropertyValueFactory<>("count"));
     }
 
     private void loadClothes() {
         Storage currentStorage = SessionManager.getInstance().getCurrentStorage();
         if (currentStorage != null) {
-            ClothesDAO clothesDAO = new ClothesDAO();
             List<Clothes> clothesList = clothesDAO.findByStorageId(currentStorage.getId_storage());
 
             for (Clothes clothes : clothesList) {
@@ -38,6 +61,48 @@ public class StoragePanelController {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    @FXML
+    private void handleCountByCategory() {
+        Map<String, Integer> counts = clothesDAO.countClothesByCategory();
+        showCounts(counts);
+    }
+
+    @FXML
+    private void handleCountBySize() {
+        Map<String, Integer> counts = clothesDAO.countClothesBySize();
+        showCounts(counts);
+    }
+
+    @FXML
+    private void handleCountByColor() {
+        Map<String, Integer> counts = clothesDAO.countClothesByColor();
+        showCounts(counts);
+    }
+
+    private void showCounts(Map<String, Integer> counts) {
+        ObservableList<Result> data = FXCollections.observableArrayList();
+        counts.forEach((key, value) -> data.add(new Result(key, value)));
+        resultsTable.setItems(data);
+    }
+
+    public static class Result {
+        private final String attribute;
+        private final Integer count;
+
+        public Result(String attribute, Integer count) {
+            this.attribute = attribute;
+            this.count = count;
+        }
+
+        public String getAttribute() {
+            return attribute;
+        }
+
+        public Integer getCount() {
+            return count;
         }
     }
 }

@@ -5,7 +5,10 @@ module org.example {
     requires jakarta.xml.bind;
     requires org.glassfish.jaxb.runtime;
     requires java.desktop;
-    requires java.prefs; // Asegúrate de incluir esto si usas JAXB
+    requires java.prefs;
+    requires kernel;
+    requires layout;
+    requires io; // Asegúrate de incluir esto si usas JAXB
 
     exports com.github.Frenadol;
     exports com.github.Frenadol.View;

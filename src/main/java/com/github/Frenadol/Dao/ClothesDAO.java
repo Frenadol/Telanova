@@ -6,7 +6,9 @@ import com.github.Frenadol.Utils.ErrorLog;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ClothesDAO {
     private static final String FIND_BY_STORAGE_ID = "SELECT * FROM prendas WHERE id_almacen=?";
@@ -19,6 +21,9 @@ public class ClothesDAO {
     private static final String GET_BY_ID = "SELECT * FROM prendas WHERE id_prenda = ?";
     private static final String UPDATE_QUANTITY = "UPDATE prendas SET cantidad=? WHERE id_prenda=?";
     private static final String UPDATE = "UPDATE prendas SET nombre_prenda=?, talla_prenda=?, color_prenda=?, descripcion=?, precio=?, imagen_prenda=?, categoria=?, cantidad=? WHERE id_prenda=?";
+    private static final String COUNT_CATEGORY = "SELECT categoria, COUNT(*) AS count FROM prendas GROUP BY categoria";
+    private static final String COUNT_BY_SIZE = "SELECT talla_prenda, COUNT(*) AS count FROM prendas GROUP BY talla_prenda";
+    private static final String COUNT_BY_COLOR = "SELECT color_prenda, COUNT(*) AS count FROM prendas GROUP BY color_prenda";
 
     private Connection conn;
 
@@ -49,6 +54,46 @@ public class ClothesDAO {
         }
         return clothes;
     }
+
+    public Map<String, Integer> countClothesBySize() {
+        Map<String, Integer> sizeCounts = new HashMap<>();
+        try (PreparedStatement pst = conn.prepareStatement(COUNT_BY_SIZE);
+             ResultSet rs = pst.executeQuery()) {
+            while (rs.next()) {
+                sizeCounts.put(rs.getString("talla_prenda"), rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            ErrorLog.fileRead(e);
+        }
+        return sizeCounts;
+    }
+
+    public Map<String, Integer> countClothesByCategory() {
+        Map<String, Integer> categoryCounts = new HashMap<>();
+        try (PreparedStatement pst = conn.prepareStatement(COUNT_CATEGORY);
+             ResultSet rs = pst.executeQuery()) {
+            while (rs.next()) {
+                categoryCounts.put(rs.getString("categoria"), rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            ErrorLog.fileRead(e);
+        }
+        return categoryCounts;
+    }
+
+    public Map<String, Integer> countClothesByColor() {
+        Map<String, Integer> colorCounts = new HashMap<>();
+        try (PreparedStatement pst = conn.prepareStatement(COUNT_BY_COLOR);
+             ResultSet rs = pst.executeQuery()) {
+            while (rs.next()) {
+                colorCounts.put(rs.getString("color_prenda"), rs.getInt("count"));
+            }
+        } catch (SQLException e) {
+            ErrorLog.fileRead(e);
+        }
+        return colorCounts;
+    }
+
 
     public void insertGarment(Clothes garment, int idAlmacen) {
         try (PreparedStatement pst = conn.prepareStatement(INSERT_GARMENT, Statement.RETURN_GENERATED_KEYS)) {
@@ -205,6 +250,7 @@ public class ClothesDAO {
         }
         return result;
     }
+
 
     public void updateQuantity(int idClothes, int quantity) {
         try (PreparedStatement pst = conn.prepareStatement(UPDATE_QUANTITY)) {
