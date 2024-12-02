@@ -16,6 +16,7 @@ public class App extends Application {
         scene = new Scene(loadFXML("View/InitialMenu"), 640, 480);
         stage.setScene(scene);
         stage.show();
+        stage.setTitle("Telanova");
     }
 
     public static void setRoot(String fxml) throws IOException {

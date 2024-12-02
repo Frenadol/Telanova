@@ -65,7 +65,7 @@ public class AdminPanelController implements Initializable {
     public void gotoStorage() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("StorageLogin.fxml"));
-            Stage stage = new Stage();
+            Stage stage = (Stage) workerImageView.getScene().getWindow();
             Scene scene = new Scene(loader.load());
             stage.setScene(scene);
             stage.setTitle("Ingresar al Almacén");

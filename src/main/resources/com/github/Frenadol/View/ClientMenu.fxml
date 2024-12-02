@@ -48,6 +48,7 @@
          </ImageView>
          <Label fx:id="walletBalanceLabel" text="Saldo: $0.00" />
          <Button fx:id="addMoneyButton" onMouseClicked="#showAddMoneyDialog" text="Añadir dinero" />
+         <Button fx:id="logoutButton" mnemonicParsing="false" onMouseClicked="#logout" prefHeight="40.0" prefWidth="167.0" text="Cerrar sesion" />
       </VBox>
    </right>
 </BorderPane>

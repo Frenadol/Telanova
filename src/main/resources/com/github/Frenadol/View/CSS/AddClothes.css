@@ -127,3 +127,6 @@
 .button:hover {
     -fx-background-color: linear-gradient(#FFB3BA, #FFDFBA); /* Rosado pastel para el hover */
 }
+.root {
+    -fx-background-color: #E6E6FA; /* Lavender background color */
+}

@@ -1796,3 +1796,4 @@ java.sql.SQLSyntaxErrorException: Table 'telanova.clothes' doesn't exist
 [2024-12-02 00:31:48] Trabajador registrado con éxito!
 [2024-12-02 00:33:05] Por favor, complete todos los campos.
 [2024-12-02 00:33:12] Por favor, complete todos los campos.
+[2024-12-02 09:34:45] Por favor, complete todos los campos.

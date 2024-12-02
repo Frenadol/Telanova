@@ -106,4 +106,10 @@ public class SessionManager {
     public Storage getCurrentStorage() {
         return currentStorage;
     }
+
+    public void clearSession() {
+        this.currentClient = null;
+        this.currentWorker = null;
+        this.currentStorage = null;
+    }
 }

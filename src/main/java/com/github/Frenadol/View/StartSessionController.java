@@ -109,8 +109,9 @@ public class StartSessionController {
 
     /**
      * Displays an alert with the given title, message, and alert type.
-     * @param title The title of the alert.
-     * @param message The message to display in the alert.
+     *
+     * @param title     The title of the alert.
+     * @param message   The message to display in the alert.
      * @param alertType The type of the alert.
      */
     private void showAlert(String title, String message, Alert.AlertType alertType) {
@@ -122,16 +123,20 @@ public class StartSessionController {
     }
 
     /**
-     * Returns the ID of the currently logged-in client.
-     * @return The ID of the current client.
-     * @throws IllegalStateException if no client is currently logged in.
+     * Changes the current scene to the Initial Menu.
      */
-    public int getClientId() {
-        Client currentClient = SessionManager.getInstance().getCurrentClient();
-        if (currentClient != null) {
-            return currentClient.getId_user();
-        } else {
-            throw new IllegalStateException("No client is currently logged in.");
+    @FXML
+    public void goToInitialMenu() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("InitialMenu.fxml"));
+            Stage stage = (Stage) textUsername.getScene().getWindow();
+            double originalWidth = stage.getWidth();
+            double originalHeight = stage.getHeight();
+            Scene scene = new Scene(loader.load(), originalWidth, originalHeight);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

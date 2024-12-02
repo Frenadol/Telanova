@@ -61,12 +61,18 @@ public class ShoppingCartController {
 
     private Clientes_PrendasDAO clientesPrendasDAO = new Clientes_PrendasDAO();
 
+    /**
+     * Initializes the controller by reloading the cart and updating the wallet balance.
+     */
     @FXML
     public void initialize() {
         reloadCart();
         updateWalletBalance();
     }
 
+    /**
+     * Loads the shopping cart for the current client and updates the total price.
+     */
     private void loadShoppingCart() {
         int clientId = SessionManager.getInstance().getCurrentClient().getId_user();
         List<Client_Clothes> shoppingCartList = clientesPrendasDAO.viewShoppingCart(clientId);
@@ -75,6 +81,11 @@ public class ShoppingCartController {
         updateTotalPrice();
     }
 
+    /**
+     * Sets the shopping cart items in the table view.
+     *
+     * @param shoppingCart The list of items in the shopping cart.
+     */
     public void setShoppingCart(ObservableList<Client_Clothes> shoppingCart) {
         this.shoppingCart = shoppingCart;
 
@@ -119,6 +130,9 @@ public class ShoppingCartController {
         shoppingCartTableView.setItems(shoppingCart);
     }
 
+    /**
+     * Updates the total price label based on the items in the shopping cart.
+     */
     private void updateTotalPrice() {
         double totalPrice = shoppingCart.stream()
                 .mapToDouble(item -> item.getClothes().getPrice_clothes() * item.getCantidad())
@@ -126,11 +140,17 @@ public class ShoppingCartController {
         totalPriceLabel.setText("Total: $" + String.format("%.2f", totalPrice));
     }
 
+    /**
+     * Reloads the shopping cart by loading the items again.
+     */
     @FXML
     public void reloadCart() {
         loadShoppingCart();
     }
 
+    /**
+     * Handles the action to finish the order. Validates the total price and removes items from the cart.
+     */
     @FXML
     public void handleFinishOrder() {
         if (shoppingCart.isEmpty()) {
@@ -170,6 +190,14 @@ public class ShoppingCartController {
             showAlert("Éxito", "Pedido terminado correctamente.", Alert.AlertType.INFORMATION);
         }
     }
+
+    /**
+     * Displays an alert with the given title, message, and alert type.
+     *
+     * @param title     The title of the alert.
+     * @param message   The message to display in the alert.
+     * @param alertType The type of the alert.
+     */
     private void showAlert(String title, String message, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -178,6 +206,9 @@ public class ShoppingCartController {
         alert.showAndWait();
     }
 
+    /**
+     * Handles the action to go back to the client menu.
+     */
     @FXML
     public void goBack() {
         try {
@@ -194,10 +225,10 @@ public class ShoppingCartController {
             e.printStackTrace();
         }
     }
+
     /**
-     * Handles the payment of the order.
-     * Validates the total price, checks the client's wallet balance, updates the balance,
-     * sets the total price to 0, and saves the order details to a PDF file.
+     * Handles the payment of the order. Validates the total price, checks the client's wallet balance,
+     * updates the balance, sets the total price to 0, and saves the order details to a PDF file.
      */
     @FXML
     public void handlePayOrder() {
@@ -275,6 +306,10 @@ public class ShoppingCartController {
             showAlert("Éxito", "Pedido pagado correctamente.", Alert.AlertType.INFORMATION);
         }
     }
+
+    /**
+     * Updates the wallet balance label with the current client's wallet balance.
+     */
     private void updateWalletBalance() {
         double clientBalance = SessionManager.getInstance().getCurrentClient().getWallet();
         walletBalanceLabel.setText("Wallet Balance: $" + String.format("%.2f", clientBalance));
