@@ -33,7 +33,7 @@
         </columns>
     </TableView>
     <Label fx:id="totalPriceLabel" text="Total: €" />
-    <Label fx:id="walletBalanceLabel" text="Wallet Balance: €" />
+    <Label fx:id="walletBalanceLabel" text="Saldo Disponible: €" />
     <Button onAction="#reloadCart" text="Recargar carrito" />
     <Button onAction="#goBack" text="Ir atras" />
     <Button mnemonicParsing="false" onMouseClicked="#handlePayOrder" text="Pagar pedido" />
