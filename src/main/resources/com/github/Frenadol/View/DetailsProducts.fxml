@@ -5,8 +5,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane fx:id="productDetailPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.DetailsProductsController">
-    <!-- Contenedor principal -->
+<AnchorPane fx:id="productDetailPane" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.DetailsProductsController" stylesheets="@CSS/DetailsProduct.css">    <!-- Contenedor principal -->
     <VBox layoutX="20.0" layoutY="20.0" spacing="20.0" style="-fx-padding: 20;">
         <!-- Imagen del producto -->
         <ImageView fx:id="productImage" fitHeight="300.0" fitWidth="300.0" />

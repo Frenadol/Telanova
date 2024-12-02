@@ -7,20 +7,20 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#handleAddToCart" prefHeight="305.0" prefWidth="206.0" spacing="10.0" style="-fx-background-color: #F5F5DC;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.ThumbController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#handleAddToCart" prefHeight="244.0" prefWidth="156.0" spacing="10.0" styleClass="vbox" stylesheets="@CSS/Thumb.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.ThumbController">
    <children>
-      <Label fx:id="itemName" text="Nombre: " textFill="#333333" wrapText="true">
+      <Label fx:id="itemName" prefHeight="20.0" prefWidth="154.0" styleClass="label-title" text="Nombre: " wrapText="true">
          <font>
-            <Font size="18.0" />
+            <Font size="13.0" />
          </font>
       </Label>
-      <Label fx:id="productPriceLabel" prefHeight="27.0" prefWidth="101.0" text="Precio:" textFill="#333333" wrapText="true">
+      <Label fx:id="productPriceLabel" prefHeight="20.0" prefWidth="80.0" styleClass="label" text="Precio:" wrapText="true">
          <font>
-            <Font size="14.0" />
+            <Font size="12.0" />
          </font>
       </Label>
-      <Button fx:id="addToCartButton" mnemonicParsing="false" onMouseClicked="#handleAddToCart" text="Añadir al carro" />
-      <ImageView fx:id="productImageView" fitHeight="200.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" />
+      <Button fx:id="addToCartButton" mnemonicParsing="false" onMouseClicked="#handleAddToCart" styleClass="button" text="Añadir al carro" />
+      <ImageView fx:id="productImageView" fitHeight="100.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true" styleClass="image-view" />
    </children>
    <cursor>
       <Cursor fx:constant="HAND" />

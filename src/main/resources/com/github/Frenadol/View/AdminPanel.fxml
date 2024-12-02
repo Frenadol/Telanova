@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -7,9 +8,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="480.0" prefWidth="669.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.AdminPanelController">
+<AnchorPane prefHeight="518.0" prefWidth="809.0" stylesheets="@CSS/AdminPanel.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.AdminPanelController">
    <children>
-      <Pane layoutX="14.0" layoutY="8.0" prefHeight="108.0" prefWidth="654.0">
+      <Pane layoutX="-2.0" layoutY="14.0" prefHeight="108.0" prefWidth="774.0">
          <children>
             <ImageView fitHeight="108.0" fitWidth="111.0" layoutX="-3.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -18,51 +19,52 @@
             </ImageView>
             <Text layoutX="79.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Bienvenido/a al panel de administración" wrappingWidth="382.71514892578125">
                <font>
-                  <Font size="19.0" />
+                  <Font size="34.0" />
                </font>
             </Text>
-            <ImageView fx:id="workerImageView" fitHeight="108.0" fitWidth="175.0" layoutX="479.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="workerImageView" fitHeight="108.0" fitWidth="175.0" layoutX="544.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </Pane>
-      <Text layoutX="39.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AÑADIR PRENDAS" wrappingWidth="157.40002441406244">
+      <Text layoutX="167.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AÑADIR PRENDAS" wrappingWidth="157.40002441406244">
          <font>
             <Font size="19.0" />
          </font>
       </Text>
-      <Text layoutX="450.0" layoutY="137.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AÑADIR TRABAJADORES" wrappingWidth="217.99999999999977">
+      <Text layoutX="333.0" layoutY="258.0" strokeType="OUTSIDE" strokeWidth="0.0" text="AÑADIR TRABAJADORES" wrappingWidth="213.4000244140625">
          <font>
             <Font size="19.0" />
          </font>
       </Text>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="26.0" layoutY="144.0" onMouseClicked="#goToAddClothes" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="24.0" layoutY="165.0" onMouseClicked="#goToAddClothes" onMouseEntered="#handleMouseEnter" onMouseExited="#handleMouseExit" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/AddGarment.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="518.0" layoutY="144.0" onMouseClicked="#gotoAddWorker" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="528.0" layoutY="151.0" onMouseClicked="#gotoAddWorker" onMouseEntered="#handleMouseEnter" onMouseExited="#handleMouseExit" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/AddWorker.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="7.0" layoutY="316.0" onMouseClicked="#gotoStorage" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="175.0" fitWidth="167.0" layoutX="7.0" layoutY="316.0" onMouseClicked="#gotoStorage" onMouseEntered="#handleMouseEnter" onMouseExited="#handleMouseExit" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Storage.png" />
          </image>
       </ImageView>
-      <Text layoutX="166.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ENTRAR EN ALMACENES" wrappingWidth="175.0">
+      <Text layoutX="196.0" layoutY="389.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ENTRAR EN ALMACENES" wrappingWidth="175.0">
          <font>
             <Font size="19.0" />
          </font>
       </Text>
-      <ImageView fitHeight="180.0" fitWidth="200.0" layoutX="469.0" layoutY="300.0" onMouseClicked="#openInsertStorageWindow" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="167.0" fitWidth="167.0" layoutX="518.0" layoutY="315.0" onMouseClicked="#openInsertStorageWindow" onMouseEntered="#handleMouseEnter" onMouseExited="#handleMouseExit" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/MapStorage.png" />
          </image>
       </ImageView>
-      <Text layoutX="312.0" layoutY="364.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CREAR ALMACENES" wrappingWidth="175.0">
+      <Text layoutX="352.0" layoutY="401.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CREAR ALMACENES" wrappingWidth="175.0">
          <font>
             <Font size="19.0" />
          </font>
       </Text>
+      <Button layoutX="284.0" layoutY="165.0" mnemonicParsing="false" onMouseClicked="#handleExitButton" prefHeight="42.0" prefWidth="194.0" text="Salir de la aplicacion" />
    </children>
 </AnchorPane>

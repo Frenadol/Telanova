@@ -7,15 +7,18 @@ import com.github.Frenadol.Utils.SessionManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AdminPanelController implements Initializable {
@@ -43,7 +46,6 @@ public class AdminPanelController implements Initializable {
         }
     }
 
-
     @FXML
     public void openInsertStorageWindow() {
         try {
@@ -56,6 +58,46 @@ public class AdminPanelController implements Initializable {
         } catch (IOException e) {
             ErrorLog.fileRead(e);
             showAlert("Error" + e.getMessage());
+        }
+    }
+
+    @FXML
+    public void gotoStorage() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("StorageLogin.fxml"));
+            Stage stage = new Stage();
+            Scene scene = new Scene(loader.load());
+            stage.setScene(scene);
+            stage.setTitle("Ingresar al Almacén");
+            stage.show();
+        } catch (IOException e) {
+            ErrorLog.fileRead(e);
+            showAlert("Error" + e.getMessage());
+        }
+    }
+
+    @FXML
+    private void handleMouseEnter(MouseEvent event) {
+        ImageView imageView = (ImageView) event.getSource();
+        imageView.setOpacity(0.7);
+    }
+
+    @FXML
+    private void handleMouseExit(MouseEvent event) {
+        ImageView imageView = (ImageView) event.getSource();
+        imageView.setOpacity(1.0);
+    }
+
+    @FXML
+    private void handleExitButton() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmación de salida");
+        alert.setHeaderText(null);
+        alert.setContentText("¿Estás seguro de que quieres salir?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            System.exit(0);
         }
     }
 
@@ -80,20 +122,6 @@ public class AdminPanelController implements Initializable {
             }
         } else {
             System.out.println("Current worker is null");
-        }
-    }
-    @FXML
-    public void gotoStorage() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("StorageLogin.fxml"));
-            Stage stage = new Stage();
-            Scene scene = new Scene(loader.load());
-            stage.setScene(scene);
-            stage.setTitle("Ingresar al Almacén");
-            stage.show();
-        } catch (IOException e) {
-            ErrorLog.fileRead(e);
-            showAlert("Error" + e.getMessage());
         }
     }
 }

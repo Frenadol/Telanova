@@ -1684,3 +1684,115 @@ java.sql.SQLIntegrityConstraintViolationException: Column 'talla_prenda' cannot 
 	at javafx.graphics@19/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
 	at javafx.graphics@19/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:184)
 	at java.base/java.lang.Thread.run(Thread.java:1575)
+[2024-12-01 19:35:22] El correo electrónico no tiene un formato válido.
+[2024-12-01 19:35:31] Usuario registrado con éxito!
+[2024-12-01 19:36:26] Usuario registrado con éxito!
+[2024-12-01 22:33:18] El correo electrónico no tiene un formato válido.
+[2024-12-01 22:33:48] Trabajador registrado con éxito!
+[2024-12-01 22:34:55] SQLIntegrityConstraintViolationException: Column 'imagen_prenda' cannot be null
+java.sql.SQLIntegrityConstraintViolationException: Column 'imagen_prenda' cannot be null
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:118)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1061)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdateInternal(ClientPreparedStatement.java:1009)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeLargeUpdate(ClientPreparedStatement.java:1320)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeUpdate(ClientPreparedStatement.java:994)
+	at org.example/com.github.Frenadol.Dao.ClothesDAO.insertGarment(ClothesDAO.java:132)
+	at org.example/com.github.Frenadol.View.AddClothesController.saveGarment(AddClothesController.java:140)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:77)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at javafx.base@19/com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:275)
+	at javafx.fxml@19/com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:84)
+	at javafx.fxml@19/javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1854)
+	at javafx.fxml@19/javafx.fxml.FXMLLoader$ControllerMethodEventHandler.handle(FXMLLoader.java:1724)
+	at javafx.base@19/com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+	at javafx.base@19/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:234)
+	at javafx.base@19/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
+	at javafx.base@19/com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at javafx.base@19/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at javafx.base@19/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@19/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at javafx.base@19/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@19/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at javafx.base@19/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@19/com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at javafx.base@19/com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
+	at javafx.base@19/javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.graphics@19/javafx.scene.Scene$ClickGenerator.postProcess(Scene.java:3599)
+	at javafx.graphics@19/javafx.scene.Scene$MouseHandler.process(Scene.java:3903)
+	at javafx.graphics@19/javafx.scene.Scene.processMouseEvent(Scene.java:1887)
+	at javafx.graphics@19/javafx.scene.Scene$ScenePeerListener.mouseEvent(Scene.java:2620)
+	at javafx.graphics@19/com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:411)
+	at javafx.graphics@19/com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:301)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at javafx.graphics@19/com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleMouseEvent$2(GlassViewEventHandler.java:450)
+	at javafx.graphics@19/com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:424)
+	at javafx.graphics@19/com.sun.javafx.tk.quantum.GlassViewEventHandler.handleMouseEvent(GlassViewEventHandler.java:449)
+	at javafx.graphics@19/com.sun.glass.ui.View.handleMouseEvent(View.java:551)
+	at javafx.graphics@19/com.sun.glass.ui.View.notifyMouse(View.java:937)
+	at javafx.graphics@19/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics@19/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:184)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+[2024-12-01 23:18:30] SQLSyntaxErrorException: Table 'telanova.clothes' doesn't exist
+java.sql.SQLSyntaxErrorException: Table 'telanova.clothes' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:121)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:972)
+	at org.example/com.github.Frenadol.Dao.ClothesDAO.garmentExists(ClothesDAO.java:86)
+	at org.example/com.github.Frenadol.View.AddClothesController.saveGarment(AddClothesController.java:88)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at com.sun.javafx.reflect.Trampoline.invoke(MethodUtil.java:77)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
+	at javafx.base@19/com.sun.javafx.reflect.MethodUtil.invoke(MethodUtil.java:275)
+	at javafx.fxml@19/com.sun.javafx.fxml.MethodHelper.invoke(MethodHelper.java:84)
+	at javafx.fxml@19/javafx.fxml.FXMLLoader$MethodHandler.invoke(FXMLLoader.java:1854)
+	at javafx.fxml@19/javafx.fxml.FXMLLoader$ControllerMethodEventHandler.handle(FXMLLoader.java:1724)
+	at javafx.base@19/com.sun.javafx.event.CompositeEventHandler.dispatchBubblingEvent(CompositeEventHandler.java:86)
+	at javafx.base@19/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:234)
+	at javafx.base@19/com.sun.javafx.event.EventHandlerManager.dispatchBubblingEvent(EventHandlerManager.java:191)
+	at javafx.base@19/com.sun.javafx.event.CompositeEventDispatcher.dispatchBubblingEvent(CompositeEventDispatcher.java:59)
+	at javafx.base@19/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:58)
+	at javafx.base@19/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@19/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at javafx.base@19/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@19/com.sun.javafx.event.BasicEventDispatcher.dispatchEvent(BasicEventDispatcher.java:56)
+	at javafx.base@19/com.sun.javafx.event.EventDispatchChainImpl.dispatchEvent(EventDispatchChainImpl.java:114)
+	at javafx.base@19/com.sun.javafx.event.EventUtil.fireEventImpl(EventUtil.java:74)
+	at javafx.base@19/com.sun.javafx.event.EventUtil.fireEvent(EventUtil.java:54)
+	at javafx.base@19/javafx.event.Event.fireEvent(Event.java:198)
+	at javafx.graphics@19/javafx.scene.Scene$ClickGenerator.postProcess(Scene.java:3599)
+	at javafx.graphics@19/javafx.scene.Scene$MouseHandler.process(Scene.java:3903)
+	at javafx.graphics@19/javafx.scene.Scene.processMouseEvent(Scene.java:1887)
+	at javafx.graphics@19/javafx.scene.Scene$ScenePeerListener.mouseEvent(Scene.java:2620)
+	at javafx.graphics@19/com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:411)
+	at javafx.graphics@19/com.sun.javafx.tk.quantum.GlassViewEventHandler$MouseEventNotification.run(GlassViewEventHandler.java:301)
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:400)
+	at javafx.graphics@19/com.sun.javafx.tk.quantum.GlassViewEventHandler.lambda$handleMouseEvent$2(GlassViewEventHandler.java:450)
+	at javafx.graphics@19/com.sun.javafx.tk.quantum.QuantumToolkit.runWithoutRenderLock(QuantumToolkit.java:424)
+	at javafx.graphics@19/com.sun.javafx.tk.quantum.GlassViewEventHandler.handleMouseEvent(GlassViewEventHandler.java:449)
+	at javafx.graphics@19/com.sun.glass.ui.View.handleMouseEvent(View.java:551)
+	at javafx.graphics@19/com.sun.glass.ui.View.notifyMouse(View.java:937)
+	at javafx.graphics@19/com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at javafx.graphics@19/com.sun.glass.ui.win.WinApplication.lambda$runLoop$3(WinApplication.java:184)
+	at java.base/java.lang.Thread.run(Thread.java:1575)
+[2024-12-01 23:22:59] El nombre de usuario ya está en uso. Por favor, elija otro.
+[2024-12-01 23:23:04] Usuario registrado con éxito!
+[2024-12-01 23:23:16] El nombre de usuario ya está en uso. Por favor, elija otro.
+[2024-12-01 23:23:18] Usuario registrado con éxito!
+[2024-12-01 23:26:54] El nombre de usuario ya está en uso. Por favor, elija otro.
+[2024-12-01 23:28:51] El correo electrónico ya está en uso. Por favor, elija otro.
+[2024-12-01 23:28:58] El correo electrónico ya está en uso. Por favor, elija otro.
+[2024-12-01 23:29:00] Por favor, complete todos los campos.
+[2024-12-02 00:24:57] El nombre de usuario ya está en uso. Por favor, elija otro.
+[2024-12-02 00:25:08] Trabajador registrado con éxito!
+[2024-12-02 00:31:44] El correo electrónico ya está en uso. Por favor, elija otro.
+[2024-12-02 00:31:48] Trabajador registrado con éxito!
+[2024-12-02 00:33:05] Por favor, complete todos los campos.
+[2024-12-02 00:33:12] Por favor, complete todos los campos.

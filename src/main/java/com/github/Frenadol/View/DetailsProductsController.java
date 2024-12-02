@@ -34,6 +34,10 @@ public class DetailsProductsController {
         this.clothesDAO = new ClothesDAO();
     }
 
+    /**
+     * Displays the product details for the given product ID.
+     * @param id The ID of the product to display.
+     */
     public void displayProductDetails(int id) {
         Clothes clothes = clothesDAO.findClothesById(id);
         if (clothes != null) {
@@ -41,6 +45,10 @@ public class DetailsProductsController {
         }
     }
 
+    /**
+     * Sets the product details in the UI components.
+     * @param clothes The clothes object containing the product details.
+     */
     public void setProductDetails(Clothes clothes) {
         productName.setText(clothes.getName_clothes());
         productPrice.setText(String.format("$%.2f", clothes.getPrice_clothes()));

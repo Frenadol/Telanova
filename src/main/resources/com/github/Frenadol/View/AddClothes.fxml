@@ -9,14 +9,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="524.0" prefWidth="716.0" stylesheets="@CSS/AddClothes.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.AddClothesController">
+<AnchorPane stylesheets="@CSS/AddClothes.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.AddClothesController">
     <children>
 
         <!-- Campo de texto para nombre de la prenda -->
-        <TextField fx:id="Garment_name" layoutX="208.0" layoutY="50.0" prefWidth="300" promptText="Nombre de la prenda" />
+        <TextField fx:id="Garment_name" layoutY="40.0" prefWidth="300" promptText="Nombre de la prenda" />
 
         <!-- ComboBox para seleccionar la talla -->
-        <ComboBox fx:id="GarmentSizeComboBox" layoutX="208.0" layoutY="86.0" prefWidth="300" promptText="Selecciona la talla">
+        <ComboBox fx:id="GarmentSizeComboBox" layoutX="400.0" layoutY="35.0" prefWidth="300" promptText="Selecciona la talla">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="S" />
@@ -29,7 +29,7 @@
         </ComboBox>
 
         <!-- ComboBox para seleccionar el color -->
-        <ComboBox fx:id="GarmentColorComboBox" layoutX="208.0" layoutY="132.0" prefWidth="300" promptText="Selecciona el color">
+        <ComboBox fx:id="GarmentColorComboBox" layoutX="400.0" layoutY="106.0" prefWidth="300" promptText="Selecciona el color">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="Rojo" />
@@ -49,13 +49,13 @@
         </ComboBox>
 
         <!-- Campo de texto para descripción de la prenda -->
-        <TextField fx:id="GarmentDescriptionField" layoutX="208.0" layoutY="168.0" prefWidth="300" promptText="Descripción de la prenda" />
+        <TextField fx:id="GarmentDescriptionField" layoutY="106.0" prefHeight="117.0" prefWidth="308.0" promptText="Descripción de la prenda" />
 
         <!-- Campo de texto para precio de la prenda -->
-        <TextField fx:id="GarmentPriceField" layoutX="208.0" layoutY="204.0" prefWidth="300" promptText="Precio de la prenda" />
+        <TextField fx:id="GarmentPriceField" layoutY="240.0" prefWidth="300" promptText="Precio de la prenda" />
 
         <!-- ComboBox para seleccionar la categoría -->
-        <ComboBox fx:id="GarmentCategoryComboBox" layoutX="208.0" layoutY="240.0" prefWidth="300" promptText="Selecciona la categoría">
+        <ComboBox fx:id="GarmentCategoryComboBox" layoutX="400.0" layoutY="171.0" prefWidth="300" promptText="Selecciona la categoría">
             <items>
                 <FXCollections fx:factory="observableArrayList">
                     <String fx:value="Deportiva" />
@@ -69,19 +69,18 @@
         </ComboBox>
 
         <!-- Campo de texto para cantidad de la prenda -->
-        <TextField fx:id="GarmentQuantityField" layoutX="208.0" layoutY="276.0" prefWidth="300" promptText="Cantidad de la prenda" />
+        <TextField fx:id="GarmentQuantityField" layoutX="6.0" layoutY="314.0" prefWidth="300" promptText="Cantidad de la prenda" />
 
         <!-- ComboBox para seleccionar el almacén -->
-        <ComboBox fx:id="StorageComboBox" layoutX="208.0" layoutY="312.0" prefWidth="300" promptText="Selecciona el almacén" />
+        <ComboBox fx:id="StorageComboBox" layoutX="402.0" layoutY="235.0" prefWidth="300" promptText="Selecciona el almacén" />
 
         <!-- Imagen de la prenda -->
-        <ImageView fx:id="GarmentImageField" fitHeight="264.0" fitWidth="286.0" layoutX="215.0" layoutY="350.0" />
+        <ImageView fx:id="GarmentImageField" fitHeight="111.0" fitWidth="152.0" layoutX="81.0" layoutY="362.0" />
 
         <!-- Botones -->
-        <Button layoutX="517.0" layoutY="408.0" onMouseClicked="#saveGarment" prefHeight="39.0" prefWidth="166.0" text="Guardar" />
-        <Button fx:id="cancelClothesButton" layoutX="550.0" layoutY="288.0" prefWidth="100" text="Cancelar" />
-        <Button fx:id="addImageButton" layoutX="521.0" layoutY="238.0" onMouseClicked="#addImage" prefHeight="39.0" prefWidth="158.0" text="Añadir imagen" />
-        <Button fx:id="goToOtherScreenButton" layoutX="516.0" layoutY="347.0" prefHeight="39.0" prefWidth="166.0" text="Ir a otra pantalla" />
-        <Text layoutX="266.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu de creación de prendas" />
+        <Button layoutX="320.0" layoutY="312.0" onMouseClicked="#saveGarment" prefHeight="39.0" prefWidth="166.0" text="Guardar" />
+        <Button fx:id="addImageButton" layoutX="320.0" layoutY="366.0" onMouseClicked="#addImage" prefHeight="39.0" prefWidth="158.0" text="Añadir imagen" />
+        <Button fx:id="goToOtherScreenButton" layoutX="297.0" layoutY="425.0" onMouseClicked="#goToAdminPanel" prefHeight="39.0" prefWidth="210.0" text="Volver a la otra pantalla" />
+        <Text layoutX="24.0" layoutY="29.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Menu de creación de prendas" />
     </children>
 </AnchorPane>

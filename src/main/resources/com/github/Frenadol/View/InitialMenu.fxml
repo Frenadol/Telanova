@@ -2,22 +2,39 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="301.0" prefWidth="439.0" spacing="20.0" styleClass="Primary" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.PrimaryController">
+<AnchorPane prefHeight="292.0" prefWidth="585.0" styleClass="Primary" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.PrimaryController">
    <children>
-      <Label text="TELANOVA">
+      <Pane layoutX="52.0" layoutY="10.0" prefHeight="84.0" prefWidth="466.0" AnchorPane.leftAnchor="52.0" AnchorPane.rightAnchor="-42.40000000000009" AnchorPane.topAnchor="10.0">
+         <children>
+            <ImageView fitHeight="95.0" fitWidth="86.0" layoutX="10.0" layoutY="-9.0">
+               <image>
+                  <Image url="@Images/TelaNovaLogo.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="121.0" layoutY="18.0" text="TELANOVA">
+               <font>
+                  <Font name="Constantia" size="40.0" />
+               </font>
+            </Label>
+            <ImageView fitHeight="84.0" fitWidth="86.0" layoutX="370.0" layoutY="0.0">
+               <image>
+                  <Image url="@Images/TelaNovaLogo.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
+      <Label layoutX="195.0" layoutY="94.0" prefHeight="38.0" prefWidth="213.0" text="Bienvenido/a a Telanova" AnchorPane.leftAnchor="195.0" AnchorPane.topAnchor="94.0">
          <font>
-            <Font name="Constantia" size="40.0" />
+            <Font size="18.0" />
          </font>
       </Label>
-      <Label text="Bienvenido/a a Telanova">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Button fx:id="registerButton" onAction="#switchToRegister" prefHeight="38.0" prefWidth="99.0" text="Crear Cuenta" />
-      <Button fx:id="sessionButton" onAction="#switchToStartSession" prefHeight="38.0" prefWidth="99.0" text="Iniciar Sesion" />
+      <Button fx:id="registerButton" layoutX="216.0" layoutY="139.0" onAction="#switchToRegister" prefHeight="38.0" prefWidth="171.0" text="Crear Cuenta" AnchorPane.leftAnchor="216.0" AnchorPane.topAnchor="139.0" />
+      <Button fx:id="sessionButton" layoutX="216.0" layoutY="178.0" onAction="#switchToStartSession" prefHeight="38.0" prefWidth="171.0" text="Iniciar Sesion" AnchorPane.leftAnchor="216.0" AnchorPane.topAnchor="178.0" />
    </children>
-</VBox>
+</AnchorPane>

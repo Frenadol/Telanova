@@ -3,9 +3,12 @@ package com.github.Frenadol.View;
 import com.github.Frenadol.Dao.ClothesDAO;
 import com.github.Frenadol.Model.Clothes;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -13,6 +16,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.List;
 import java.util.Optional;
 
 public class ChanguePropertiesController {
@@ -35,6 +39,8 @@ public class ChanguePropertiesController {
     private TextField imageField;
     @FXML
     private ImageView imageView;
+    @FXML
+    private GridPane itemsContainer;
 
     private Clothes clothesItem;
     private ClothesDAO clothesDAO;
@@ -44,6 +50,10 @@ public class ChanguePropertiesController {
         this.clothesDAO = new ClothesDAO();
     }
 
+    /**
+     * Sets the clothes item to be edited and populates the fields with its data.
+     * @param clothes The clothes item to be edited.
+     */
     public void setClothesItem(Clothes clothes) {
         this.clothesItem = clothes;
         nameField.setText(clothes.getName_clothes());
@@ -61,18 +71,34 @@ public class ChanguePropertiesController {
         }
     }
 
+    /**
+     * Loads the clothes item from the database by its ID and sets it for editing.
+     * @param clothesId The ID of the clothes item to be loaded.
+     */
     public void loadClothesItem(int clothesId) {
         Clothes clothes = clothesDAO.findClothesById(clothesId);
         setClothesItem(clothes);
     }
 
+    /**
+     * Initializes the controller by populating the combo boxes with predefined values.
+     */
     @FXML
     private void initialize() {
+        sizeComboBox.getItems().clear();
         sizeComboBox.getItems().addAll("S", "M", "L", "XL", "XXL"); // Add sizes
+
+        colorComboBox.getItems().clear();
         colorComboBox.getItems().addAll("Rojo", "Azul", "Verde", "Negro", "Blanco", "Amarillo", "Naranja", "Rosa", "Morado", "Marrón", "Gris", "Beige"); // Add colors
+
+        categoryComboBox.getItems().clear();
         categoryComboBox.getItems().addAll("Deportiva", "Formal", "Informal", "Casual", "Exterior", "Interior"); // Add categories
     }
 
+    /**
+     * Handles the save action, updating the clothes item with the new values from the fields.
+     * Shows a confirmation dialog before saving.
+     */
     @FXML
     private void handleSave() {
         Alert confirmationAlert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -142,12 +168,19 @@ public class ChanguePropertiesController {
         }
     }
 
+    /**
+     * Handles the back action, closing the current window.
+     */
     @FXML
     private void handleBack() {
         Stage stage = (Stage) nameField.getScene().getWindow();
         stage.close();
     }
 
+    /**
+     * Handles the action of selecting an image file for the clothes item.
+     * Opens a file chooser dialog to select the image.
+     */
     @FXML
     private void handleSelectImage() {
         FileChooser fileChooser = new FileChooser();
@@ -160,11 +193,48 @@ public class ChanguePropertiesController {
         }
     }
 
+    /**
+     * Shows an alert dialog with the given title, message, and alert type.
+     * @param title The title of the alert.
+     * @param message The message to be displayed in the alert.
+     * @param alertType The type of the alert.
+     */
     private void showAlert(String title, String message, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);
         alert.showAndWait();
+    }
+
+    /**
+     * Loads the thumbnails of the given list of clothes items into the items container.
+     * @param clothesList The list of clothes items to be displayed as thumbnails.
+     */
+    public void loadThumbnails(List<Clothes> clothesList) {
+        final int MAX_COLUMNS = 4;
+        int columns = 0;
+        int rows = 0;
+
+        itemsContainer.getChildren().clear();
+
+        for (Clothes clothes : clothesList) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminThumb.fxml"));
+                VBox thumb = loader.load();
+                ThumbControllerAdmin controller = loader.getController();
+                controller.setGarment(clothes);
+
+                itemsContainer.add(thumb, columns, rows);
+                columns++;
+
+                if (columns == MAX_COLUMNS) {
+                    columns = 0;
+                    rows++;
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

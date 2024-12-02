@@ -6,14 +6,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.StartSessionController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@CSS/StartSession.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.StartSessionController">
    <children>
-      <Text layoutX="146.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduzca sus credenciales para iniciar sesion" wrappingWidth="307.7366943359375" />
-      <Text layoutX="225.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de usuario/ria" wrappingWidth="169.30975341796875" />
-      <Text layoutX="238.0" layoutY="188.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña" wrappingWidth="123.85943603515625" />
-      <Text layoutX="238.0" layoutY="247.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gmail" wrappingWidth="51.28631591796875" />
-      <Button layoutX="125.0" layoutY="325.0" mnemonicParsing="false" onMouseClicked="#Login" text="Iniciar Sesion" />
-      <TextField fx:id="textUsername" layoutX="225.0" layoutY="139.0" />
+      <Text layoutX="164.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduzca sus credenciales para iniciar sesion" wrappingWidth="307.7366943359375" />
+      <Text layoutX="233.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de usuario/ria" wrappingWidth="169.30975341796875" />
+      <Text layoutX="265.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña" wrappingWidth="123.85943603515625" />
+      <Text layoutX="287.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gmail" wrappingWidth="51.28631591796875" />
+      <Button layoutX="243.0" layoutY="321.0" mnemonicParsing="false" onMouseClicked="#Login" text="Iniciar Sesion" />
+      <TextField fx:id="textUsername" layoutX="230.0" layoutY="116.0" />
       <TextField fx:id="gmailField" layoutX="225.0" layoutY="262.0" />
       <PasswordField fx:id="textPassword" layoutX="225.0" layoutY="200.0" />
 

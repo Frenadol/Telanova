@@ -24,6 +24,8 @@ public class ClothesDAO {
     private static final String COUNT_CATEGORY = "SELECT categoria, COUNT(*) AS count FROM prendas GROUP BY categoria";
     private static final String COUNT_BY_SIZE = "SELECT talla_prenda, COUNT(*) AS count FROM prendas GROUP BY talla_prenda";
     private static final String COUNT_BY_COLOR = "SELECT color_prenda, COUNT(*) AS count FROM prendas GROUP BY color_prenda";
+    private static final String FIND_BY_CATEGORY="SELECT * FROM prendas WHERE categoria = ?";
+    private static final String COUNTS_GARMENTS = "SELECT COUNT(*) FROM prendas WHERE nombre_prenda = ?";
 
     private Connection conn;
 
@@ -31,6 +33,11 @@ public class ClothesDAO {
         this.conn = ConnectionDB.getConnection();
     }
 
+    /**
+     * Finds clothes by their ID.
+     * @param id The ID of the clothes.
+     * @return The clothes with the specified ID, or null if not found.
+     */
     public Clothes findClothesById(int id) {
         Clothes clothes = null;
         try (PreparedStatement pst = conn.prepareStatement(GET_BY_ID)) {
@@ -55,6 +62,59 @@ public class ClothesDAO {
         return clothes;
     }
 
+    /**
+     * Finds clothes by their category.
+     * @param category The category to search for.
+     * @return A list of clothes in the specified category.
+     */
+    public List<Clothes> findClothesByCategory(String category) {
+        List<Clothes> result = new ArrayList<>();
+        try (PreparedStatement pst = conn.prepareStatement(FIND_BY_CATEGORY)) {
+            pst.setString(1, category);
+            try (ResultSet res = pst.executeQuery()) {
+                while (res.next()) {
+                    Clothes clothes = new Clothes();
+                    clothes.setId_clothes(res.getInt("id_prenda"));
+                    clothes.setName_clothes(res.getString("nombre_prenda"));
+                    clothes.setSize_clothes(res.getString("talla_prenda"));
+                    clothes.setColor_clothes(res.getString("color_prenda"));
+                    clothes.setDescription_clothes(res.getString("descripcion"));
+                    clothes.setPrice_clothes(res.getDouble("precio"));
+                    clothes.setClothes_Visual(res.getBytes("imagen_prenda"));
+                    clothes.setCategory(res.getString("categoria"));
+                    clothes.setCantidad(res.getInt("cantidad"));
+                    result.add(clothes);
+                }
+            }
+        } catch (SQLException e) {
+            ErrorLog.fileRead(e);
+        }
+        return result;
+    }
+
+    /**
+     * Checks if a garment exists by its name.
+     * @param garmentName The name of the garment.
+     * @return True if the garment exists, false otherwise.
+     */
+    public boolean garmentExists(String garmentName) {
+        try (PreparedStatement pst = conn.prepareStatement(COUNTS_GARMENTS)) {
+            pst.setString(1, garmentName);
+            try (ResultSet rs = pst.executeQuery()) {
+                if (rs.next()) {
+                    return rs.getInt(1) > 0;
+                }
+            }
+        } catch (SQLException e) {
+            ErrorLog.fileRead(e);
+        }
+        return false;
+    }
+
+    /**
+     * Counts clothes by their size.
+     * @return A map of sizes and their respective counts.
+     */
     public Map<String, Integer> countClothesBySize() {
         Map<String, Integer> sizeCounts = new HashMap<>();
         try (PreparedStatement pst = conn.prepareStatement(COUNT_BY_SIZE);
@@ -68,6 +128,10 @@ public class ClothesDAO {
         return sizeCounts;
     }
 
+    /**
+     * Counts clothes by their category.
+     * @return A map of categories and their respective counts.
+     */
     public Map<String, Integer> countClothesByCategory() {
         Map<String, Integer> categoryCounts = new HashMap<>();
         try (PreparedStatement pst = conn.prepareStatement(COUNT_CATEGORY);
@@ -81,6 +145,10 @@ public class ClothesDAO {
         return categoryCounts;
     }
 
+    /**
+     * Counts clothes by their color.
+     * @return A map of colors and their respective counts.
+     */
     public Map<String, Integer> countClothesByColor() {
         Map<String, Integer> colorCounts = new HashMap<>();
         try (PreparedStatement pst = conn.prepareStatement(COUNT_BY_COLOR);
@@ -94,7 +162,11 @@ public class ClothesDAO {
         return colorCounts;
     }
 
-
+    /**
+     * Inserts a new garment into the database.
+     * @param garment The garment to be inserted.
+     * @param idAlmacen The storage ID where the garment is stored.
+     */
     public void insertGarment(Clothes garment, int idAlmacen) {
         try (PreparedStatement pst = conn.prepareStatement(INSERT_GARMENT, Statement.RETURN_GENERATED_KEYS)) {
             pst.setString(1, garment.getName_clothes());
@@ -112,6 +184,11 @@ public class ClothesDAO {
         }
     }
 
+    /**
+     * Finds clothes by their storage ID.
+     * @param storageId The storage ID to search for.
+     * @return A list of clothes in the specified storage.
+     */
     public List<Clothes> findByStorageId(int storageId) {
         List<Clothes> clothesList = new ArrayList<>();
         try (PreparedStatement pst = conn.prepareStatement(FIND_BY_STORAGE_ID)) {
@@ -132,6 +209,10 @@ public class ClothesDAO {
         return clothesList;
     }
 
+    /**
+     * Updates the details of a garment.
+     * @param clothes The clothes object with updated details.
+     */
     public void updateClothes(Clothes clothes) {
         try (PreparedStatement pst = conn.prepareStatement(UPDATE)) {
             pst.setString(1, clothes.getName_clothes());
@@ -149,6 +230,11 @@ public class ClothesDAO {
         }
     }
 
+    /**
+     * Gets the available quantity of a specific garment.
+     * @param idClothes The ID of the garment.
+     * @return The available quantity of the garment.
+     */
     public int getAvailableQuantity(int idClothes) {
         try (PreparedStatement pst = conn.prepareStatement(GET_QUANTITY)) {
             pst.setInt(1, idClothes);
@@ -163,6 +249,11 @@ public class ClothesDAO {
         return 0;
     }
 
+    /**
+     * Inserts a record of created clothes by a worker.
+     * @param idClothes The ID of the clothes.
+     * @param idWorker The ID of the worker.
+     */
     public void insertCreatedClothes(int idClothes, int idWorker) {
         if (idWorker > 0 && idClothes > 0) {
             try (PreparedStatement pst = conn.prepareStatement(INSERT_CREATED_CLOTHES)) {
@@ -175,6 +266,10 @@ public class ClothesDAO {
         }
     }
 
+    /**
+     * Gets the last inserted ID in the database.
+     * @return The last inserted ID.
+     */
     public int getLastInsertedId() {
         try (Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT LAST_INSERT_ID()")) {
@@ -187,6 +282,10 @@ public class ClothesDAO {
         return 0;
     }
 
+    /**
+     * Finds all clothes with lazy loading.
+     * @return A list of clothes with limited details.
+     */
     public List<ClothesLazyAll> findAllClothesLazy() {
         List<ClothesLazyAll> result = new ArrayList<>();
         try (PreparedStatement pst = conn.prepareStatement(FIND_CLOTHES_LAZY);
@@ -206,6 +305,10 @@ public class ClothesDAO {
         return result;
     }
 
+    /**
+     * Finds all clothes in the database.
+     * @return A list of all clothes.
+     */
     public List<Clothes> findAll() {
         List<Clothes> result = new ArrayList<>();
         try (PreparedStatement pst = conn.prepareStatement(FIND_ALL)) {
@@ -230,6 +333,11 @@ public class ClothesDAO {
         return result;
     }
 
+    /**
+     * Finds clothes by their name.
+     * @param name The name to search for.
+     * @return A list of clothes with the specified name.
+     */
     public List<Clothes> findClothesByName(String name) {
         List<Clothes> result = new ArrayList<>();
         try (PreparedStatement pst = conn.prepareStatement(FIND_BY_NAME)) {
@@ -251,7 +359,11 @@ public class ClothesDAO {
         return result;
     }
 
-
+    /**
+     * Updates the quantity of a specific garment.
+     * @param idClothes The ID of the garment.
+     * @param quantity The new quantity to be set.
+     */
     public void updateQuantity(int idClothes, int quantity) {
         try (PreparedStatement pst = conn.prepareStatement(UPDATE_QUANTITY)) {
             pst.setInt(1, quantity);
@@ -262,6 +374,10 @@ public class ClothesDAO {
         }
     }
 
+    /**
+     * Builds a new instance of ClothesDAO.
+     * @return A new ClothesDAO instance.
+     */
     public ClothesDAO build() {
         return this;
     }

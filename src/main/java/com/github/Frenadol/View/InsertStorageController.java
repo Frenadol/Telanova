@@ -17,6 +17,11 @@ public class InsertStorageController {
 
     private StorageDAO storageDAO = new StorageDAO();
 
+    /**
+     * Saves the storage to the database.
+     * This method is called when the user clicks the save button.
+     * It validates the input, checks for duplicates, and inserts the new storage.
+     */
     @FXML
     public void saveStorage() {
         String storageName = storageNameField.getText();
@@ -37,6 +42,10 @@ public class InsertStorageController {
         closeWindow();
     }
 
+    /**
+     * Closes the current window.
+     * This method is called after the storage is successfully saved.
+     */
     private void closeWindow() {
         Stage stage = (Stage) storageNameField.getScene().getWindow();
         stage.close();

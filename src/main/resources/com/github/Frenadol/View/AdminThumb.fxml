@@ -7,20 +7,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#handleViewProperties" prefHeight="305.0" prefWidth="206.0" spacing="10.0" style="-fx-background-color: #F5F5DC;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.ThumbControllerAdmin">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#handleViewProperties" prefHeight="305.0" prefWidth="206.0" spacing="10.0" style="-fx-background-color: #F5F5DC;" stylesheets="@CSS/AdminThumb.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.ThumbControllerAdmin">
     <children>
-        <Label fx:id="itemName" text="Nombre: " textFill="#333333" wrapText="true">
+        <Label fx:id="itemName" text="Nombre: " textFill="#333333" wrapText="true" alignment="CENTER">
             <font>
                 <Font size="18.0" />
             </font>
         </Label>
-        <Label fx:id="productPriceLabel" prefHeight="27.0" prefWidth="101.0" text="Precio:" textFill="#333333" wrapText="true">
+        <Label text="Precio" alignment="CENTER" />
+        <Label fx:id="productPriceLabel" prefHeight="27.0" prefWidth="101.0" text="Precio:" textFill="#333333" wrapText="true" alignment="CENTER">
             <font>
                 <Font size="14.0" />
             </font>
         </Label>
-        <Button mnemonicParsing="false" text="Cambiar propiedades" onAction="#handleChangeProperties"/>
-        <ImageView fx:id="productImageView" fitHeight="200.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" />
+        <Button mnemonicParsing="false" onAction="#handleChangeProperties" text="Cambiar propiedades" alignment="CENTER" />
+        <ImageView fx:id="productImageView" fitHeight="171.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true"/>
     </children>
     <cursor>
         <Cursor fx:constant="HAND" />

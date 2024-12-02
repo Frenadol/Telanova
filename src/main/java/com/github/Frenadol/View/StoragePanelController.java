@@ -13,6 +13,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 
 import java.io.IOException;
@@ -23,7 +24,7 @@ import java.util.Optional;
 public class StoragePanelController {
 
     @FXML
-    private VBox itemsContainer;
+    private GridPane itemsContainer;
 
     @FXML
     private TableView<Result> resultsTable;
@@ -50,13 +51,24 @@ public class StoragePanelController {
         if (currentStorage != null) {
             List<Clothes> clothesList = clothesDAO.findByStorageId(currentStorage.getId_storage());
 
+            final int MAX_COLUMNS = 5;
+            int columns = 0;
+            int rows = 0;
+
             for (Clothes clothes : clothesList) {
                 try {
                     FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminThumb.fxml"));
                     VBox thumb = loader.load();
                     ThumbControllerAdmin controller = loader.getController();
                     controller.setGarment(clothes);
-                    itemsContainer.getChildren().add(thumb);
+
+                    itemsContainer.add(thumb, columns, rows);
+                    columns++;
+
+                    if (columns == MAX_COLUMNS) {
+                        columns = 0;
+                        rows++;
+                    }
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

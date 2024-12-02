@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -11,35 +14,40 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.Label?>
-<BorderPane fx:id="root" prefHeight="626.0" prefWidth="868.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.ClientMenuController">
+<BorderPane fx:id="root" prefHeight="652.0" prefWidth="953.0" stylesheets="@CSS/ClientMenu.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.ClientMenuController">
    <top>
-      <HBox alignment="CENTER" spacing="10">
+      <HBox alignment="CENTER" prefHeight="0.0" prefWidth="824.0" spacing="10">
          <Button fx:id="cleanButton" mnemonicParsing="false" onMouseClicked="#cleanSearch" prefHeight="26.0" prefWidth="121.0" text="Limpiar busqueda" />
          <TextField fx:id="searchTextField" promptText="Buscar productos" />
          <Button fx:id="searchButton" onMouseClicked="#searchClothes" text="Buscar" />
+         <ComboBox fx:id="categoryComboBox" promptText="Seleccionar categoría" />
+         <Button fx:id="searchCategoryButton" onMouseClicked="#searchByCategory" text="Buscar por categoría" />
       </HBox>
    </top>
    <center>
-      <ScrollPane fx:id="scrollPane" fitToWidth="true" prefHeight="548.0" prefWidth="662.0">
+      <ScrollPane fx:id="scrollPane" fitToWidth="true" prefHeight="425.0" prefWidth="700.0" style="-fx-background-color: #f5e6e8;" vbarPolicy="ALWAYS">
          <content>
-            <GridPane fx:id="ClothesPane" prefHeight="599.0" prefWidth="776.0">
+            <GridPane fx:id="ClothesPane" hgap="20.0" prefHeight="604.0" prefWidth="918.0" style="-fx-background-color: #f5e6e8;" vgap="20.0">
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
             </GridPane>
          </content>
       </ScrollPane>
    </center>
    <right>
-      <VBox alignment="CENTER" spacing="10">
+      <VBox alignment="CENTER" prefHeight="593.0" prefWidth="167.0" spacing="10">
+         <Label text="Carrito" />
          <ImageView fx:id="carritoImage" fitHeight="90.0" fitWidth="90.0" onMouseClicked="#openShoppingCart">
             <image>
                <Image url="@Images/Carrito.png" />
             </image>
          </ImageView>
          <Label fx:id="walletBalanceLabel" text="Saldo: $0.00" />
-         <Button fx:id="addMoneyButton" text="Añadir dinero" onMouseClicked="#showAddMoneyDialog" />
+         <Button fx:id="addMoneyButton" onMouseClicked="#showAddMoneyDialog" text="Añadir dinero" />
       </VBox>
    </right>
 </BorderPane>

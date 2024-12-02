@@ -25,6 +25,10 @@ public class ThumbControllerAdmin {
 
     private Clothes clothesItem;
 
+    /**
+     * Sets the garment details in the view.
+     * @param clothes The clothes item to display.
+     */
     public void setGarment(Clothes clothes) {
         this.clothesItem = clothes;
         itemName.setText(clothes.getName_clothes());
@@ -36,6 +40,9 @@ public class ThumbControllerAdmin {
         }
     }
 
+    /**
+     * Handles the action of viewing the properties of the selected garment.
+     */
     @FXML
     private void handleViewProperties() {
         try {
@@ -52,6 +59,9 @@ public class ThumbControllerAdmin {
         }
     }
 
+    /**
+     * Handles the action of changing the properties of the selected garment.
+     */
     @FXML
     private void handleChangeProperties() {
         try {
@@ -59,7 +69,7 @@ public class ThumbControllerAdmin {
             Stage stage = new Stage();
             Scene scene = new Scene(loader.load());
             ChanguePropertiesController controller = loader.getController();
-            controller.loadClothesItem(clothesItem.getId_clothes()); // Pasar la ID de la prenda
+            controller.loadClothesItem(clothesItem.getId_clothes()); // Pass the ID of the garment
             stage.setScene(scene);
             stage.setTitle("Cambiar Propiedades");
             stage.show();

@@ -32,6 +32,10 @@ public class StartSessionController {
     @FXML
     private TextField gmailField;
 
+    /**
+     * Handles the login process for both clients and workers.
+     * Validates the username and password, sets the current session, and loads the appropriate view.
+     */
     @FXML
     public void Login() {
         String username = textUsername.getText();
@@ -77,23 +81,38 @@ public class StartSessionController {
         saveFields();
     }
 
+    /**
+     * Loads the saved username, password, and Gmail fields from the preferences.
+     */
     private void loadFields() {
         textUsername.setText(Preferences.userRoot().node("username").get("username", ""));
         textPassword.setText(Preferences.userRoot().node("password").get("password", ""));
         gmailField.setText(Preferences.userRoot().node("gmail").get("gmail", ""));
     }
 
+    /**
+     * Saves the current username, password, and Gmail fields to the preferences.
+     */
     private void saveFields() {
         Preferences.userRoot().node("username").put("username", textUsername.getText());
         Preferences.userRoot().node("password").put("password", textPassword.getText());
         Preferences.userRoot().node("gmail").put("gmail", gmailField.getText());
     }
 
+    /**
+     * Initializes the controller by loading the saved fields.
+     */
     @FXML
     public void initialize() {
         loadFields();
     }
 
+    /**
+     * Displays an alert with the given title, message, and alert type.
+     * @param title The title of the alert.
+     * @param message The message to display in the alert.
+     * @param alertType The type of the alert.
+     */
     private void showAlert(String title, String message, Alert.AlertType alertType) {
         Alert alert = new Alert(alertType);
         alert.setTitle(title);
@@ -102,6 +121,11 @@ public class StartSessionController {
         alert.showAndWait();
     }
 
+    /**
+     * Returns the ID of the currently logged-in client.
+     * @return The ID of the current client.
+     * @throws IllegalStateException if no client is currently logged in.
+     */
     public int getClientId() {
         Client currentClient = SessionManager.getInstance().getCurrentClient();
         if (currentClient != null) {
