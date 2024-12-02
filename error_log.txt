@@ -1797,3 +1797,11 @@ java.sql.SQLSyntaxErrorException: Table 'telanova.clothes' doesn't exist
 [2024-12-02 00:33:05] Por favor, complete todos los campos.
 [2024-12-02 00:33:12] Por favor, complete todos los campos.
 [2024-12-02 09:34:45] Por favor, complete todos los campos.
+[2024-12-02 10:22:14] El correo electrónico no tiene un formato válido.
+[2024-12-02 10:22:24] El correo electrónico no tiene un formato válido.
+[2024-12-02 10:22:28] Por favor, complete todos los campos.
+[2024-12-02 10:22:37] Usuario registrado con éxito!
+[2024-12-02 10:31:30] Por favor, complete todos los campos.
+[2024-12-02 10:31:44] El correo electrónico no tiene un formato válido.
+[2024-12-02 10:31:53] Usuario registrado con éxito!
+[2024-12-02 10:35:28] Trabajador registrado con éxito!
