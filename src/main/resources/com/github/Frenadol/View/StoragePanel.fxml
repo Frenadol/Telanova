@@ -5,40 +5,33 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane fx:id="root" prefHeight="770.0" prefWidth="1206.0" stylesheets="@CSS/StoragePanel.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.StoragePanelController">
-    <top>
-        <TableView fx:id="resultsTable" prefHeight="291.0" prefWidth="1206.0" styleClass="grid-pane">
-            <columns>
-                <TableColumn fx:id="attributeColumn" prefWidth="152.0" text="Atributo" />
-                <TableColumn fx:id="countColumn" prefWidth="147.2" text="Cantidad" />
-            </columns>
-        </TableView>
-    </top>
-    <center>
-        <HBox alignment="CENTER" prefHeight="13.0" prefWidth="1206.0" spacing="10">
-         <Button mnemonicParsing="false" onMouseClicked="#goToInitialMenu" prefHeight="32.0" prefWidth="257.0" text="Volver al panel de administrador" />
-            <Button onAction="#handleCountByCategory" text="Recuento por Categoría" />
-            <Button onAction="#handleCountBySize" text="Recuento por Talla" />
-            <Button onAction="#handleCountByColor" text="Recuento por Color" />
-        </HBox>
-    </center>
-    <bottom>
-        <ScrollPane fx:id="scrollPane" fitToWidth="true" prefHeight="425.0" prefWidth="1206.0" style="-fx-background-color: #f5e6e8;" vbarPolicy="ALWAYS">
-            <content>
-                <GridPane fx:id="itemsContainer" hgap="20.0" prefHeight="679.0" prefWidth="1192.0" style="-fx-background-color: #f5e6e8;" vgap="20.0">
-                    <rowConstraints>
-                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                    </rowConstraints>
-                    <padding>
-                        <Insets left="20.0" />
-                    </padding>
-                </GridPane>
-            </content>
-        </ScrollPane>
-    </bottom>
-</BorderPane>
+<AnchorPane fx:id="root" prefHeight="768.0" prefWidth="1205.0" stylesheets="@CSS/StoragePanel.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.StoragePanelController">
+    <TableView fx:id="resultsTable" prefHeight="258.0" prefWidth="1205.0" styleClass="grid-pane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <columns>
+            <TableColumn fx:id="attributeColumn" prefWidth="152.0" text="Atributo" />
+            <TableColumn fx:id="countColumn" prefWidth="147.2" text="Cantidad" />
+        </columns>
+    </TableView>
+    <HBox alignment="CENTER" prefHeight="13.0" prefWidth="1206.0" spacing="10" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="291.0" />
+    <ScrollPane fx:id="scrollPane" fitToWidth="true" prefHeight="425.0" prefWidth="1206.0" style="-fx-background-color: #f5e6e8;" vbarPolicy="ALWAYS" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="304.0">
+        <content>
+            <GridPane fx:id="itemsContainer" hgap="20.0" prefHeight="679.0" prefWidth="1192.0" style="-fx-background-color: #f5e6e8;" vgap="20.0">
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <padding>
+                    <Insets left="20.0" />
+                </padding>
+            </GridPane>
+        </content>
+    </ScrollPane>
+     <Button layoutX="119.0" layoutY="258.0" mnemonicParsing="false" onMouseClicked="#goToInitialMenu" prefHeight="32.0" prefWidth="258.0" text="Volver al panel de administrador" />
+     <Button layoutX="432.0" layoutY="259.0" onAction="#handleCountByCategory" text="Recuento por Categoría" />
+     <Button layoutX="698.0" layoutY="258.0" onAction="#handleCountBySize" text="Recuento por Talla" />
+     <Button layoutX="910.0" layoutY="259.0" onAction="#handleCountByColor" text="Recuento por Color" />
+</AnchorPane>

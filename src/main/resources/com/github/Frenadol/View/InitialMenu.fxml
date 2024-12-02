@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="190.0" prefWidth="506.0" styleClass="Primary" stylesheets="@CSS/InitialMenu.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.PrimaryController">
+<AnchorPane prefHeight="381.0" prefWidth="536.0" styleClass="Primary" stylesheets="@CSS/InitialMenu.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.PrimaryController">
    <children>
       <Pane layoutX="-9.6" layoutY="3.2" prefHeight="95.0" prefWidth="534.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="3.0">
          <children>

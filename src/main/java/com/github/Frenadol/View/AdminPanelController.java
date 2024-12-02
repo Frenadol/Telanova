@@ -49,12 +49,7 @@ public class AdminPanelController implements Initializable {
     @FXML
     public void openInsertStorageWindow() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("InsertStorage.fxml"));
-            Stage stage = new Stage();
-            Scene scene = new Scene(loader.load());
-            stage.setScene(scene);
-            stage.setTitle("Insertar Almacén");
-            stage.show();
+            App.setRoot("View/InsertStorage");
         } catch (IOException e) {
             ErrorLog.fileRead(e);
             showAlert("Error" + e.getMessage());
@@ -64,12 +59,7 @@ public class AdminPanelController implements Initializable {
     @FXML
     public void gotoStorage() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("StorageLogin.fxml"));
-            Stage stage = (Stage) workerImageView.getScene().getWindow();
-            Scene scene = new Scene(loader.load());
-            stage.setScene(scene);
-            stage.setTitle("Ingresar al Almacén");
-            stage.show();
+            App.setRoot("View/StorageLogin");
         } catch (IOException e) {
             ErrorLog.fileRead(e);
             showAlert("Error" + e.getMessage());
@@ -110,7 +100,6 @@ public class AdminPanelController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        System.out.println("initialize method called");
         SessionManager sessionManager = SessionManager.getInstance();
         Worker currentWorker = sessionManager.getCurrentWorker();
         if (currentWorker != null) {

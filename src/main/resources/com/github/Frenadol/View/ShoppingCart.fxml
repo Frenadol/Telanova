@@ -7,25 +7,25 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox prefHeight="568.0" prefWidth="527.0" stylesheets="@CSS/ShoppingCart.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.ShoppingCartController">
-    <TableView fx:id="shoppingCartTableView">
+<VBox prefHeight="600.0" prefWidth="587.0" stylesheets="@CSS/ShoppingCart.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.ShoppingCartController">
+    <TableView fx:id="shoppingCartTableView" prefHeight="374.0" prefWidth="564.0">
         <columns>
             <TableColumn fx:id="imageColumn" prefWidth="148.00006103515625" text="Preview">
                 <cellValueFactory>
                     <PropertyValueFactory property="image" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="nameColumn" prefWidth="75.99993896484375" text="Nombre">
+            <TableColumn fx:id="nameColumn" prefWidth="115.20002746582031" text="Nombre">
                 <cellValueFactory>
                     <PropertyValueFactory property="name" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="priceColumn" prefWidth="79.20001220703125" text="Precio">
+            <TableColumn fx:id="priceColumn" prefWidth="160.0" text="Precio">
                 <cellValueFactory>
                     <PropertyValueFactory property="price" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="quantityColumn" prefWidth="222.4000122070313" text="Cantidad">
+            <TableColumn fx:id="quantityColumn" prefWidth="161.59994506835938" text="Cantidad">
                 <cellValueFactory>
                     <PropertyValueFactory property="cantidad" />
                 </cellValueFactory>

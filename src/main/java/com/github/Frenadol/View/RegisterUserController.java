@@ -2,6 +2,7 @@ package com.github.Frenadol.View;
 
 import com.github.Frenadol.App;
 import com.github.Frenadol.Dao.ClientDAO;
+import com.github.Frenadol.Dao.WorkerDAO;
 import com.github.Frenadol.Model.Client;
 import com.github.Frenadol.Security.Security;
 import com.github.Frenadol.Utils.ErrorLog;
@@ -35,6 +36,7 @@ public class RegisterUserController {
     private File imageFile;
 
     private ClientDAO clientDAO = new ClientDAO();
+    private WorkerDAO workerDAO = new WorkerDAO();
 
     /**
      * Registers a new user.
@@ -61,7 +63,7 @@ public class RegisterUserController {
 
         Client existingClientByName = clientDAO.findByName(username);
         Client existingClientByEmail = clientDAO.findByGmail(email);
-        if (existingClientByName != null) {
+        if (existingClientByName != null || workerDAO.findByName(username) != null) {
             String message = "El nombre de usuario ya está en uso. Por favor, elija otro.";
             showAlert(message);
             ErrorLog.logMessage(message);

@@ -1,5 +1,6 @@
 package com.github.Frenadol.View;
 
+import com.github.Frenadol.App;
 import com.github.Frenadol.Dao.StorageDAO;
 import com.github.Frenadol.Model.Storage;
 import com.github.Frenadol.Utils.SessionManager;
@@ -40,7 +41,11 @@ public class StorageLoginController {
         } else {
             SessionManager.getInstance().setCurrentStorage(storage);
             showStoragePanel();
-            closeWindow();
+            try {
+                App.setRoot("View/StoragePanel");
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
