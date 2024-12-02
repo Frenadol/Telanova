@@ -34,13 +34,11 @@ public class RegisterUserController {
     private ImageView perfilImage;
     private File imageFile;
 
-
-    private ClientDAO clientDAO= new ClientDAO();
+    private ClientDAO clientDAO = new ClientDAO();
 
     /**
-     * Este método se utiliza para registrar un nuevo usuario.
-     * Valida los campos obligatorios (nombre de usuario, contraseña y correo), comprueba si el usuario ya existe,
-     * hashea la contraseña, crea un objeto User, lo configura y lo inserta en la base de datos.
+     * Registers a new user.
+     * Validates the input fields, checks for existing users, and saves the new user.
      */
     public void registerUser() {
         String username = textUsername.getText();
@@ -61,9 +59,16 @@ public class RegisterUserController {
             return;
         }
 
-        Client existingClient = clientDAO.findByName(username);
-        if (existingClient != null) {
+        Client existingClientByName = clientDAO.findByName(username);
+        Client existingClientByEmail = clientDAO.findByGmail(email);
+        if (existingClientByName != null) {
             String message = "El nombre de usuario ya está en uso. Por favor, elija otro.";
+            showAlert(message);
+            ErrorLog.logMessage(message);
+            return;
+        }
+        if (existingClientByEmail != null) {
+            String message = "El correo electrónico ya está en uso. Por favor, elija otro.";
             showAlert(message);
             ErrorLog.logMessage(message);
             return;
@@ -108,24 +113,38 @@ public class RegisterUserController {
         ErrorLog.logMessage(message);
     }
 
-
+    /**
+     * Validates the email format.
+     * @param email The email to validate.
+     * @return true if the email format is valid, false otherwise.
+     */
     private boolean isValidEmail(String email) {
         String emailRegex = "^[\\w-\\.]+@[\\w-\\.]+\\.[a-z]{2,}$";
         return Pattern.matches(emailRegex, email);
     }
 
-
+    /**
+     * Navigates to the initial menu.
+     * @throws IOException if the view cannot be loaded.
+     */
     @FXML
     public void goToInitialMenu() throws IOException {
         App.setRoot("View/InitialMenu");
     }
 
-
+    /**
+     * Shows an alert with the given message.
+     * @param message The message to display in the alert.
+     */
     private void showAlert(String message) {
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setContentText(message);
         alert.show();
     }
+
+    /**
+     * Opens a file chooser to select an image and sets it to the profile image view.
+     */
     @FXML
     private void selectImage() {
         FileChooser fileChooser = new FileChooser();
@@ -145,6 +164,4 @@ public class RegisterUserController {
             }
         }
     }
-
-
 }

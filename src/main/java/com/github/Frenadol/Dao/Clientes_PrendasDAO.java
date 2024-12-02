@@ -5,9 +5,7 @@ import com.github.Frenadol.Model.Client_Clothes;
 import com.github.Frenadol.Model.Clothes;
 
 import java.sql.*;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 public class Clientes_PrendasDAO {
@@ -32,6 +30,11 @@ public class Clientes_PrendasDAO {
         conn = ConnectionDB.getConnection();
     }
 
+    /**
+     * Retrieves the shopping cart for a specific client.
+     * @param clientId The ID of the client.
+     * @return A list of Client_Clothes objects representing the shopping cart.
+     */
     public List<Client_Clothes> viewShoppingCart(int clientId) {
         List<Client_Clothes> clientClothesList = new ArrayList<>();
         try (PreparedStatement pst = conn.prepareStatement(SELECT_IDCLIENTS_FOR_CLIENTS_SHOPPINGCART)) {
@@ -55,6 +58,12 @@ public class Clientes_PrendasDAO {
         return clientClothesList;
     }
 
+    /**
+     * Checks if an entry exists in the shopping cart for a specific client and garment.
+     * @param clientId The ID of the client.
+     * @param prendaId The ID of the garment.
+     * @return True if the entry exists, false otherwise.
+     */
     public boolean entryExists(int clientId, int prendaId) {
         try (PreparedStatement pst = conn.prepareStatement(CHECK_ENTRY_EXISTS)) {
             pst.setInt(1, clientId);
@@ -68,6 +77,13 @@ public class Clientes_PrendasDAO {
         }
     }
 
+    /**
+     * Adds clothes to the shopping cart for a specific client.
+     * @param clientId The ID of the client.
+     * @param prendaId The ID of the garment.
+     * @param purchaseDate The purchase date.
+     * @param quantity The quantity to be added.
+     */
     public void addClothesToCart(int clientId, int prendaId, String purchaseDate, int quantity) {
         if (entryExists(clientId, prendaId)) {
             updateClothesQuantity(clientId, prendaId, quantity);
@@ -84,6 +100,12 @@ public class Clientes_PrendasDAO {
         }
     }
 
+    /**
+     * Updates the quantity of a specific garment in the shopping cart for a client.
+     * @param clientId The ID of the client.
+     * @param prendaId The ID of the garment.
+     * @param quantity The new quantity to be set.
+     */
     public void updateClothesQuantity(int clientId, int prendaId, int quantity) {
         try (PreparedStatement pst = conn.prepareStatement(CHECK_ENTRY_EXISTS)) {
             pst.setInt(1, clientId);
@@ -105,6 +127,11 @@ public class Clientes_PrendasDAO {
         }
     }
 
+    /**
+     * Removes clothes from the shopping cart for a specific client.
+     * @param clientId The ID of the client.
+     * @param prendaId The ID of the garment.
+     */
     public void removeClothesFromCart(int clientId, int prendaId) {
         try (PreparedStatement pst = conn.prepareStatement(DELETE_PRENDA_DEL_CARRITO)) {
             pst.setInt(1, clientId);

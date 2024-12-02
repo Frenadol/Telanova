@@ -7,7 +7,6 @@ import com.github.Frenadol.Model.Clothes;
 import com.github.Frenadol.Utils.SessionManager;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
@@ -18,7 +17,6 @@ import javafx.scene.input.MouseEvent;
 import java.io.ByteArrayInputStream;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.Optional;
 
 public class ThumbController {
@@ -33,6 +31,10 @@ public class ThumbController {
 
     private Clothes clothesItem;
 
+    /**
+     * Sets the garment details in the view.
+     * @param clothes The clothes item to display.
+     */
     public void setGarment(Clothes clothes) {
         this.clothesItem = clothes;
         itemName.setText(clothes.getName_clothes());
@@ -44,6 +46,10 @@ public class ThumbController {
         }
     }
 
+    /**
+     * Handles the addition of a garment to the shopping cart.
+     * @param event The mouse event triggered by clicking the add to cart button.
+     */
     @FXML
     private void handleAddToCart(MouseEvent event) {
         if (clothesItem == null) {
@@ -113,11 +119,19 @@ public class ThumbController {
         }
     }
 
+    /**
+     * Gets the ID of the currently logged-in client.
+     * @return The ID of the current client.
+     */
     private int getClientId() {
-        // Obtener el ID del cliente actual desde el SessionManager
         return SessionManager.getInstance().getCurrentClient().getId_user();
     }
 
+    /**
+     * Displays an alert with the given title and message.
+     * @param title The title of the alert.
+     * @param message The message to display in the alert.
+     */
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);

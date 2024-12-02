@@ -1,21 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<VBox xmlns="http://javafx.com/javafx"
-      xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.github.Frenadol.View.StoragePanelController"
-      spacing="10" alignment="CENTER" prefWidth="300" prefHeight="200">
-    <VBox fx:id="itemsContainer" spacing="10" alignment="CENTER"/>
-    <Button text="Recuento por Categoría" onAction="#handleCountByCategory"/>
-    <Button text="Recuento por Talla" onAction="#handleCountBySize"/>
-    <Button text="Recuento por Color" onAction="#handleCountByColor"/>
-    <TableView fx:id="resultsTable">
-        <columns>
-            <TableColumn fx:id="attributeColumn" text="Atributo"/>
-            <TableColumn fx:id="countColumn" text="Cantidad"/>
-            <TableColumn fx:id="nameColumn" text="Nombre"/>
-        </columns>
-    </TableView>
-</VBox>
+<BorderPane fx:id="root" prefHeight="770.0" prefWidth="1206.0" stylesheets="@CSS/StoragePanel.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.StoragePanelController">
+    <top>
+        <TableView fx:id="resultsTable" prefHeight="291.0" prefWidth="1206.0" styleClass="grid-pane">
+            <columns>
+                <TableColumn fx:id="attributeColumn" prefWidth="152.0" text="Atributo" />
+                <TableColumn fx:id="countColumn" prefWidth="147.2" text="Cantidad" />
+            </columns>
+        </TableView>
+    </top>
+    <center>
+        <HBox alignment="CENTER" prefHeight="13.0" prefWidth="1206.0" spacing="10">
+         <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="257.0" text="Volver al panel de administrador" />
+            <Button onAction="#handleCountByCategory" text="Recuento por Categoría" />
+            <Button onAction="#handleCountBySize" text="Recuento por Talla" />
+            <Button onAction="#handleCountByColor" text="Recuento por Color" />
+        </HBox>
+    </center>
+    <bottom>
+        <ScrollPane fx:id="scrollPane" fitToWidth="true" prefHeight="425.0" prefWidth="1206.0" style="-fx-background-color: #f5e6e8;" vbarPolicy="ALWAYS">
+            <content>
+                <GridPane fx:id="itemsContainer" hgap="20.0" prefHeight="679.0" prefWidth="1192.0" style="-fx-background-color: #f5e6e8;" vgap="20.0">
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <padding>
+                        <Insets left="20.0" />
+                    </padding>
+                </GridPane>
+            </content>
+        </ScrollPane>
+    </bottom>
+</BorderPane>

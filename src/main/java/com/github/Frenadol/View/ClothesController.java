@@ -45,15 +45,25 @@ public class ClothesController implements Initializable {
 
     private ClothesDAO clothesDao;
 
+    /**
+     * Initializes the controller class. This method is automatically called
+     * after the fxml file has been loaded.
+     * @param url The location used to resolve relative paths for the root object, or null if the location is not known.
+     * @param resourceBundle The resources used to localize the root object, or null if the root object was not localized.
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         clothesDao = new ClothesDAO();
+
+        // Set up the columns in the table
         idPrendaColumn.setCellValueFactory(new PropertyValueFactory<>("id_clothes"));
         nombrePrendaColumn.setCellValueFactory(new PropertyValueFactory<>("name_clothes"));
         tallaPrendaColumn.setCellValueFactory(new PropertyValueFactory<>("size_clothes"));
         colorPrendaColumn.setCellValueFactory(new PropertyValueFactory<>("color_clothes"));
         descripcionColumn.setCellValueFactory(new PropertyValueFactory<>("description_clothes"));
         precioColumn.setCellValueFactory(new PropertyValueFactory<>("price_clothes"));
+
+        // Set up the image column to display images
         imagenPrendaColumn.setCellValueFactory(characters -> {
             byte[] visualData = characters.getValue().getClothes_Visual();
             if (visualData != null) {
@@ -71,6 +81,7 @@ public class ClothesController implements Initializable {
             }
         });
 
+        // Load all clothes from the database and set them in the table
         ObservableList<Clothes> clothesList = FXCollections.observableArrayList(clothesDao.findAll());
         clothesTable.setItems(clothesList);
     }

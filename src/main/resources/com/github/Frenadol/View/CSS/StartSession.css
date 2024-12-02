@@ -5,31 +5,19 @@
 }
 
 /* Background of the AnchorPane */
-.background-pane {
+.anchor-pane {
     -fx-background-color: #f3f4f6; /* Light grey background */
 }
 
-/* Title label styles */
-.title-label {
-    -fx-font-size: 24px;
-    -fx-font-weight: bold;
-    -fx-text-fill: #2c3e50; /* Dark blue text color */
-}
-
-/* Separator styles */
-.section-separator {
-    -fx-background-color: #bdc3c7; /* Light grey color */
-    -fx-padding: 5px;
-}
-
-/* Form label styles */
-.form-label {
-    -fx-text-fill: #2c3e50; /* Dark blue text color */
+/* Text styles */
+.text {
+    -fx-fill: #2c3e50; /* Dark blue text color */
+    -fx-font-size: 16px;
     -fx-font-weight: bold;
 }
 
 /* TextField and PasswordField styles */
-.text-field {
+.text-field, .password-field {
     -fx-background-color: #ffffff; /* White background */
     -fx-border-color: #bdc3c7; /* Light grey border */
     -fx-border-width: 1px;
@@ -40,7 +28,7 @@
 }
 
 /* Button styles */
-.button-primary {
+.button {
     -fx-background-color: linear-gradient(#4CAF50, #2E7D32); /* Green gradient */
     -fx-text-fill: white; /* White text */
     -fx-font-size: 14px;
@@ -51,24 +39,7 @@
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0.4, 0, 2);
 }
 
-.button-primary:hover {
-    -fx-background-color: linear-gradient(#FFB3BA, #FFDFBA); /* Pastel pink on hover */
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 12, 0.7, 0, 0);
-    -fx-transform: scale(1.05);
-}
-
-.button-secondary {
-    -fx-background-color: linear-gradient(#e74c3c, #c0392b); /* Red gradient */
-    -fx-text-fill: white; /* White text */
-    -fx-font-size: 14px;
-    -fx-font-weight: bold;
-    -fx-border-radius: 5px;
-    -fx-padding: 10px 20px;
-    -fx-cursor: hand;
-    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0.4, 0, 2);
-}
-
-.button-secondary:hover {
+.button:hover {
     -fx-background-color: linear-gradient(#FFB3BA, #FFDFBA); /* Pastel pink on hover */
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 12, 0.7, 0, 0);
     -fx-transform: scale(1.05);

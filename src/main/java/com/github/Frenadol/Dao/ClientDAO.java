@@ -9,7 +9,6 @@ import java.sql.*;
 public class ClientDAO {
     private static final String INSERT = "INSERT INTO usuario (nombre_usuario,contraseña,gmail,imagen_perfil) VALUES (?,?,?,?)";
     private static final String INSERT_CLIENTE = "INSERT INTO cliente (id_cliente, cartera) VALUES (?, ?)";
-    private static final String UPDATE = "UPDATE usuario SET nombre_usuario=?, contraseña=?, gmail=?, esadministrador=? WHERE id_usuario=?";
     private static final String UPDATE_WALLET = "UPDATE cliente SET cartera=? WHERE id_cliente=?";
     private static final String FIND_BY_NAME = "SELECT u.id_usuario, u.nombre_usuario, u.contraseña,u.gmail,c.cartera FROM usuario u JOIN cliente c ON c.id_cliente = u.id_usuario WHERE u.nombre_usuario=?";
     private static final String FIND_BY_GMAIL = "SELECT * FROM usuario WHERE gmail=?";
@@ -20,6 +19,10 @@ public class ClientDAO {
         conn = ConnectionDB.getConnection();
     }
 
+    /**
+     * Inserts a new client into the database.
+     * @param cliente The client to be inserted.
+     */
     public void insertClient(Client cliente) {
         try (PreparedStatement pst = conn.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS)) {
             pst.setString(1, cliente.getUsername());
@@ -42,18 +45,11 @@ public class ClientDAO {
         }
     }
 
-    public void updateUser(User entity) {
-        try (PreparedStatement pst = conn.prepareStatement(UPDATE)) {
-            pst.setString(1, entity.getUsername());
-            pst.setString(2, entity.getPassword());
-            pst.setString(3, entity.getGmail());
-            pst.setInt(5, entity.getId_user());
-            pst.executeUpdate();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
+    /**
+     * Updates the wallet balance of a client.
+     * @param clientId The ID of the client.
+     * @param newBalance The new balance to be set.
+     */
     public void updateWallet(int clientId, double newBalance) {
         try (PreparedStatement pst = conn.prepareStatement(UPDATE_WALLET)) {
             pst.setDouble(1, newBalance);
@@ -64,6 +60,11 @@ public class ClientDAO {
         }
     }
 
+    /**
+     * Finds a client by their username.
+     * @param name The username to search for.
+     * @return The client with the specified username, or null if not found.
+     */
     public Client findByName(String name) {
         Client result = null;
         try (PreparedStatement pst = conn.prepareStatement(FIND_BY_NAME)) {
@@ -83,6 +84,11 @@ public class ClientDAO {
         return result;
     }
 
+    /**
+     * Finds a client by their email.
+     * @param gmail The email to search for.
+     * @return The client with the specified email, or null if not found.
+     */
     public Client findByGmail(String gmail) {
         Client result = null;
         try (PreparedStatement pst = conn.prepareStatement(FIND_BY_GMAIL)) {
@@ -93,7 +99,6 @@ public class ClientDAO {
                 result.setId_user(res.getInt("id_usuario"));
                 result.setUsername(res.getString("nombre_usuario"));
                 result.setPassword(res.getString("contraseña"));
-                result.setWallet(res.getDouble("cartera"));
                 result.setGmail(res.getString("gmail"));
             }
         } catch (SQLException e) {
@@ -102,6 +107,10 @@ public class ClientDAO {
         return result;
     }
 
+    /**
+     * Builds a new instance of ClientDAO.
+     * @return A new ClientDAO instance.
+     */
     public static ClientDAO build() {
         return new ClientDAO();
     }

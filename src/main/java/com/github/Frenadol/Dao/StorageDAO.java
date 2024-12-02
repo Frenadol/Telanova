@@ -20,6 +20,10 @@ public class StorageDAO {
         this.conn = ConnectionDB.getConnection();
     }
 
+    /**
+     * Inserts a new storage into the database.
+     * @param storage The storage to be inserted.
+     */
     public void insertStorage(Storage storage) {
         try (PreparedStatement pst = conn.prepareStatement(INSERT)) {
             pst.setInt(1, storage.getId_storage());
@@ -30,6 +34,11 @@ public class StorageDAO {
         }
     }
 
+    /**
+     * Finds a storage by its name.
+     * @param storageName The name of the storage to search for.
+     * @return The storage with the specified name, or null if not found.
+     */
     public Storage findByName(String storageName) {
         Storage storage = null;
         try (PreparedStatement pst = conn.prepareStatement(FIND_BY_NAME)) {
@@ -47,6 +56,10 @@ public class StorageDAO {
         return storage;
     }
 
+    /**
+     * Updates the details of a storage.
+     * @param storage The storage object with updated details.
+     */
     public void updateStorage(Storage storage) {
         try (PreparedStatement pst = conn.prepareStatement(UPDATE)) {
             pst.setString(1, storage.getStorageName());
@@ -57,6 +70,10 @@ public class StorageDAO {
         }
     }
 
+    /**
+     * Deletes a storage from the database.
+     * @param id_storage The ID of the storage to be deleted.
+     */
     public void deleteStorage(int id_storage) {
         try (PreparedStatement pst = conn.prepareStatement(DELETE)) {
             pst.setInt(1, id_storage);
@@ -66,6 +83,11 @@ public class StorageDAO {
         }
     }
 
+    /**
+     * Finds a storage by its ID.
+     * @param id_storage The ID of the storage to search for.
+     * @return The storage with the specified ID, or null if not found.
+     */
     public Storage findById(int id_storage) {
         Storage storage = null;
         try (PreparedStatement pst = conn.prepareStatement(FIND_BY_ID)) {
@@ -83,6 +105,10 @@ public class StorageDAO {
         return storage;
     }
 
+    /**
+     * Finds all storages in the database.
+     * @return A list of all storages.
+     */
     public List<Storage> findAllStorages() {
         List<Storage> storages = new ArrayList<>();
         try (PreparedStatement pst = conn.prepareStatement(FIND_ALL_STORAGES);

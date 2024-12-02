@@ -2,7 +2,6 @@ package com.github.Frenadol.View;
 
 import com.github.Frenadol.Dao.StorageDAO;
 import com.github.Frenadol.Model.Storage;
-import com.github.Frenadol.Model.Worker;
 import com.github.Frenadol.Utils.SessionManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,6 +22,10 @@ public class StorageLoginController {
 
     private StorageDAO storageDAO = new StorageDAO();
 
+    /**
+     * Handles the process of entering a storage.
+     * Validates the storage name, sets the current storage in the session, and loads the storage panel.
+     */
     @FXML
     public void enterStorage() {
         String storageName = storageNameField.getText();
@@ -41,7 +44,9 @@ public class StorageLoginController {
         }
     }
 
-
+    /**
+     * Loads and displays the storage panel.
+     */
     private void showStoragePanel() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("StoragePanel.fxml"));
@@ -55,6 +60,9 @@ public class StorageLoginController {
         }
     }
 
+    /**
+     * Closes the current window.
+     */
     private void closeWindow() {
         Stage stage = (Stage) storageNameField.getScene().getWindow();
         stage.close();

@@ -1,0 +1,55 @@
+/* DetailsProducts.css */
+
+.anchor-pane {
+    -fx-background-color: #ffe6e6;
+    -fx-padding: 20;
+    -fx-border-color: #ffcccc;
+    -fx-border-width: 2;
+    -fx-border-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.15), 10, 0.5, 0, 0);
+}
+
+.vbox {
+    -fx-spacing: 20;
+    -fx-alignment: center;
+}
+
+.label {
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-text-fill: #333333;
+}
+
+#productName {
+    -fx-font-size: 26px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #b30000;
+}
+
+#productPrice {
+    -fx-font-size: 22px;
+    -fx-text-fill: #ff6666;
+}
+
+#productDescription {
+    -fx-font-size: 18px;
+    -fx-text-fill: #7f8c8d;
+    -fx-padding: 10;
+    -fx-background-color: #ffe6e6;
+    -fx-border-color: #ffcccc;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+}
+
+#productSize, #productColor, #productCategory, #productQuantity {
+    -fx-font-size: 18px;
+    -fx-text-fill: #b30000;
+}
+
+.image-view {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.25), 10, 0.5, 0, 0);
+    -fx-border-color: #ffcccc;
+    -fx-border-width: 1;
+    -fx-border-radius: 5;
+    -fx-background-color: #ffffff;
+    -fx-padding: 10;
+}

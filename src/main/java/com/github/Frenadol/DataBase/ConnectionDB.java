@@ -1,35 +1,41 @@
 package com.github.Frenadol.DataBase;
 
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class ConnectionDB {
-    private final static String FILE="connection.xml";
+    private final static String FILE = "connection.xml";
     private static ConnectionDB _instance;
     private static Connection conn;
 
-    private ConnectionDB(){
-        ConnectionProperties properties = (ConnectionProperties) XMLManager.readXML(new ConnectionProperties(),FILE);
+    private ConnectionDB() {
+        ConnectionProperties properties = (ConnectionProperties) XMLManager.readXML(new ConnectionProperties(), FILE);
 
         try {
-            conn = DriverManager.getConnection(properties.getURL(),properties.getUser(),properties.getPassword());
+            conn = DriverManager.getConnection(properties.getURL(), properties.getUser(), properties.getPassword());
         } catch (SQLException e) {
             e.printStackTrace();
-            conn=null;
+            conn = null;
         }
     }
 
-    public static Connection getConnection(){
-        if(_instance==null){
+    /**
+     * Gets the database connection.
+     * @return The database connection.
+     */
+    public static Connection getConnection() {
+        if (_instance == null) {
             _instance = new ConnectionDB();
         }
         return conn;
     }
 
-    public static void closeConnection(){
-        if(conn!=null){
+    /**
+     * Closes the database connection.
+     */
+    public static void closeConnection() {
+        if (conn != null) {
             try {
                 conn.close();
             } catch (SQLException e) {
@@ -37,7 +43,4 @@ public class ConnectionDB {
             }
         }
     }
-
-
 }
-

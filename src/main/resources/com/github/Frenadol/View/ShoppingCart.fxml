@@ -7,25 +7,25 @@
 <?import javafx.scene.control.cell.PropertyValueFactory?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.ShoppingCartController">
+<VBox prefHeight="568.0" prefWidth="527.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.ShoppingCartController">
     <TableView fx:id="shoppingCartTableView">
         <columns>
-            <TableColumn fx:id="imageColumn" text="Image">
+            <TableColumn fx:id="imageColumn" prefWidth="148.00006103515625" text="Image">
                 <cellValueFactory>
                     <PropertyValueFactory property="image" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="nameColumn" text="Name">
+            <TableColumn fx:id="nameColumn" prefWidth="75.99993896484375" text="Name">
                 <cellValueFactory>
                     <PropertyValueFactory property="name" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="priceColumn" text="Price">
+            <TableColumn fx:id="priceColumn" prefWidth="79.20001220703125" text="Price">
                 <cellValueFactory>
                     <PropertyValueFactory property="price" />
                 </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="quantityColumn" text="Quantity">
+            <TableColumn fx:id="quantityColumn" prefWidth="222.4000122070313" text="Quantity">
                 <cellValueFactory>
                     <PropertyValueFactory property="cantidad" />
                 </cellValueFactory>
@@ -33,8 +33,9 @@
         </columns>
     </TableView>
     <Label fx:id="totalPriceLabel" text="Total: €" />
-    <Button onAction="#goBack" text="Go Back" />
-   <Button mnemonicParsing="false" onMouseClicked="#handleOrderReceived" text="Terminar pedido" />
-   <Button mnemonicParsing="false" onMouseClicked="#handleFinishOrder" text="terminar pedido" />
-    <Button onAction="#reloadCart" text="Reload Cart" />
+    <Label fx:id="walletBalanceLabel" text="Wallet Balance: €" />
+    <Button onAction="#goBack" text="Ir atras" />
+    <Button mnemonicParsing="false" onMouseClicked="#handlePayOrder" text="Pagar pedido" />
+    <Button mnemonicParsing="false" onMouseClicked="#handleFinishOrder" text="Pedido recibido" />
+    <Button onAction="#reloadCart" text="Recargar carrito" />
 </VBox>

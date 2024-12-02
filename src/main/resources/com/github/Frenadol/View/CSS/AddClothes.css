@@ -47,8 +47,8 @@
 
 /* Botones */
 .button {
-    -fx-background-color: #3498db; /* Azul brillante para los botones */
-    -fx-text-fill: #ffffff;
+    -fx-background-color: linear-gradient(#4CAF50, #2E7D32); /* Verde brillante para los botones */
+    -fx-text-fill: white;
     -fx-font-size: 14px;
     -fx-font-weight: bold;
     -fx-border-radius: 5px;
@@ -59,7 +59,9 @@
 }
 
 .button:hover {
-    -fx-background-color: #2980b9; /* Azul más oscuro al pasar el mouse */
+    -fx-background-color: linear-gradient(#FFB3BA, #FFDFBA); /* Rosado pastel al pasar el mouse */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 12, 0.7, 0, 0);
+    -fx-transform: scale(1.05);
 }
 
 /* Botón 'Ir a otra pantalla' */
@@ -69,7 +71,7 @@
 }
 
 #goToOtherScreenButton:hover {
-    -fx-background-color: #d35400;
+    -fx-background-color: linear-gradient(#FFB3BA, #FFDFBA); /* Rosado pastel al pasar el mouse */
 }
 
 /* Imagen */
@@ -115,7 +117,7 @@
 
 /* Asegura que los botones sean visualmente atractivos */
 .button {
-    -fx-background-color: #3498db; /* Azul */
+    -fx-background-color: linear-gradient(#4CAF50, #2E7D32); /* Verde */
     -fx-text-fill: #ffffff;
     -fx-font-weight: bold;
     -fx-padding: 10px 20px;
@@ -123,6 +125,5 @@
 }
 
 .button:hover {
-    -fx-background-color: #2980b9; /* Azul más oscuro para el hover */
+    -fx-background-color: linear-gradient(#FFB3BA, #FFDFBA); /* Rosado pastel para el hover */
 }
-

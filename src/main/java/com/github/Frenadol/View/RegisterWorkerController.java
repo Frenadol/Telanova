@@ -41,13 +41,16 @@ public class RegisterWorkerController {
 
     private final WorkerDAO workerDAO = new WorkerDAO();
 
+    /**
+     * Registers a new worker.
+     * Validates the input fields, checks for existing workers, and saves the new worker.
+     */
     public void registerWorker() {
         String username = textUsername.getText().trim();
         String pass = textPassword.getText().trim();
         String email = textEmail.getText().trim();
 
-
-        if (username.isEmpty() || pass.isEmpty() || email.isEmpty()) {
+        if (username.isEmpty() || pass.isEmpty() || email.isEmpty() || imageFile == null) {
             String message = "Por favor, complete todos los campos.";
             showAlert(AlertType.WARNING, message);
             ErrorLog.logMessage(message);
@@ -60,7 +63,6 @@ public class RegisterWorkerController {
             ErrorLog.logMessage(message);
             return;
         }
-
 
         if (username.length() < 3 || pass.length() < 6) {
             String message = "El nombre de usuario debe tener al menos 3 caracteres y la contraseña al menos 6 caracteres.";
@@ -78,22 +80,28 @@ public class RegisterWorkerController {
             return;
         }
 
+        // Verificar si el correo ya existe
+        Worker existingEmailWorker = workerDAO.findByEmail(email);
+        if (existingEmailWorker != null) {
+            String message = "El correo electrónico ya está en uso. Por favor, elija otro.";
+            showAlert(AlertType.WARNING, message);
+            ErrorLog.logMessage(message);
+            return;
+        }
 
         Worker newWorker = new Worker();
         newWorker.setUsername(username);
         newWorker.setGmail(email);
         newWorker.setHireDate(String.valueOf(UtilDate.getCurrentDate()));
         newWorker.setWorker(true);
-        if (imageFile != null) {
-            try {
-                byte[] imageBytes = Files.readAllBytes(imageFile.toPath());
-                newWorker.setProfilePicture(imageBytes);
-            } catch (IOException e) {
-                ErrorLog.fileRead(e);
-                ErrorLog.logMessage("Error al leer la imagen: " + e.getMessage());
-                showAlert(AlertType.ERROR, "Error al leer la imagen. Intente nuevamente.");
-                return;
-            }
+        try {
+            byte[] imageBytes = Files.readAllBytes(imageFile.toPath());
+            newWorker.setProfilePicture(imageBytes);
+        } catch (IOException e) {
+            ErrorLog.fileRead(e);
+            ErrorLog.logMessage("Error al leer la imagen: " + e.getMessage());
+            showAlert(AlertType.ERROR, "Error al leer la imagen. Intente nuevamente.");
+            return;
         }
         try {
             newWorker.setPassword(Security.hashPassword(pass));
@@ -118,11 +126,21 @@ public class RegisterWorkerController {
         ErrorLog.logMessage(message);
     }
 
+    /**
+     * Validates the email format.
+     * @param email The email to validate.
+     * @return true if the email format is valid, false otherwise.
+     */
     private boolean isValidEmail(String email) {
         String emailRegex = "^[\\w-\\.]+@[\\w-]+\\.[a-zA-Z]{2,7}$";
         return Pattern.matches(emailRegex, email);
     }
 
+    /**
+     * Shows an alert with the given message.
+     * @param type The type of alert.
+     * @param message The message to display in the alert.
+     */
     private void showAlert(AlertType type, String message) {
         Alert alert = new Alert(type);
         alert.setContentText(message);
@@ -130,10 +148,17 @@ public class RegisterWorkerController {
         alert.show();
     }
 
+    /**
+     * Closes the application.
+     */
     @FXML
     private void onClose() {
         System.exit(0);
     }
+
+    /**
+     * Opens a file chooser to select an image and sets it to the profile image view.
+     */
     @FXML
     private void selectImage() {
         FileChooser fileChooser = new FileChooser();
@@ -153,5 +178,4 @@ public class RegisterWorkerController {
             }
         }
     }
-
 }
