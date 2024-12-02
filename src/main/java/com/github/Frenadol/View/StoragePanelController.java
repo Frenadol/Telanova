@@ -1,5 +1,6 @@
 package com.github.Frenadol.View;
 
+import com.github.Frenadol.App;
 import com.github.Frenadol.Dao.ClothesDAO;
 import com.github.Frenadol.Model.Clothes;
 import com.github.Frenadol.Model.Storage;
@@ -129,11 +130,9 @@ public class StoragePanelController {
  */
     public void goToInitialMenu() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminPanel.fxml"));
-            Stage stage = (Stage) itemsContainer.getScene().getWindow();
-            Scene scene = new Scene(loader.load());
-            stage.setScene(scene);
-            stage.show();
+            App.setRoot("View/AdminPanel");
+            Stage stage = (Stage) resultsTable.getScene().getWindow();
+            stage.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

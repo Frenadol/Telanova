@@ -1,5 +1,6 @@
 package com.github.Frenadol.View;
 
+import com.github.Frenadol.App;
 import com.github.Frenadol.Dao.WorkerDAO;
 import com.github.Frenadol.Model.Worker;
 import com.github.Frenadol.Security.Security;
@@ -149,13 +150,16 @@ public class RegisterWorkerController {
     }
 
     /**
-     * Closes the application.
+     * Go to AdminPanel again.
      */
     @FXML
     private void onClose() {
-        System.exit(0);
+        try {
+            App.setRoot("View/AdminPanel");
+        } catch (IOException e) {
+            showAlert(AlertType.ERROR, "Error al volver al panel de administración: " + e.getMessage());
+        }
     }
-
     /**
      * Opens a file chooser to select an image and sets it to the profile image view.
      */

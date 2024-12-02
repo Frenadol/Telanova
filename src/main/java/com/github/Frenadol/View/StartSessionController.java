@@ -128,13 +128,7 @@ public class StartSessionController {
     @FXML
     public void goToInitialMenu() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("InitialMenu.fxml"));
-            Stage stage = (Stage) textUsername.getScene().getWindow();
-            double originalWidth = stage.getWidth();
-            double originalHeight = stage.getHeight();
-            Scene scene = new Scene(loader.load(), originalWidth, originalHeight);
-            stage.setScene(scene);
-            stage.show();
+           App.setRoot("View/InitialMenu");
         } catch (IOException e) {
             e.printStackTrace();
         }

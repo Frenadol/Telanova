@@ -1805,3 +1805,15 @@ java.sql.SQLSyntaxErrorException: Table 'telanova.clothes' doesn't exist
 [2024-12-02 10:31:44] El correo electrónico no tiene un formato válido.
 [2024-12-02 10:31:53] Usuario registrado con éxito!
 [2024-12-02 10:35:28] Trabajador registrado con éxito!
+[2024-12-02 12:35:28] Por favor, complete todos los campos.
+[2024-12-02 12:35:42] El nombre de usuario ya está en uso. Por favor, elija otro.
+[2024-12-02 12:35:57] Trabajador registrado con éxito!
+[2024-12-02 12:40:16] El correo electrónico ya está en uso. Por favor, elija otro.
+[2024-12-02 12:40:21] Usuario registrado con éxito!
+[2024-12-02 12:40:35] Usuario registrado con éxito!
+[2024-12-02 14:38:36] Usuario registrado con éxito!
+[2024-12-02 14:38:52] El correo electrónico ya está en uso. Por favor, elija otro.
+[2024-12-02 14:38:55] El correo electrónico ya está en uso. Por favor, elija otro.
+[2024-12-02 14:39:00] Usuario registrado con éxito!
+[2024-12-02 14:41:29] El nombre de usuario ya está en uso. Por favor, elija otro.
+[2024-12-02 14:41:35] El nombre de usuario ya está en uso. Por favor, elija otro.

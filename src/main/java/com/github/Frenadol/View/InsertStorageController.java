@@ -1,11 +1,14 @@
 package com.github.Frenadol.View;
 
+import com.github.Frenadol.App;
 import com.github.Frenadol.Dao.StorageDAO;
 import com.github.Frenadol.Model.Storage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+
+import java.io.IOException;
 
 public class InsertStorageController {
 
@@ -39,7 +42,11 @@ public class InsertStorageController {
         Storage storage = new Storage();
         storage.setStorageName(storageName);
         storageDAO.insertStorage(storage);
-        closeWindow();
+        try {
+            App.setRoot("View/AdminPanel");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
