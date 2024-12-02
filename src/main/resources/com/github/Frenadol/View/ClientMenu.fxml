@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="root" prefHeight="652.0" prefWidth="953.0" stylesheets="@CSS/ClientMenu.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.ClientMenuController">
+<BorderPane fx:id="root" prefHeight="694.0" prefWidth="982.0" stylesheets="@CSS/ClientMenu.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.ClientMenuController">
    <top>
       <HBox alignment="CENTER" prefHeight="0.0" prefWidth="824.0" spacing="10">
          <Button fx:id="cleanButton" mnemonicParsing="false" onMouseClicked="#cleanSearch" prefHeight="26.0" prefWidth="121.0" text="Limpiar busqueda" />
@@ -27,7 +27,7 @@
    <center>
       <ScrollPane fx:id="scrollPane" fitToWidth="true" prefHeight="425.0" prefWidth="700.0" style="-fx-background-color: #f5e6e8;" vbarPolicy="ALWAYS">
          <content>
-            <GridPane fx:id="ClothesPane" hgap="20.0" prefHeight="604.0" prefWidth="918.0" style="-fx-background-color: #f5e6e8;" vgap="20.0">
+            <GridPane fx:id="ClothesPane" hgap="20.0" prefHeight="640.0" prefWidth="530.0" style="-fx-background-color: #f5e6e8;" vgap="20.0">
                <rowConstraints>
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                </rowConstraints>
@@ -39,7 +39,7 @@
       </ScrollPane>
    </center>
    <right>
-      <VBox alignment="CENTER" prefHeight="593.0" prefWidth="167.0" spacing="10">
+      <VBox alignment="CENTER" prefHeight="642.0" prefWidth="433.0" spacing="10">
          <Label text="Carrito" />
          <ImageView fx:id="carritoImage" fitHeight="90.0" fitWidth="90.0" onMouseClicked="#openShoppingCart">
             <image>
@@ -48,7 +48,7 @@
          </ImageView>
          <Label fx:id="walletBalanceLabel" text="Saldo: $0.00" />
          <Button fx:id="addMoneyButton" onMouseClicked="#showAddMoneyDialog" text="Añadir dinero" />
-         <Button fx:id="logoutButton" mnemonicParsing="false" onMouseClicked="#logout" prefHeight="40.0" prefWidth="167.0" text="Cerrar sesion" />
+         <Button fx:id="logoutButton" mnemonicParsing="false" onMouseClicked="#logout" prefHeight="40.0" prefWidth="155.0" text="Cerrar sesion" />
       </VBox>
    </right>
 </BorderPane>
