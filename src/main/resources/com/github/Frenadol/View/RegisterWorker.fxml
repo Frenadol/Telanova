@@ -21,14 +21,14 @@
 
     <!-- Campo Contraseña -->
     <HBox alignment="CENTER_LEFT" spacing="10" styleClass="form-hbox" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="130.0">
-        <Label styleClass="form-label" text="Contraseña:" />
+        <Label prefHeight="18.0" prefWidth="130.0" styleClass="form-label" text="Contraseña:" />
         <PasswordField fx:id="textPassword" styleClass="text-field" />
     </HBox>
 
     <!-- Campo Correo electrónico -->
     <HBox alignment="CENTER_LEFT" spacing="10" styleClass="form-hbox" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="180.0">
         <Label styleClass="form-label" text="Correo electrónico:" />
-        <TextField fx:id="textEmail" styleClass="text-field" />
+        <TextField fx:id="textEmail" prefHeight="36.0" prefWidth="178.0" styleClass="text-field" />
     </HBox>
 
     <!-- Selección de imagen -->

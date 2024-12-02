@@ -21,7 +21,7 @@
     </top>
     <center>
         <HBox alignment="CENTER" prefHeight="13.0" prefWidth="1206.0" spacing="10">
-         <Button mnemonicParsing="false" prefHeight="32.0" prefWidth="257.0" text="Volver al panel de administrador" />
+         <Button mnemonicParsing="false" onMouseClicked="#goToInitialMenu" prefHeight="32.0" prefWidth="257.0" text="Volver al panel de administrador" />
             <Button onAction="#handleCountByCategory" text="Recuento por Categoría" />
             <Button onAction="#handleCountBySize" text="Recuento por Talla" />
             <Button onAction="#handleCountByColor" text="Recuento por Color" />

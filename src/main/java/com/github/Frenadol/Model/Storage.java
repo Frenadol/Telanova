@@ -83,10 +83,9 @@ public class Storage {
      */
     @Override
     public String toString() {
-        return "Storage{" +
-                "id_storage=" + id_storage +
-                ", storageName='" + storageName + '\'' +
-                ", clothes=" + clothes +
+        return "Almacen{" +
+                 + id_storage +
+                 ": "+ storageName + '\'' +
                 '}';
     }
 }

@@ -93,8 +93,7 @@ public class ThumbController {
         Optional<ButtonType> response = confirmationAlert.showAndWait();
         if (response.isPresent() && response.get() == ButtonType.OK) {
             SessionManager.getInstance().addToCart(clothesItem, cantidad);
-            System.out.println("Prenda añadida al carrito: " + clothesItem.getName_clothes());
-
+            showAlert("Información", "Prenda añadida al carrito: " + clothesItem.getName_clothes(), Alert.AlertType.INFORMATION);
             Client_Clothes clientClothes = new Client_Clothes();
             clientClothes.setClothes(clothesItem);
             clientClothes.setCantidad(cantidad);
@@ -108,14 +107,13 @@ public class ThumbController {
             Clientes_PrendasDAO dao = new Clientes_PrendasDAO();
             int clientId = getClientId(); // Obtener el ID del cliente actual
             String purchaseDate = new SimpleDateFormat("yyyy-MM-dd").format(new Date(System.currentTimeMillis()));
-            // Verificar si la entrada ya existe y actualizar la cantidad si es necesario
             if (dao.entryExists(clientId, clothesItem.getId_clothes())) {
                 dao.updateClothesQuantity(clientId, clothesItem.getId_clothes(), cantidad);
             } else {
                 dao.addClothesToCart(clientId, clothesItem.getId_clothes(), purchaseDate, cantidad);
             }
 
-            System.out.println("Prenda añadida a la base de datos.");
+
         }
     }
 
@@ -134,6 +132,13 @@ public class ThumbController {
      */
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+    private void showAlert(String title, String message, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);

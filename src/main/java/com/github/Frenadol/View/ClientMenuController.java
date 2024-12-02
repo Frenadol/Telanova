@@ -1,5 +1,6 @@
 package com.github.Frenadol.View;
 
+import com.github.Frenadol.App;
 import com.github.Frenadol.Dao.ClientDAO;
 import com.github.Frenadol.Dao.ClothesDAO;
 import com.github.Frenadol.Model.Client_Clothes;
@@ -47,6 +48,8 @@ public class ClientMenuController {
     private Label walletBalanceLabel;
     @FXML
     private Button addMoneyButton;
+    @FXML
+    private Button logoutButton;
 
     private String savedCardNumber = "";
     private String savedCardExpiry = "";
@@ -321,6 +324,22 @@ public class ClientMenuController {
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    private void logout() {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Confirmar Cierre de Sesión");
+        alert.setHeaderText("Estás a punto de cerrar sesión");
+        alert.setContentText("¿Estás seguro de que deseas salir de la aplicación?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            SessionManager.getInstance().clearSession();
+            Stage stage = (Stage) logoutButton.getScene().getWindow();
+            stage.close();
         }
     }
 }
