@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane fx:id="root" prefHeight="694.0" prefWidth="982.0" stylesheets="@CSS/ClientMenu.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.ClientMenuController">
+<BorderPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@CSS/ClientMenu.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.ClientMenuController">
    <top>
       <HBox alignment="CENTER" prefHeight="0.0" prefWidth="824.0" spacing="10">
          <Button fx:id="cleanButton" mnemonicParsing="false" onMouseClicked="#cleanSearch" prefHeight="26.0" prefWidth="121.0" text="Limpiar busqueda" />
@@ -25,7 +25,7 @@
       </HBox>
    </top>
    <center>
-      <ScrollPane fx:id="scrollPane" fitToWidth="true" prefHeight="425.0" prefWidth="700.0" style="-fx-background-color: #f5e6e8;" vbarPolicy="ALWAYS">
+      <ScrollPane fx:id="scrollPane" fitToWidth="true" prefHeight="642.0" prefWidth="585.0" style="-fx-background-color: #f5e6e8;" vbarPolicy="ALWAYS">
          <content>
             <GridPane fx:id="ClothesPane" hgap="20.0" prefHeight="640.0" prefWidth="530.0" style="-fx-background-color: #f5e6e8;" vgap="20.0">
                <rowConstraints>
@@ -39,7 +39,7 @@
       </ScrollPane>
    </center>
    <right>
-      <VBox alignment="CENTER" prefHeight="642.0" prefWidth="433.0" spacing="10">
+      <VBox alignment="CENTER" prefHeight="642.0" prefWidth="351.0" spacing="10">
          <Label text="Carrito" />
          <ImageView fx:id="carritoImage" fitHeight="90.0" fitWidth="90.0" onMouseClicked="#openShoppingCart">
             <image>

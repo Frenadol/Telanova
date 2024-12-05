@@ -28,7 +28,7 @@
 .button {
     -fx-background-color: linear-gradient(#4CAF50, #2E7D32); /* Green gradient */
     -fx-text-fill: white; /* White text */
-    -fx-font-size: 14px;
+    -fx-font-size: 20px;
     -fx-font-weight: bold;
     -fx-border-radius: 5px;
     -fx-padding: 10px 20px;

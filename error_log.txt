@@ -1817,3 +1817,26 @@ java.sql.SQLSyntaxErrorException: Table 'telanova.clothes' doesn't exist
 [2024-12-02 14:39:00] Usuario registrado con éxito!
 [2024-12-02 14:41:29] El nombre de usuario ya está en uso. Por favor, elija otro.
 [2024-12-02 14:41:35] El nombre de usuario ya está en uso. Por favor, elija otro.
+[2024-12-03 09:51:45] El correo electrónico no tiene un formato válido.
+[2024-12-03 09:51:56] El correo electrónico no tiene un formato válido.
+[2024-12-03 09:52:04] Usuario registrado con éxito!
+[2024-12-03 11:25:51] Usuario registrado con éxito!
+[2024-12-03 11:26:23] Usuario registrado con éxito!
+[2024-12-03 11:26:55] Por favor, complete todos los campos.
+[2024-12-03 11:26:58] El correo electrónico no tiene un formato válido.
+[2024-12-03 11:27:05] El nombre de usuario ya está en uso. Por favor, elija otro.
+[2024-12-03 11:27:07] Usuario registrado con éxito!
+[2024-12-03 11:28:13] Usuario registrado con éxito!
+[2024-12-03 12:11:28] Usuario registrado con éxito!
+[2024-12-03 12:11:56] El nombre de usuario ya está en uso. Por favor, elija otro.
+[2024-12-03 12:11:59] El correo electrónico ya está en uso. Por favor, elija otro.
+[2024-12-03 12:14:14] Por favor, complete todos los campos.
+[2024-12-03 12:19:31] El nombre de usuario debe tener al menos 3 caracteres y la contraseña al menos 6 caracteres.
+[2024-12-03 12:20:35] Trabajador registrado con éxito!
+[2024-12-03 12:20:37] El nombre de usuario ya está en uso. Por favor, elija otro.
+[2024-12-03 12:21:39] El correo electrónico ya está en uso. Por favor, elija otro.
+[2024-12-03 12:21:59] Trabajador registrado con éxito!
+[2024-12-03 13:20:41] Usuario registrado con éxito!
+[2024-12-03 13:24:45] Por favor, complete todos los campos.
+[2024-12-03 13:25:22] Trabajador registrado con éxito!
+[2024-12-03 14:09:17] Usuario registrado con éxito!
