@@ -222,7 +222,7 @@ public class ClientMenuController {
     }
 
     /** Displays the list of clothes in the grid pane. */
-    public void mostrarProductos(List<? extends Clothes> clothesList) {
+    public void mostrarProductos(List<Clothes> clothesList) {
         ClothesPane.getChildren().clear();
         final int MAX_COLUMNS = 4;
         int columns = 0;
@@ -242,6 +242,39 @@ public class ClientMenuController {
                     } else {
                         showProductDetails(clothes);
                     }
+                });
+
+                ClothesPane.add(box, columns, rows);
+                columns++;
+
+                if (columns == MAX_COLUMNS) {
+                    columns = 0;
+                    rows++;
+                }
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    /** Displays the list of clothes in the grid pane (overloaded method). */
+    public void mostrarProductos(ObservableList<ClothesDAO.ClothesLazyAll> clothesList) {
+        ClothesPane.getChildren().clear();
+        final int MAX_COLUMNS = 4;
+        int columns = 0;
+        int rows = 0;
+
+        for (ClothesDAO.ClothesLazyAll clothes : clothesList) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("Thumb.fxml"));
+                VBox box = loader.load();
+                ThumbController thumbController = loader.getController();
+                thumbController.setGarment(clothes);
+
+                box.setOnMouseClicked(event -> {
+                    selectedClothes = clothes;
+                    showProductDetails(selectedClothes);
                 });
 
                 ClothesPane.add(box, columns, rows);

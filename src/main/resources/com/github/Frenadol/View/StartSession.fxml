@@ -6,17 +6,17 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@CSS/StartSession.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.StartSessionController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" stylesheets="@CSS/StartSession.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.StartSessionController">
    <children>
-      <Text layoutX="164.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduzca sus credenciales para iniciar sesion" wrappingWidth="307.7366943359375" />
-      <Text layoutX="233.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de usuario/ria" wrappingWidth="169.30975341796875" />
-      <Text layoutX="265.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña" wrappingWidth="123.85943603515625" />
+      <Text layoutX="159.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Introduzca sus credenciales para iniciar sesion" wrappingWidth="307.7366943359375" />
+      <Text layoutX="242.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre de usuario/ria" wrappingWidth="169.30975341796875" />
+      <Text layoutX="276.0" layoutY="195.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Contraseña" wrappingWidth="123.85943603515625" />
       <Text layoutX="287.0" layoutY="251.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Gmail" wrappingWidth="51.28631591796875" />
-      <Button layoutX="228.0" layoutY="304.0" mnemonicParsing="false" onMouseClicked="#Login" prefHeight="40.0" prefWidth="169.0" text="Iniciar Sesion" />
-      <TextField fx:id="textUsername" layoutX="225.0" layoutY="132.0" prefHeight="36.0" prefWidth="169.0" />
+      <Button layoutX="181.0" layoutY="334.0" mnemonicParsing="false" onMouseClicked="#Login" prefHeight="40.0" prefWidth="262.0" text="Iniciar Sesion" />
+      <TextField fx:id="textUsername" layoutX="226.0" layoutY="132.0" prefHeight="36.0" prefWidth="175.0" />
       <TextField fx:id="gmailField" layoutX="225.0" layoutY="262.0" />
       <PasswordField fx:id="textPassword" layoutX="225.0" layoutY="200.0" />
-      <Button layoutX="179.0" layoutY="362.0" mnemonicParsing="false" onMouseClicked="#goToInitialMenu" prefHeight="40.0" prefWidth="261.0" text="Volver al menu anterior" />
+      <Button layoutX="182.0" layoutY="411.0" mnemonicParsing="false" onMouseClicked="#goToInitialMenu" prefHeight="40.0" prefWidth="261.0" text="Volver al menu anterior" />
 
    </children>
 </AnchorPane>

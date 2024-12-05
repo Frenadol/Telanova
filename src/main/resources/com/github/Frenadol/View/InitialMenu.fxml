@@ -8,33 +8,33 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="381.0" prefWidth="536.0" styleClass="Primary" stylesheets="@CSS/InitialMenu.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.PrimaryController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" styleClass="Primary" stylesheets="@CSS/InitialMenu.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.github.Frenadol.View.PrimaryController">
    <children>
       <Pane layoutX="-9.6" layoutY="3.2" prefHeight="95.0" prefWidth="534.0" AnchorPane.leftAnchor="-10.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="3.0">
          <children>
-            <Label layoutX="217.0" layoutY="37.0" text="TELANOVA">
+            <Label layoutX="288.0" layoutY="39.0" text="TELANOVA">
                <font>
                   <Font name="Constantia" size="40.0" />
                </font>
             </Label>
-            <ImageView fitHeight="95.0" fitWidth="95.0" layoutX="439.0" layoutY="2.0">
+            <ImageView fitHeight="95.0" fitWidth="95.0" layoutX="555.0">
                <image>
                   <Image url="@Images/TelaNovaLogo.png" />
                </image>
             </ImageView>
-            <ImageView fitHeight="103.0" fitWidth="95.0" layoutX="19.0" layoutY="-3.0">
+            <ImageView fitHeight="103.0" fitWidth="95.0" layoutX="8.0" layoutY="-3.0">
                <image>
                   <Image url="@Images/TelaNovaLogo.png" />
                </image>
             </ImageView>
          </children>
       </Pane>
-      <Label alignment="CENTER" layoutX="50.0" layoutY="94.0" prefHeight="38.0" prefWidth="424.0" text="Bienvenido/a a Telanova" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="94.0">
+      <Label alignment="CENTER" layoutX="50.0" layoutY="159.0" prefHeight="38.0" prefWidth="424.0" text="Bienvenido/a a Telanova" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.799999999999955" AnchorPane.topAnchor="159.0">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="registerButton" layoutX="176.5" layoutY="139.0" onAction="#switchToRegister" prefHeight="38.0" prefWidth="171.0" text="Crear Cuenta" AnchorPane.leftAnchor="176.5" AnchorPane.rightAnchor="176.5" AnchorPane.topAnchor="139.0" />
-      <Button fx:id="sessionButton" layoutX="176.5" layoutY="220.0" onAction="#switchToStartSession" prefHeight="38.0" prefWidth="171.0" text="Iniciar Sesion" AnchorPane.leftAnchor="176.5" AnchorPane.rightAnchor="176.5" AnchorPane.topAnchor="220.0" />
+      <Button fx:id="registerButton" layoutX="177.0" layoutY="220.0" onAction="#switchToRegister" prefHeight="38.0" prefWidth="171.0" text="Crear Cuenta" AnchorPane.leftAnchor="177.0" AnchorPane.rightAnchor="176.60000000000002" AnchorPane.topAnchor="220.0" />
+      <Button fx:id="sessionButton" layoutX="172.0" layoutY="311.0" onAction="#switchToStartSession" prefHeight="39.0" prefWidth="286.0" text="Iniciar Sesion" AnchorPane.leftAnchor="172.0" AnchorPane.rightAnchor="182.0" AnchorPane.topAnchor="311.0" />
    </children>
 </AnchorPane>
