@@ -13,6 +13,7 @@ public class SessionManager {
     private Worker currentWorker;
     private Client currentClient;
     private Storage currentStorage;
+    private boolean hasPaid;
 
     private SessionManager() {
         details = new ArrayList<>();
@@ -26,7 +27,20 @@ public class SessionManager {
         }
         return instance;
     }
+    /* Returns whether the client has paid or not */
+    public boolean hasPaid() {
+        return hasPaid;
+    }
 
+    /* Sets the payment status of the client */
+    public void setHasPaid(boolean hasPaid) {
+        this.hasPaid = hasPaid;
+    }
+
+    /* Resets the payment status to false */
+    public void resetHasPaid() {
+        this.hasPaid = false;
+    }
     /** Adds a new detail to the list or updates the quantity if it already exists. */
     public void addDetail(Client_Clothes newDetail, int quantity) {
         for (Client_Clothes detail : details) {
