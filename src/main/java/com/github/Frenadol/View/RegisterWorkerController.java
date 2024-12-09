@@ -13,13 +13,13 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
 import java.nio.file.Files;
 import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
 import java.util.regex.Pattern;
 
 public class RegisterWorkerController {
@@ -33,8 +33,6 @@ public class RegisterWorkerController {
     @FXML
     private TextField textEmail;
 
-    @FXML
-    private AnchorPane anchorPane;
     @FXML
     private ImageView imageView;
 
@@ -114,10 +112,14 @@ public class RegisterWorkerController {
 
         try {
             workerDAO.insertWorker(newWorker);
-        } catch (Exception e) {
-            ErrorLog.fileRead(e);
-            ErrorLog.logMessage("Error al insertar el trabajador: " + e.getMessage());
-            showAlert("No se pudo registrar al trabajador. Intente nuevamente.");
+        } catch (SQLException e) {
+            if (e.getMessage().contains("Duplicate entry for email")) {
+                showAlert("El correo electrónico ya está en uso. Por favor, elija otro.");
+            } else {
+                ErrorLog.fileRead(e);
+                ErrorLog.logMessage("Error al insertar el trabajador: " + e.getMessage());
+                showAlert("No se pudo registrar al trabajador. Intente nuevamente.");
+            }
             return;
         }
 
@@ -125,6 +127,7 @@ public class RegisterWorkerController {
         showAlert(message);
         ErrorLog.logMessage(message);
     }
+
     /**
      * Validates the email format.
      * @param email The email to validate.
