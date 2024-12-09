@@ -76,7 +76,7 @@ public class StartSessionController {
                 showAlert("Error", "Contraseña incorrecta", Alert.AlertType.ERROR);
             }
         } else {
-            showAlert("Error", "Cliente no encontrado", Alert.AlertType.ERROR);
+            showAlert("Error", "Usuario no encontrado", Alert.AlertType.ERROR);
         }
         saveFields();
     }

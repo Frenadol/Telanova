@@ -88,7 +88,6 @@ public class WorkerDAO {
                     result.setProfilePicture(res.getBytes("imagen_perfil"));
                 }
             }
-
             if (useH2) {
                 try (PreparedStatement pstH2 = connectionH2.prepareStatement(H2_FIND_BY_GMAIL)) {
                     pstH2.setString(1, email);
@@ -184,29 +183,6 @@ public class WorkerDAO {
         return result;
     }
 
-    public void updateWorker(Worker worker) {
-        try (PreparedStatement pst = conn.prepareStatement(UPDATE)) {
-            pst.setString(1, worker.getUsername());
-            pst.setString(2, worker.getPassword());
-            pst.setString(3, worker.getGmail());
-            pst.setBytes(4, worker.getProfilePicture());
-            pst.setInt(5, worker.getId_user());
-            pst.executeUpdate();
-
-            if (useH2) {
-                try (PreparedStatement pstH2 = connectionH2.prepareStatement(H2_UPDATE)) {
-                    pstH2.setString(1, worker.getUsername());
-                    pstH2.setString(2, worker.getPassword());
-                    pstH2.setString(3, worker.getGmail());
-                    pstH2.setBytes(4, worker.getProfilePicture());
-                    pstH2.setInt(5, worker.getId_user());
-                    pstH2.executeUpdate();
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     public static WorkerDAO build() {
         return new WorkerDAO();
