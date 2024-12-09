@@ -32,7 +32,7 @@ public class WorkerDAO {
         connectionH2 = ConnectionH2.getTEMPConnection();
     }
 
-    public void insertWorker(Worker worker) {
+    public void insertWorker(Worker worker) throws SQLException {
         try (PreparedStatement pst = conn.prepareStatement(INSERT, Statement.RETURN_GENERATED_KEYS)) {
             pst.setString(1, worker.getUsername());
             pst.setString(2, worker.getPassword());
@@ -70,7 +70,11 @@ public class WorkerDAO {
                 }
             }
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            if (e.getErrorCode() == 1062) { // Duplicate entry error code for MySQL
+                throw new SQLException("Duplicate entry for email", e);
+            } else {
+                throw e;
+            }
         }
     }
 
@@ -182,7 +186,6 @@ public class WorkerDAO {
         }
         return result;
     }
-
 
     public static WorkerDAO build() {
         return new WorkerDAO();
