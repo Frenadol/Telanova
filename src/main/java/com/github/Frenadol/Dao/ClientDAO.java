@@ -1,8 +1,8 @@
 package com.github.Frenadol.Dao;
 
 import com.github.Frenadol.DataBase.ConnectionDB;
+import com.github.Frenadol.DataBase.ConnectionH2;
 import com.github.Frenadol.Model.Client;
-import com.github.Frenadol.Model.User;
 
 import java.sql.*;
 
@@ -12,11 +12,20 @@ public class ClientDAO {
     private static final String UPDATE_WALLET = "UPDATE cliente SET cartera=? WHERE id_cliente=?";
     private static final String FIND_BY_NAME = "SELECT u.id_usuario, u.nombre_usuario, u.contraseña,u.gmail,c.cartera FROM usuario u JOIN cliente c ON c.id_cliente = u.id_usuario WHERE u.nombre_usuario=?";
     private static final String FIND_BY_GMAIL = "SELECT * FROM usuario WHERE gmail=?";
+    // H2 SENTENCES
+    private static final String H2_INSERT = "INSERT INTO \"usuario\" (\"nombre_usuario\", \"contraseña\", \"gmail\", \"imagen_perfil\") VALUES (?, ?, ?, ?)";
+    private static final String H2_INSERT_CLIENTE = "INSERT INTO \"cliente\" (\"id_cliente\", \"cartera\") VALUES (?, ?)";
+    private static final String H2_UPDATE_WALLET = "UPDATE \"cliente\" SET \"cartera\" = ? WHERE \"id_cliente\" = ?";
+    private static final String H2_FIND_BY_NAME = "SELECT u.\"id_usuario\", u.\"nombre_usuario\", u.\"contraseña\", u.\"gmail\", c.\"cartera\" FROM \"usuario\" u JOIN \"cliente\" c ON c.\"id_cliente\" = u.\"id_usuario\" WHERE u.\"nombre_usuario\" = ?";
+    private static final String H2_FIND_BY_GMAIL = "SELECT * FROM \"usuario\" WHERE \"gmail\" = ?";
 
     private Connection conn;
+    private Connection connectionH2;
+    public static boolean useH2 = false;
 
     public ClientDAO() {
         conn = ConnectionDB.getConnection();
+        connectionH2 = ConnectionH2.getTEMPConnection();
     }
 
     /**
@@ -31,6 +40,16 @@ public class ClientDAO {
             pst.setBytes(4, cliente.getProfilePicture());
             pst.executeUpdate();
 
+            if (useH2) {
+                try (PreparedStatement pstH2 = connectionH2.prepareStatement(H2_INSERT, Statement.RETURN_GENERATED_KEYS)) {
+                    pstH2.setString(1, cliente.getUsername());
+                    pstH2.setString(2, cliente.getPassword());
+                    pstH2.setString(3, cliente.getGmail());
+                    pstH2.setBytes(4, cliente.getProfilePicture());
+                    pstH2.executeUpdate();
+                }
+            }
+
             ResultSet rs = pst.getGeneratedKeys();
             if (rs.next()) {
                 int idUsuario = rs.getInt(1);
@@ -38,6 +57,14 @@ public class ClientDAO {
                     pstmt2.setInt(1, idUsuario);
                     pstmt2.setDouble(2, cliente.getWallet());
                     pstmt2.executeUpdate();
+
+                    if (useH2) {
+                        try (PreparedStatement pstmt2H2 = connectionH2.prepareStatement(H2_INSERT_CLIENTE)) {
+                            pstmt2H2.setInt(1, idUsuario);
+                            pstmt2H2.setDouble(2, cliente.getWallet());
+                            pstmt2H2.executeUpdate();
+                        }
+                    }
                 }
             }
         } catch (SQLException e) {
@@ -55,6 +82,14 @@ public class ClientDAO {
             pst.setDouble(1, newBalance);
             pst.setInt(2, clientId);
             pst.executeUpdate();
+
+            if (useH2) {
+                try (PreparedStatement pstH2 = connectionH2.prepareStatement(H2_UPDATE_WALLET)) {
+                    pstH2.setDouble(1, newBalance);
+                    pstH2.setInt(2, clientId);
+                    pstH2.executeUpdate();
+                }
+            }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -78,6 +113,21 @@ public class ClientDAO {
                 result.setWallet(res.getDouble("cartera"));
             }
             res.close();
+
+            if (useH2) {
+                try (PreparedStatement pstH2 = connectionH2.prepareStatement(H2_FIND_BY_NAME)) {
+                    pstH2.setString(1, name);
+                    ResultSet resH2 = pstH2.executeQuery();
+                    if (resH2.next()) {
+                        result = new Client();
+                        result.setId_user(resH2.getInt("id_usuario"));
+                        result.setUsername(resH2.getString("nombre_usuario"));
+                        result.setPassword(resH2.getString("contraseña"));
+                        result.setWallet(resH2.getDouble("cartera"));
+                    }
+                    resH2.close();
+                }
+            }
         } catch (SQLException e) {
             System.err.println("Error al buscar el cliente por nombre de usuario: " + e.getMessage());
         }
@@ -100,6 +150,22 @@ public class ClientDAO {
                 result.setUsername(res.getString("nombre_usuario"));
                 result.setPassword(res.getString("contraseña"));
                 result.setGmail(res.getString("gmail"));
+            }
+            res.close();
+
+            if (useH2) {
+                try (PreparedStatement pstH2 = connectionH2.prepareStatement(H2_FIND_BY_GMAIL)) {
+                    pstH2.setString(1, gmail);
+                    ResultSet resH2 = pstH2.executeQuery();
+                    if (resH2.next()) {
+                        result = new Client();
+                        result.setId_user(resH2.getInt("id_usuario"));
+                        result.setUsername(resH2.getString("nombre_usuario"));
+                        result.setPassword(resH2.getString("contraseña"));
+                        result.setGmail(resH2.getString("gmail"));
+                    }
+                    resH2.close();
+                }
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

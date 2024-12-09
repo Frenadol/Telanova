@@ -2,6 +2,7 @@ package com.github.Frenadol.Dao;
 
 import com.github.Frenadol.Model.Storage;
 import com.github.Frenadol.DataBase.ConnectionDB;
+import com.github.Frenadol.DataBase.ConnectionH2;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -14,31 +15,42 @@ public class StorageDAO {
     private static final String FIND_BY_ID = "SELECT * FROM almacen WHERE id_almacen=?";
     private static final String FIND_BY_NAME = "SELECT * FROM almacen WHERE nombre_almacen=?";
     private static final String FIND_ALL_STORAGES = "SELECT * FROM almacen";
+
+    // H2 SENTENCES
+    private static final String H2_INSERT = "INSERT INTO \"almacen\" (\"id_almacen\", \"nombre_almacen\") VALUES (?, ?)";
+    private static final String H2_UPDATE = "UPDATE \"almacen\" SET \"nombre_almacen\"=? WHERE \"id_almacen\"=?";
+    private static final String H2_DELETE = "DELETE FROM \"almacen\" WHERE \"id_almacen\"=?";
+    private static final String H2_FIND_BY_ID = "SELECT * FROM \"almacen\" WHERE \"id_almacen\"=?";
+    private static final String H2_FIND_BY_NAME = "SELECT * FROM \"almacen\" WHERE \"nombre_almacen\"=?";
+    private static final String H2_FIND_ALL_STORAGES = "SELECT * FROM \"almacen\"";
+
     private Connection conn;
+    private Connection connectionH2;
+    public static boolean useH2 = false;
 
     public StorageDAO() {
         this.conn = ConnectionDB.getConnection();
+        this.connectionH2 = ConnectionH2.getTEMPConnection();
     }
 
-    /**
-     * Inserts a new storage into the database.
-     * @param storage The storage to be inserted.
-     */
     public void insertStorage(Storage storage) {
         try (PreparedStatement pst = conn.prepareStatement(INSERT)) {
             pst.setInt(1, storage.getId_storage());
             pst.setString(2, storage.getStorageName());
             pst.executeUpdate();
+
+            if (useH2) {
+                try (PreparedStatement pstH2 = connectionH2.prepareStatement(H2_INSERT)) {
+                    pstH2.setInt(1, storage.getId_storage());
+                    pstH2.setString(2, storage.getStorageName());
+                    pstH2.executeUpdate();
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    /**
-     * Finds a storage by its name.
-     * @param storageName The name of the storage to search for.
-     * @return The storage with the specified name, or null if not found.
-     */
     public Storage findByName(String storageName) {
         Storage storage = null;
         try (PreparedStatement pst = conn.prepareStatement(FIND_BY_NAME)) {
@@ -50,44 +62,59 @@ public class StorageDAO {
                     storage.setStorageName(res.getString("nombre_almacen"));
                 }
             }
+
+            if (useH2) {
+                try (PreparedStatement pstH2 = connectionH2.prepareStatement(H2_FIND_BY_NAME)) {
+                    pstH2.setString(1, storageName);
+                    try (ResultSet resH2 = pstH2.executeQuery()) {
+                        if (resH2.next()) {
+                            storage = new Storage();
+                            storage.setId_storage(resH2.getInt("id_almacen"));
+                            storage.setStorageName(resH2.getString("nombre_almacen"));
+                        }
+                    }
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return storage;
     }
 
-    /**
-     * Updates the details of a storage.
-     * @param storage The storage object with updated details.
-     */
     public void updateStorage(Storage storage) {
         try (PreparedStatement pst = conn.prepareStatement(UPDATE)) {
             pst.setString(1, storage.getStorageName());
             pst.setInt(2, storage.getId_storage());
             pst.executeUpdate();
+
+            if (useH2) {
+                try (PreparedStatement pstH2 = connectionH2.prepareStatement(H2_UPDATE)) {
+                    pstH2.setString(1, storage.getStorageName());
+                    pstH2.setInt(2, storage.getId_storage());
+                    pstH2.executeUpdate();
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    /**
-     * Deletes a storage from the database.
-     * @param id_storage The ID of the storage to be deleted.
-     */
     public void deleteStorage(int id_storage) {
         try (PreparedStatement pst = conn.prepareStatement(DELETE)) {
             pst.setInt(1, id_storage);
             pst.executeUpdate();
+
+            if (useH2) {
+                try (PreparedStatement pstH2 = connectionH2.prepareStatement(H2_DELETE)) {
+                    pstH2.setInt(1, id_storage);
+                    pstH2.executeUpdate();
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    /**
-     * Finds a storage by its ID.
-     * @param id_storage The ID of the storage to search for.
-     * @return The storage with the specified ID, or null if not found.
-     */
     public Storage findById(int id_storage) {
         Storage storage = null;
         try (PreparedStatement pst = conn.prepareStatement(FIND_BY_ID)) {
@@ -99,16 +126,25 @@ public class StorageDAO {
                     storage.setStorageName(res.getString("nombre_almacen"));
                 }
             }
+
+            if (useH2) {
+                try (PreparedStatement pstH2 = connectionH2.prepareStatement(H2_FIND_BY_ID)) {
+                    pstH2.setInt(1, id_storage);
+                    try (ResultSet resH2 = pstH2.executeQuery()) {
+                        if (resH2.next()) {
+                            storage = new Storage();
+                            storage.setId_storage(resH2.getInt("id_almacen"));
+                            storage.setStorageName(resH2.getString("nombre_almacen"));
+                        }
+                    }
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return storage;
     }
 
-    /**
-     * Finds all storages in the database.
-     * @return A list of all storages.
-     */
     public List<Storage> findAllStorages() {
         List<Storage> storages = new ArrayList<>();
         try (PreparedStatement pst = conn.prepareStatement(FIND_ALL_STORAGES);
@@ -118,6 +154,18 @@ public class StorageDAO {
                 storage.setId_storage(res.getInt("id_almacen"));
                 storage.setStorageName(res.getString("nombre_almacen"));
                 storages.add(storage);
+            }
+
+            if (useH2) {
+                try (PreparedStatement pstH2 = connectionH2.prepareStatement(H2_FIND_ALL_STORAGES);
+                     ResultSet resH2 = pstH2.executeQuery()) {
+                    while (resH2.next()) {
+                        Storage storage = new Storage();
+                        storage.setId_storage(resH2.getInt("id_almacen"));
+                        storage.setStorageName(resH2.getString("nombre_almacen"));
+                        storages.add(storage);
+                    }
+                }
             }
         } catch (SQLException e) {
             e.printStackTrace();
