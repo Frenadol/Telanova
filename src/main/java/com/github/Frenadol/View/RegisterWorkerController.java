@@ -53,39 +53,36 @@ public class RegisterWorkerController {
 
         if (username.isEmpty() || pass.isEmpty() || email.isEmpty() || imageFile == null) {
             String message = "Por favor, complete todos los campos.";
-            showAlert(AlertType.WARNING, message);
+            showAlert(message);
             ErrorLog.logMessage(message);
             return;
         }
 
         if (!isValidEmail(email)) {
             String message = "El correo electrónico no tiene un formato válido.";
-            showAlert(AlertType.WARNING, message);
+            showAlert(message);
             ErrorLog.logMessage(message);
             return;
         }
 
         if (username.length() < 3 || pass.length() < 6) {
             String message = "El nombre de usuario debe tener al menos 3 caracteres y la contraseña al menos 6 caracteres.";
-            showAlert(AlertType.WARNING, message);
+            showAlert(message);
             ErrorLog.logMessage(message);
             return;
         }
 
-        // Verificar si el usuario ya existe
-        Worker existingWorker = workerDAO.findByName(username);
-        if (existingWorker != null) {
+        Worker existingWorkerByName = workerDAO.findByName(username);
+        Worker existingWorkerByEmail = workerDAO.findByEmail(email);
+        if (existingWorkerByName != null) {
             String message = "El nombre de usuario ya está en uso. Por favor, elija otro.";
-            showAlert(AlertType.WARNING, message);
+            showAlert(message);
             ErrorLog.logMessage(message);
             return;
         }
-
-        // Verificar si el correo ya existe
-        Worker existingEmailWorker = workerDAO.findByEmail(email);
-        if (existingEmailWorker != null) {
+        if (existingWorkerByEmail != null) {
             String message = "El correo electrónico ya está en uso. Por favor, elija otro.";
-            showAlert(AlertType.WARNING, message);
+            showAlert(message);
             ErrorLog.logMessage(message);
             return;
         }
@@ -95,21 +92,23 @@ public class RegisterWorkerController {
         newWorker.setGmail(email);
         newWorker.setHireDate(String.valueOf(UtilDate.getCurrentDate()));
         newWorker.setWorker(true);
+
         try {
             byte[] imageBytes = Files.readAllBytes(imageFile.toPath());
             newWorker.setProfilePicture(imageBytes);
         } catch (IOException e) {
             ErrorLog.fileRead(e);
             ErrorLog.logMessage("Error al leer la imagen: " + e.getMessage());
-            showAlert(AlertType.ERROR, "Error al leer la imagen. Intente nuevamente.");
+            showAlert("Error al leer la imagen. Intente nuevamente.");
             return;
         }
+
         try {
             newWorker.setPassword(Security.hashPassword(pass));
         } catch (NoSuchAlgorithmException e) {
             ErrorLog.fileRead(e);
             ErrorLog.logMessage("Error al hashear la contraseña: " + e.getMessage());
-            showAlert(AlertType.ERROR, "Error al procesar la contraseña. Intente nuevamente.");
+            showAlert("Error al hashear la contraseña. Intente nuevamente.");
             return;
         }
 
@@ -118,15 +117,14 @@ public class RegisterWorkerController {
         } catch (Exception e) {
             ErrorLog.fileRead(e);
             ErrorLog.logMessage("Error al insertar el trabajador: " + e.getMessage());
-            showAlert(AlertType.ERROR, "No se pudo registrar al trabajador. Intente nuevamente.");
+            showAlert("No se pudo registrar al trabajador. Intente nuevamente.");
             return;
         }
 
         String message = "Trabajador registrado con éxito!";
-        showAlert(AlertType.INFORMATION, message);
+        showAlert(message);
         ErrorLog.logMessage(message);
     }
-
     /**
      * Validates the email format.
      * @param email The email to validate.
@@ -139,13 +137,11 @@ public class RegisterWorkerController {
 
     /**
      * Shows an alert with the given message.
-     * @param type The type of alert.
      * @param message The message to display in the alert.
      */
-    private void showAlert(AlertType type, String message) {
-        Alert alert = new Alert(type);
+    private void showAlert(String message) {
+        Alert alert = new Alert(AlertType.INFORMATION);
         alert.setContentText(message);
-        alert.setTitle(type == AlertType.INFORMATION ? "Éxito" : "Advertencia");
         alert.show();
     }
 
@@ -157,9 +153,10 @@ public class RegisterWorkerController {
         try {
             App.setRoot("View/AdminPanel");
         } catch (IOException e) {
-            showAlert(AlertType.ERROR, "Error al volver al panel de administración: " + e.getMessage());
+            showAlert("Error al volver al panel de administración: " + e.getMessage());
         }
     }
+
     /**
      * Opens a file chooser to select an image and sets it to the profile image view.
      */

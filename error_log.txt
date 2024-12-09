@@ -1840,3 +1840,34 @@ java.sql.SQLSyntaxErrorException: Table 'telanova.clothes' doesn't exist
 [2024-12-03 13:24:45] Por favor, complete todos los campos.
 [2024-12-03 13:25:22] Trabajador registrado con éxito!
 [2024-12-03 14:09:17] Usuario registrado con éxito!
+[2024-12-09 22:24:31] Por favor, complete todos los campos.
+[2024-12-09 22:24:38] Trabajador registrado con éxito!
+[2024-12-09 22:24:47] Trabajador registrado con éxito!
+[2024-12-09 22:24:55] Trabajador registrado con éxito!
+[2024-12-09 22:25:52] Por favor, complete todos los campos.
+[2024-12-09 22:25:59] Trabajador registrado con éxito!
+[2024-12-09 22:27:59] Trabajador registrado con éxito!
+[2024-12-09 22:29:40] Trabajador registrado con éxito!
+[2024-12-09 22:29:49] Por favor, complete todos los campos.
+[2024-12-09 22:30:13] Trabajador registrado con éxito!
+[2024-12-09 22:33:33] El nombre de usuario ya está en uso. Por favor, elija otro.
+[2024-12-09 22:33:42] El nombre de usuario ya está en uso. Por favor, elija otro.
+[2024-12-09 22:33:45] Trabajador registrado con éxito!
+[2024-12-09 22:33:47] Trabajador registrado con éxito!
+[2024-12-09 22:33:50] Trabajador registrado con éxito!
+[2024-12-09 22:33:51] Trabajador registrado con éxito!
+[2024-12-09 22:33:52] Trabajador registrado con éxito!
+[2024-12-09 22:33:54] Trabajador registrado con éxito!
+[2024-12-09 22:34:19] Trabajador registrado con éxito!
+[2024-12-09 22:34:25] Trabajador registrado con éxito!
+[2024-12-09 22:34:34] El nombre de usuario ya está en uso. Por favor, elija otro.
+[2024-12-09 22:34:42] El nombre de usuario ya está en uso. Por favor, elija otro.
+[2024-12-09 22:35:49] El nombre de usuario ya está en uso. Por favor, elija otro.
+[2024-12-09 22:36:01] Trabajador registrado con éxito!
+[2024-12-09 22:38:29] El nombre de usuario ya está en uso. Por favor, elija otro.
+[2024-12-09 22:38:32] El correo electrónico ya está en uso. Por favor, elija otro.
+[2024-12-09 22:40:29] El nombre de usuario ya está en uso. Por favor, elija otro.
+[2024-12-09 22:40:33] Trabajador registrado con éxito!
+[2024-12-09 22:46:13] El correo electrónico ya está en uso. Por favor, elija otro.
+[2024-12-09 22:46:19] El nombre de usuario ya está en uso. Por favor, elija otro.
+[2024-12-09 22:46:23] El nombre de usuario ya está en uso. Por favor, elija otro.
