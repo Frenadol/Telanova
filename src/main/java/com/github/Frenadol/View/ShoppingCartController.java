@@ -187,6 +187,9 @@ public class ShoppingCartController {
             shoppingCart.clear();
             reloadCart();
 
+            // Reset the hasPaid status
+            SessionManager.getInstance().resetHasPaid();
+
             showAlert("Éxito", "Pedido terminado correctamente.", Alert.AlertType.INFORMATION);
         }
     }
@@ -232,6 +235,11 @@ public class ShoppingCartController {
      */
     @FXML
     public void handlePayOrder() {
+        if (SessionManager.getInstance().hasPaid()) {
+            showAlert("Error", "Ya has pagado este pedido.", Alert.AlertType.ERROR);
+            return;
+        }
+
         String totalPriceText = totalPriceLabel.getText().replace("Total: $", "").replace(",", ".");
         double totalPrice = Double.parseDouble(totalPriceText);
 
@@ -254,6 +262,9 @@ public class ShoppingCartController {
 
         // Set total price to 0 after successful payment
         totalPriceLabel.setText("Total: $0.00");
+
+        // Mark the order as paid
+        SessionManager.getInstance().setHasPaid(true);
 
         // Save order details to a PDF file
         FileChooser fileChooser = new FileChooser();
